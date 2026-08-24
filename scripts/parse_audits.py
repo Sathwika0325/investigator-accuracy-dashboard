@@ -23,6 +23,15 @@ TICKET_HEADER_RE = re.compile(
 ACCURACY_RE = re.compile(
     r"\*\*Accuracy:\*\*\s*([A-Za-z ]+?)\s*\((\d+)%\)"
 )
+CONCLUSION_RE = re.compile(
+    r"\*\*Investigator(?:'|')s Conclusion:\*\*\s*(.+?)(?=\n\n|\*\*Actual)", re.DOTALL
+)
+OUTCOME_RE = re.compile(
+    r"\*\*Actual Outcome:\*\*\s*(.+?)(?=\n\n|\*\*Accuracy)", re.DOTALL
+)
+NOTES_RE = re.compile(
+    r"\*\*Notes:\*\*\s*(.+?)(?=\n\n|\n---|\Z)", re.DOTALL
+)
 PERIOD_RE = re.compile(r"\*\*Period:\*\*\s*(.+)")
 TITLE_RE = re.compile(r"^#\s+(.+)$", re.MULTILINE)
 
@@ -42,10 +51,13 @@ def parse_doc(path: Path) -> dict:
 
         acc_match = ACCURACY_RE.search(block)
         if not acc_match:
-            # Ticket with no accuracy rating (e.g. no investigator comment)
             label, pct = "No comment", None
         else:
             label, pct = acc_match.group(1).strip(), int(acc_match.group(2))
+
+        conclusion_match = CONCLUSION_RE.search(block)
+        outcome_match = OUTCOME_RE.search(block)
+        notes_match = NOTES_RE.search(block)
 
         tickets.append(
             {
@@ -54,6 +66,9 @@ def parse_doc(path: Path) -> dict:
                 "title": m.group(3).strip(),
                 "accuracy_label": label,
                 "accuracy_pct": pct,
+                "conclusion": conclusion_match.group(1).strip() if conclusion_match else None,
+                "actual_outcome": outcome_match.group(1).strip() if outcome_match else None,
+                "notes": notes_match.group(1).strip() if notes_match else None,
             }
         )
 

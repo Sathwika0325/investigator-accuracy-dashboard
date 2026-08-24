@@ -11,462 +11,660 @@
           "ticket_id": "82486",
           "title": "Printing from Collaterate",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 90
+          "accuracy_pct": 90,
+          "conclusion": "Printing error is a client-side/workstation issue \u2014 label printer not detected by the browser-side printer agent (QZ Tray). Not a backend outage. Recommended restarting the printer agent, checking connections, and clearing browser cache.",
+          "actual_outcome": "User self-resolved by restarting their computer. Reported \"Restarting did the job\" and asked to disregard the ticket. Closed with no help desk intervention needed.",
+          "notes": "Root cause correctly identified as local workstation issue. The recommended restart aligned with the actual fix, though the analysis was more detailed than the simple resolution warranted."
         },
         {
           "seq": 2,
           "ticket_id": "82478",
           "title": "Hard Proof Completed - Auto Email (received in error?)",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 100
+          "accuracy_pct": 100,
+          "conclusion": "The \"Hard Proof Completed\" email was sent in error because PrintFlow overwrote the Hard Proof Due task status, Debra Schneider reset it to complete, which re-triggered the notification. Recommended adding a conditional guard to only fire the email if approval task is still uncompleted.",
+          "actual_outcome": "Jason Bierschbach provided the exact same explanation (PrintFlow overwrite \u2192 Debra reset \u2192 re-trigger). He implemented the conditional guard fix and confirmed it was deployed. User satisfied.",
+          "notes": "Perfect match. The investigator's analysis was identical to the human responder's explanation, and the recommended fix was exactly what was deployed."
         },
         {
           "seq": 3,
           "ticket_id": "82494",
           "title": "403 Error - https://reports.thebernardgroup.com/query/161/",
           "accuracy_label": "Partially Accurate",
-          "accuracy_pct": 60
+          "accuracy_pct": 60,
+          "conclusion": "The 403 is a Redash application-level permission issue \u2014 the user's account lacks access to query #161. Infrastructure is healthy. Recommended granting Redash group access or having an admin share the query.",
+          "actual_outcome": "Actual root cause: user was not logged in to Redash before clicking a direct link (which surfaces a 403). Further, her password was expired/forgotten. Resolution: password reset by admin, user logged in successfully. Not a group permissions issue.",
+          "notes": "Correctly identified it as a Redash access control issue (not infrastructure), but misdiagnosed the specifics. It was an authentication problem (no active session + forgotten password), not a group membership/permission issue. A human team member identified this pattern immediately."
         },
         {
           "seq": 4,
           "ticket_id": "82493",
           "title": "Decals 404",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 95
+          "accuracy_pct": 95,
+          "conclusion": "The Decals link on the Smartpress.com \"Shop All\" page had a duplicated `/offering/offering/` segment in the URL. Identified the menu item (ID 11531). Confirmed the fix was already deployed to production before the analysis was posted.",
+          "actual_outcome": "Developer confirmed \"I have this update made and it should now be live on production\" \u2014 fix was deployed within ~1.5 hours of ticket creation. Ticket closed normally.",
+          "notes": "Correctly identified the root cause (duplicated URL path) and current state. The fix was already live before the investigator commented, which it correctly acknowledged."
         },
         {
           "seq": 5,
           "ticket_id": "82546",
           "title": "Auto ship by dates to take in account non production holidays",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 85
+          "accuracy_pct": 85,
+          "conclusion": "The automated ship-by date system does not account for TBG corporate/non-production holidays. The `sf-prod-schedule-service` `ManufactureBusinessTime` class has no support for custom holidays beyond `pyholidays`. No holiday table exists in the database. Recommended immediate manual bulk date adjustment + short-term dev fix to add a holiday table.",
+          "actual_outcome": "Ticket remains open (status=2, feature request). No resolution recorded yet. The investigator's analysis of the code gap is architecturally correct and verifiable from the codebase.",
+          "notes": "Technically accurate analysis of the code gap. As a feature request, there's no \"resolution\" to compare against. Docked slightly because the \"200 jobs\" claim from the ticket was not confirmed (only 3 active unshipped jobs found on July 3rd)."
         },
         {
           "seq": 6,
           "ticket_id": "82551",
           "title": "Collaterate Unable to leave an internal comment",
           "accuracy_label": "Partially Accurate",
-          "accuracy_pct": 55
+          "accuracy_pct": 55,
+          "conclusion": "500 error saving internal comments originates in the Collaterate monolith's Comet-based save action (`SAVE_ORDER_INTERNAL_NOTE_ACTION`). Monolith logs not available via CloudWatch. Recommended checking Tomcat logs directly, clearing cookies, and escalating to dev team.",
+          "actual_outcome": "Root cause: `java.lang.StackOverflowError` in Orika mapper (`TBGBOSystemShippingService` \u2192 `SystemShippingService` infinite recursion). Collaterate was actually down system-wide. Issue resolved after Collaterate recovered/restarted. The \"clear cookies\" recommendation didn't help (user confirmed).",
+          "notes": "Correctly identified it as a server-side monolith error and suggested checking Tomcat logs (where the StackOverflowError was found). However, it missed that the system was fully down, couldn't identify the actual root cause (Orika mapper recursion), and the cookie-clearing recommendation was unhelpful."
         },
         {
           "seq": 7,
           "ticket_id": "82552",
           "title": "Collaterate - Activity Log (WIDESPREAD ISSUE)",
           "accuracy_label": "Partially Accurate",
-          "accuracy_pct": 65
+          "accuracy_pct": 65,
+          "conclusion": "Activity log posting broken system-wide. Internal (CSR) user-created comments nearly absent (1 in last 2 hours vs. 42 standard entries). Identified as a code/API-level issue in the internal comment submission path. Recommended escalation to dev team and checking recent deployments.",
+          "actual_outcome": "Same underlying issue as #82551 \u2014 Collaterate was down (StackOverflowError in Orika mapper). After Collaterate recovered, the help desk confirmed the system was working and closed the ticket. No user response received.",
+          "notes": "Correctly identified the issue as widespread/system-level (not user-specific) and provided useful data analysis showing internal comments were broken. However, it framed this as an API/code-level issue rather than recognizing the system was fully down. The real resolution was simply the system recovering from a crash."
         },
         {
           "seq": 8,
           "ticket_id": "82505",
           "title": "Dairy Queen MOD to South Carolina",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 90
+          "accuracy_pct": 90,
+          "conclusion": "DQ MOD routing to SC requires updating `DQ Cake Labels` system offering (ID 107377) from MN-only (`fc_id: 1`) to include SC (`fc_id: 493`). Confirmed Nick's analysis that the capability matrix handles mail/LF exclusions automatically \u2014 no special DQ rule needed. July 15 go-live planned.",
+          "actual_outcome": "Nick (the actual handler) confirmed July 15 go-live. Ben confirmed no special rule needed (\"not sure if MODs were treated differently than normal Smartpress rules\"). The investigator's technical analysis matched Nick's explanation exactly. Ticket still open (planned work).",
+          "notes": "Technical mapping matched the human developer's analysis exactly. Docked slightly because this is a planning/config ticket \u2014 the investigator provided useful context but the human was already handling it correctly before the AI comment was posted."
         },
         {
           "seq": 9,
           "ticket_id": "82583",
           "title": "Petco TBG SKU#100265444 - Clear out Inventory",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 95
+          "accuracy_pct": 95,
+          "conclusion": "Petco SKU `100265444` (variant ID 36685) shows 1 actual inventory and 1 reserved with 0 backorder. Needs to be set to 0 actual, 0 reserved. Warned that `warehouse_managed = true` means WMS may overwrite manual changes on next sync.",
+          "actual_outcome": "Help desk agent adjusted inventory manually. User confirmed \"Looks good! Thanks!\" Ticket resolved same day within 10 minutes.",
+          "notes": "Correctly identified the SKU, variant, and current inventory state. The recommendation (zero out inventory) was exactly what was done. The WMS overwrite warning was a valuable proactive note not mentioned by the human agent."
         },
         {
           "seq": 10,
           "ticket_id": "82629",
           "title": "Toolkit / Triptych potential Connection Issue",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 85
+          "accuracy_pct": 85,
+          "conclusion": "UHG Agent Toolkit order pipeline stopped over the July 4 weekend. Zero orders July 3\u20135. Lambda log groups show zero stored bytes (no recent invocations). Likely a credentials/data issue on UHC/Triptych's side. Recommended escalating to integration team and checking Lambda schedules, S3 bucket, and API tokens.",
+          "actual_outcome": "Confirmed: payment method data was missing from inbound order XML files (7/1\u20137/9). Triptych/Marek Group acknowledged the issue on their side and fixed it. 42 orders impacted. TBG reprocessed 38 XML files (45 orders) successfully. Issue resolved after ~3 weeks of coordination.",
+          "notes": "Correctly identified the failure point (inbound order pipeline from UHC/Triptych), the timeframe, and that it was a data issue on the external side. Suggested credentials/tokens as a possibility \u2014 the real cause was missing payment data in XML, which the investigator couldn't confirm without access to the actual files. Solid directional analysis that led to the correct escalation path."
         },
         {
           "seq": 11,
           "ticket_id": "82662",
           "title": "Kohler Professional Channel configurator error",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 85
+          "accuracy_pct": 85,
+          "conclusion": "The configurator \"Uh-oh\" / `Cannot read properties of undefined (reading 'reduce')` error is a frontend JavaScript crash, not a backend API failure. Both KPC products are active with valid configurator IDs. The frontend receives a data structure it doesn't expect for these SKUs when placed on a pod. Recommended escalating to configurator dev team.",
+          "actual_outcome": "The actual handler (Brian Serbus) identified it as a conflict between `bayCompatibility` and `showBayFilter` being used together for the first time in the `kpc_alternates` bundle. The root cause was confirmed as a frontend bug in `configurator-client` \u2192 `masterPodsSlice.js` \u2192 `selectPodsBySku()` \u2014 the `.reduce()` call had no null guards. Fix was deployed to prod on 7/17.",
+          "notes": "Correctly identified it as a frontend JS crash (not backend), correctly traced the `.reduce()` error, and correctly identified that the products were active. Missed the specific mechanism (bayCompatibility + showBayFilter conflict) but the directional analysis and escalation path were right."
         },
         {
           "seq": 12,
           "ticket_id": "82694",
           "title": "2010448 - Uploaded proof file not generating link to proof",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 95
+          "accuracy_pct": 95,
+          "conclusion": "First proof upload stalled with `stored_offsite=true` causing the \"Generating link to proof\" spinner to hang. A second upload at 10:48 AM succeeded with `stored_offsite=false`. Recommended verifying the link is now accessible and notifying the customer.",
+          "actual_outcome": "Help desk confirmed \"Proof file is now available in Collaterate and also for the user.\" The customer subsequently approved the proof, and the ticket was closed. The re-upload resolved the issue as the investigator described.",
+          "notes": "Correctly identified the stalled first upload, the successful second upload, and the current state. The recommendation to verify and notify was exactly what the help desk did."
         },
         {
           "seq": 13,
           "ticket_id": "82695",
           "title": "12pt C1S stock adjustments",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 90
+          "accuracy_pct": 90,
+          "conclusion": "This is a feature request, not an incident. The system has no conditional logic to swap press sheets based on ink side selection. Press sheet assignment is static per PJC. Recommended retagging as Feature Request, provided a short-term workaround (manually updating PJCs for always-1-sided products), and suggested a long-term dev fix under TTI.",
+          "actual_outcome": "Ticket remains open (status=2). No resolution recorded. Only the investigator's comment exists \u2014 no human follow-up in the conversation. The analysis of system limitations appears technically accurate.",
+          "notes": "Thorough and accurate analysis of system capabilities. Correctly identified this as a feature request with no existing automated solution. Cannot verify against a resolution since none exists yet, but the technical characterization is sound."
         },
         {
           "seq": 14,
           "ticket_id": "82714",
           "title": "Folder structure on Color Work jobs",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 90
+          "accuracy_pct": 90,
+          "conclusion": "The new automated file movement system (TTI-19165/Pace webhook worker) is misclassifying Color Work jobs as retail print jobs. The `isColorWork = partJobType === 'Proofing'` check is failing because the `partJobType` value doesn't match exactly. This causes the retail folder template to be applied instead of the Color Work template.",
+          "actual_outcome": "The issue was identified and fixed (confirmed 7/14: \"The issue has been identified and fixed. Sorry for the inconvenience, we've had a lot of issue with folder structures recently after some collaterate changes\"). The internal note confirms it was related to the \"new file movement project\" (TTI-19165).",
+          "notes": "Correctly identified the root cause system (TTI-19165 webhook worker), the code path (`jobPartContentFileCreateProcessor.ts`), and the mechanism (partJobType mismatch). The fix was deployed as predicted. Slight dock because the exact fix details aren't visible to confirm the specific resolution path."
         },
         {
           "seq": 15,
           "ticket_id": "82847",
           "title": "Configurator Orders are not presenting in AOD as expected",
           "accuracy_label": "Partially Accurate",
-          "accuracy_pct": 70
+          "accuracy_pct": 70,
+          "conclusion": "Two related BOM Builder issues: (1) Exclude/hide feature was deployed 6/11 but AOD may not be respecting the `hidden=True` flag; (2) Missing BOM items after 7/6 correlates with a BomBuilder Lambda redeployment at 18:30 UTC on 7/6, possibly caused by TTI-19928 (Kohler EDI rules) shared code layer change. Recommended rollback evaluation and reprocessing affected orders.",
+          "actual_outcome": "The actual root cause for issue #1 was that the `hidden=True` flag was cascading from bays to all child pods/items when it should have been item-by-item only (no cascading). The dev team confirmed \"the bay exclude cascaded hidden=True to every pod, line item, and sub-item.\" A fix was developed and tested in staging. Ticket remains open (status=2).",
+          "notes": "The investigator correctly identified the deployment timeline, the HIDDEN_ITEMS_ENABLED feature flag, and that AOD wasn't showing items correctly. However, it missed the specific mechanism \u2014 the problem wasn't that AOD failed to filter hidden items, but rather that the cascading logic was incorrectly hiding ALL child items when only the parent bay was marked for exclusion. The investigator's analysis of issue #2 (shared code layer regression) hasn't been confirmed or denied."
         },
         {
           "seq": 16,
           "ticket_id": "82865",
           "title": "Not able to mark some jobs complete in producer off press",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 85
+          "accuracy_pct": 85,
+          "conclusion": "Found 38 print tasks stuck in `IN_PROGRESS` with `completed_on = NULL` from overnight (7/8\u20137/9). All affected production items remain in `RELEASED` status. This is a data state issue \u2014 task completion callbacks were dropped overnight. Recommended escalating to Nick Deutsch to manually update stuck records.",
+          "actual_outcome": "User reported the next morning \"It seems as though the issue has been resolved. We were able to clear the jobs from the queue this morning.\" The issue self-resolved (or was cleared by the referenced Nick Deutsch). Ticket closed same day.",
+          "notes": "Correctly identified the stuck tasks, the data state issue, and the escalation path (Nick Deutsch). The issue resolved \u2014 whether via Nick's intervention or self-healing isn't clear, but the investigator's analysis of what was wrong and who to contact was correct."
         },
         {
           "seq": 17,
           "ticket_id": "55483",
           "title": "Color Critical",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 95
+          "accuracy_pct": 95,
+          "conclusion": "This ticket was already addressed and closed. The \"Color Critical\" note issue was escalated to ticket #56044 and tracked in Jira TEM-6967, which is in Done status. Recommended closing as a duplicate/resolved.",
+          "actual_outcome": "A human agent closed the ticket referencing ticket #56044 and Jira TEM-6967 before the investigator's comment was posted. Both arrived at the same conclusion \u2014 the work was already done elsewhere.",
+          "notes": "Correctly identified this as a resolved duplicate. Added useful context about the database `color_critical` flag and 41 users affected. The ticket was already being closed by a human at the same time."
         },
         {
           "seq": 18,
           "ticket_id": "82899",
           "title": "Collaterate Quote Information",
           "accuracy_label": "Partially Accurate",
-          "accuracy_pct": 70
+          "accuracy_pct": 70,
+          "conclusion": "Custom quote information no longer populates at checkout. No prior bug ticket exists. Possibly related to the v4.39.0 deployment on July 9 (same day). TTI-20276 (Out of Sync fix) was deployed that day and could be related. Recommended filing a TTI bug ticket and investigating the 4.39.0 release.",
+          "actual_outcome": "Ticket remains open (status=2). Cameron Bjork asked the user when the issue started. No resolution recorded yet. The investigator's correlation with the same-day 4.39.0 deployment is plausible but unconfirmed.",
+          "notes": "Provided useful context (deployment timeline, related TTI tickets) and correct escalation recommendations. However, the root cause hasn't been confirmed, so accuracy can't be fully validated. The investigator couldn't view the screenshots and acknowledged this limitation. Rating reflects the directional usefulness without confirmed resolution."
         },
         {
           "seq": 19,
           "ticket_id": "82900",
           "title": "2016509 - Integration issue",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 80
+          "accuracy_pct": 80,
+          "conclusion": "Order 2016509 submitted successfully but has no integration activity \u2014 no Pace jobs, no production status, no CSR assignment. All 6 jobs stuck in \"New\" status. Found a log entry \"Skipped setting CSR because no PC assignment groups found.\" Recommended manual Pace integration trigger and investigating the CSR assignment config gap.",
+          "actual_outcome": "Ticket remains open (status=2). No resolution or follow-up conversations recorded beyond the investigator's comment. Cannot verify accuracy against an actual resolution.",
+          "notes": "Provided detailed order state verification (6 jobs identified, statuses confirmed), correctly identified the CSR assignment config gap from logs, and gave actionable recommendations. Docked slightly because no resolution exists to validate against, but the data gathering was thorough and verifiable."
         },
         {
           "seq": 20,
           "ticket_id": "82903",
           "title": "SCHWEIGER SKU 102288752-0001",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 100
+          "accuracy_pct": 100,
+          "conclusion": "SKU 102288752-0001 has a stale `reserved_inventory` of 1,675 due to reservations not being decremented when \"Obey Inventory\" was turned off. Rachel's requested correction of reserved=250 is confirmed correct (matching 2 abandoned cart items totaling 250 units). Recommended updating reserved to 250.",
+          "actual_outcome": "Help desk agent adjusted inventory as requested. Rachel confirmed \"Thank you!\" Ticket closed same day within ~40 minutes.",
+          "notes": "Perfectly matched the requested correction. The investigator independently verified Rachel's math was correct (250 = sum of 2 legitimate cart reservations) and explained why the stale 1,675 value existed. The exact action recommended was performed."
         },
         {
           "seq": 21,
           "ticket_id": "82906",
           "title": "Collaterate Error",
           "accuracy_label": "Partially Accurate",
-          "accuracy_pct": 55
+          "accuracy_pct": 55,
+          "conclusion": "The error is only visible in an inline screenshot that cannot be retrieved programmatically. No system-wide Collaterate outage detected. Recommended viewing the screenshot and requesting more details from the user.",
+          "actual_outcome": "The issue was a permissions/site whitelist configuration problem. Switching the user's account from a whitelist of specific sites to \"all sites\" resolved the error. Christi from the Config team identified and fixed it.",
+          "notes": "The investigator correctly identified no system-wide outage but missed the specific permissions/whitelist diagnosis that the human agent found within minutes by viewing the screenshot."
         },
         {
           "seq": 22,
           "ticket_id": "68152",
           "title": "Size / RDC Code Disable Logic",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 95
+          "accuracy_pct": 95,
+          "conclusion": "This is a known product gap \u2014 no validation or auto-reset logic exists for RDC die selection when size changes. Recommended Option A (auto-reset) as preferred and provided detailed technical architecture of the rules engine. Suggested creating a Jira TTI story.",
+          "actual_outcome": "The ticket is a feature request still in progress. The user confirmed they prefer Option A (auto-reset RDC code/cutting when size changes). The ticket remains open awaiting development prioritization.",
+          "notes": "Excellent analysis. Correctly identified the gap, provided both options with feasibility, and the user's response confirmed alignment with the recommended approach."
         },
         {
           "seq": 23,
           "ticket_id": "57480",
           "title": "Hiding a notification - ship date removal",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 100
+          "accuracy_pct": 100,
+          "conclusion": "This ticket is resolved. Jira TTI-14850 was marked Done, and the requester confirmed the feature was successfully implemented. Recommended marking the FreshService ticket as Resolved.",
+          "actual_outcome": "Confirmed resolved. A team member noted \"The jira has been closed and the ship date removed. This feature has implemented successfully.\" Ticket was closed.",
+          "notes": "Straightforward confirmation of an already-resolved feature request. Investigator correctly identified the status."
         },
         {
           "seq": 24,
           "ticket_id": "64429",
           "title": "Footprint/Collaterate Inventory synch",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 90
+          "accuracy_pct": 90,
+          "conclusion": "The inventory adjustment payload for Order 421802/Shipment 684459 is unrecoverable. The data is from 2017, the order was cancelled, no adjustment record exists. Recommended increasing SQS retention and confirmed the engineering team reworked the integration.",
+          "actual_outcome": "The engineering team confirmed via Jira that the ticket no longer applies \u2014 the Footprint integration was reworked to use a materials-based approach instead of the old shipmentLines/OrderLines query. Ticket closed as superseded.",
+          "notes": "The investigator's findings aligned with the Jira closure comment. The recommendation to confirm with the dev team whether the issue was superseded by the redesign was spot-on."
         },
         {
           "seq": 25,
           "ticket_id": "82969",
           "title": "PM Shelf: Parts Added - Automated Email",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 95
+          "accuracy_pct": 95,
+          "conclusion": "The \"PM Shelf: Parts Added\" email was triggered correctly \u2014 a production scan moved Job 4519060 to Proof Cart A, which is tagged as a PM Shelf location. The notification fires based on location tags, not proof type. Recommended evaluating whether Proof Cart A should retain the PM Shelf tag.",
+          "actual_outcome": "Jason Bierschbach confirmed the same finding \u2014 the email sends when a job is scanned to certain locations, and confirmed someone scanned it to \"MN01 : Cutting : PM Shelf : Proof Cart A.\" The requester thanked them and said they'd reach out to production leads.",
+          "notes": "Analysis was thorough and matched the human agent's explanation exactly. The recommendation about evaluating the tag was valuable forward-looking advice."
         },
         {
           "seq": 26,
           "ticket_id": "82986",
           "title": "Incorrect Ticket coming to Prep based on collaterate Data",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 95
+          "accuracy_pct": 95,
+          "conclusion": "The Prep file validation error is caused by a data mismatch in the child/rework job's PJC. The child job was configured as 2-sided but pages field was left at 1. Recommended updating the PJC and filing a TTI bug for the systemic issue.",
+          "actual_outcome": "The human agent confirmed the same root cause: \"the customer rework job was requoted (added side 2 ink). The number of pages was not changed from 1.\" Escalated to L4 for a fix. The issue persisted on subsequent orders.",
+          "notes": "Excellent root cause identification. The investigator's analysis matched exactly what the human agent discovered independently."
         },
         {
           "seq": 27,
           "ticket_id": "82988",
           "title": "Sephora: Inventory sku 22867-AU",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 90
+          "accuracy_pct": 90,
+          "conclusion": "Inventory quantities don't match expectations. Current DB shows actual=11, reserved=1, backorder=1, available=10 vs. expected reserved=2, backorder=0, available=9. Recommended updating reserved_inventory to 2 and clearing the backorder flag.",
+          "actual_outcome": "The support agent adjusted inventory, then escalated to CJ (developer) to remove the backorder and change picked status. CJ confirmed \"backorder released in the database.\" Rachel confirmed resolution.",
+          "notes": "Correctly identified both issues (wrong reserved count and erroneous backorder flag). The actions taken matched the recommendations."
         },
         {
           "seq": 28,
           "ticket_id": "82982",
           "title": "Omnicell: User Account/Checkout Issue",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 98
+          "accuracy_pct": 98,
+          "conclusion": "Confirmed 25 affected users with null fname/lname since June 8, 2026. Root cause is Omnicell's SSO update changed attribute names but Collaterate still expects first_name/last_name instead of OIDC standard given_name/family_name. Recommended engaging Omnicell IT and Collaterate dev.",
+          "actual_outcome": "The team confirmed the exact same root cause: their system expects first_name/last_name in Omnicell's JWT token, but Omnicell changed their SSO on June 8. A dev reached out to client IT to add the claims.",
+          "notes": "Near-perfect analysis. Identified the exact root cause, the number of affected users, the date it started, and the correct fix approach \u2014 all confirmed by the human team."
         },
         {
           "seq": 29,
           "ticket_id": "82997",
           "title": "4529659 - new templated file needed",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 85
+          "accuracy_pct": 85,
+          "conclusion": "Job 4529659 has issue_flag=true and requires a new Chili template file. The template session was closed but the output file URL expired (Azure Blob SAS token). Recommended regenerating the file from the Chili session and re-uploading.",
+          "actual_outcome": "Kyle re-exported the PDF from the template session and provided it. However, the font was bad in the new file and prepress flagged it \u2014 further troubleshooting ensued around font issues in the Chili template.",
+          "notes": "Correctly identified the expired file URL issue and the regeneration path. The subsequent font quality issue was an additional problem not predictable from initial data."
         },
         {
           "seq": 30,
           "ticket_id": "83011",
           "title": "Add Ink Configuration Option",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 92
+          "accuracy_pct": 92,
+          "conclusion": "The Nyala 4 press is missing a \"White Only (Spot / Second Surface)\" ink configuration. It only has the First Surface variant. Recommended creating a new ink record with type_id=63 and linking it to device_id 106.",
+          "actual_outcome": "Sheila (Config team) set up the configuration and reported \"I believe I set this up correctly for you.\" Ticket resolved/closed.",
+          "notes": "Correctly identified what was missing and provided the exact database references needed for the config team."
         },
         {
           "seq": 31,
           "ticket_id": "83087",
           "title": "2005014 - Charge not processing",
           "accuracy_label": "Partially Accurate",
-          "accuracy_pct": 70
+          "accuracy_pct": 70,
+          "conclusion": "Order was paid via PayPal which doesn't support post-settlement additional charges through stored payment method (no vault token). Recommended collecting payment via alternate method or manual PayPal invoice.",
+          "actual_outcome": "The actual issue was that the customer had removed their preferred billing method on PayPal for Smartpress. An existing SOP for creating additional PayPal charges existed. The CSR ultimately sent a manual payment link.",
+          "notes": "Correctly identified PayPal as the root issue and that alternate payment was needed, but the specific cause was the customer removing their billing method (not a fundamental platform limitation)."
         },
         {
           "seq": 32,
           "ticket_id": "83015",
           "title": "Shipment classification issue causing Routing map problems",
           "accuracy_label": "Partially Accurate",
-          "accuracy_pct": 65
+          "accuracy_pct": 65,
+          "conclusion": "Root cause confirmed \u2014 OrderCreatedEventHandler.java builds the integration payload before calling syncShipmentTypesAndDates(), causing stale SINGLE_SHIPMENT_SINGLE_JOB to be sent to Workflow. Found 6 additional affected orders. Recommended moving payload construction after the sync call.",
+          "actual_outcome": "The team's deeper investigation revealed the scenario was different: the order was created with one job, a second was added later, then shipments were manually consolidated. The issue was that consolidation didn't re-propagate the updated classification. Not a simple code ordering bug.",
+          "notes": "Correctly identified the symptom (wrong classification sent to Workflow) and found the relevant code, but the root cause was specific to the \"add product then consolidate shipments\" workflow, not the general code ordering issue proposed."
         },
         {
           "seq": 33,
           "ticket_id": "73378",
           "title": "PC Queue Update - Remaining Production Time",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 100
+          "accuracy_pct": 100,
+          "conclusion": "This feature was already built and shipped to production in early 2026 (Jira TTI-18260, completed Feb 2, 2026). Recommended confirming with the requester whether the column is visible.",
+          "actual_outcome": "The team confirmed \"This has been implemented long ago\" and closed the ticket, linking to TTI-18260.",
+          "notes": "Perfect identification that the requested feature already existed and was deployed."
         },
         {
           "seq": 34,
           "ticket_id": "83123",
           "title": "Wrong name showing in HUB when I'm logged in",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 98
+          "accuracy_pct": 98,
+          "conclusion": "Ben Elliott's account has incorrect fname/lname data set to \"Riley McGrath\" and email set to riley.mcgrath's address. Username is correct. Recommended updating the users record.",
+          "actual_outcome": "The support team confirmed the same finding (fname=Riley, lname=McGrath). Sheila from Config updated it and confirmed \"This has been updated.\"",
+          "notes": "Spot-on diagnosis with exact field values identified. The fix was exactly what was recommended."
         },
         {
           "seq": 35,
           "ticket_id": "83134",
           "title": "Product Not Loading Proof: #4517003",
           "accuracy_label": "Inaccurate",
-          "accuracy_pct": 10
+          "accuracy_pct": 10,
+          "conclusion": "Investigation failed \u2014 RDS resources not found after 5 attempts. No useful analysis provided.",
+          "actual_outcome": "The support team found the proof was not generated for this specific job. Tully manually uploaded the proof as a workaround. The requester confirmed resolution.",
+          "notes": "The investigator failed to complete its analysis due to technical issues (RDS resource lookup failures). No useful information was provided."
         },
         {
           "seq": 36,
           "ticket_id": "83191",
           "title": "Add Shipping Speed Category in PC Queue",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 90
+          "accuracy_pct": 90,
+          "conclusion": "This is a feature request to add a Shipping Speed column to PC Queue V2 and enable multi-column sorting. The data exists in the DB but isn't in the DynamoDB payload. Provided detailed architecture overview and noted DB performance concerns.",
+          "actual_outcome": "Ticket is still open/in progress \u2014 no resolution yet. The investigator's analysis stands as the technical assessment for the feature request.",
+          "notes": "Thorough technical analysis of a feature request. Architectural context and performance caveats provide valuable guidance for development planning."
         },
         {
           "seq": 37,
           "ticket_id": "83178",
           "title": "Woodhouse: Quantity Drop Down not working as needed",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 95
+          "accuracy_pct": 95,
+          "conclusion": "The dropdown has \"100\" as the first option but when users don't interact with it, the platform records an empty string. Only active selection triggers the value capture. Recommended adding a \"Select One\" placeholder option to force user interaction.",
+          "actual_outcome": "The team reproduced and found the exact same root cause: \"Select One\" is hidden by CSS (display: none), so the user sees \"100\" as default. JavaScript only captures the value on the onchange event. A dev deployed a fix to production.",
+          "notes": "The investigator nailed the root cause. The team's investigation refined it with the CSS detail, but the core diagnosis was identical."
         },
         {
           "seq": 38,
           "ticket_id": "83322",
           "title": "Collaterate Error Message",
           "accuracy_label": "Partially Accurate",
-          "accuracy_pct": 50
+          "accuracy_pct": 50,
+          "conclusion": "Unable to pinpoint the specific root cause due to limited log visibility. Suggested it was likely a frontend API call returning an error. Recommended viewing the screenshot and checking recent deployments.",
+          "actual_outcome": "The actual error was a permissions issue: \"User does not have Read Only permission for REST_CLIENTS\" on assetville.collaterate.com. Christi added 3 permissions and the error was resolved.",
+          "notes": "The investigator couldn't view the screenshot and acknowledged limitations. The human team found the exact ForbiddenResourceException log entry immediately."
         },
         {
           "seq": 39,
           "ticket_id": "78065",
           "title": "Nonprofit Discount error",
           "accuracy_label": "No comment",
-          "accuracy_pct": null
+          "accuracy_pct": null,
+          "conclusion": null,
+          "actual_outcome": null,
+          "notes": null
         },
         {
           "seq": 40,
           "ticket_id": "83404",
           "title": "updating location",
           "accuracy_label": "Partially Accurate",
-          "accuracy_pct": 65
+          "accuracy_pct": 65,
+          "conclusion": "Shannon's permissions appear correct (Producer Administrator, Producer User). No system-level permission gap detected. The issue is likely a Producer app preferences configuration or location scoping problem. Recommended asking for specific job number and destination locations.",
+          "actual_outcome": "Through a live call, the team found the specific location \"MN01 SF Press 5-100K\" wasn't available to Shannon. The resolution was a workaround (have Kevin do it) while investigating further \u2014 a location-specific issue, not role-based.",
+          "notes": "Correctly ruled out permission gaps and suggested location scoping as a likely cause (which was correct), but required human interaction to diagnose fully."
         },
         {
           "seq": 41,
           "ticket_id": "83418",
           "title": "4541337 - special order envelopes",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 90
+          "accuracy_pct": 90,
+          "conclusion": "Job 4541337 (Order 2020379) is for a \"MSLLC Lock Box Envelope\" \u2014 a special envelope product with no envelope spec details, no job description, and no job notes configured. The checkout flow allowed submission without required spec details, suggesting a misconfigured PJC. Recommended contacting the customer and reviewing the site offering configuration.",
+          "actual_outcome": "The support agent directly used the AI's recommendation to reach out to the requester and looped in the Config team. They also found a null-pointer error when previewing the storefront, confirming a configuration issue. Ticket resolved.",
+          "notes": "Correctly identified the root cause (missing configuration/specs). Recommendations were directly adopted by the support agent."
         },
         {
           "seq": 42,
           "ticket_id": "83473",
           "title": "Need to add a customer to Collaterate",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 85
+          "accuracy_pct": 85,
+          "conclusion": "Gold Medal, Inc. (Pace customer ID: GOLDMEDA) does not exist in Collaterate \u2014 no matching site, user, or company record found. Recommended clarifying with the requester what type of access is needed before proceeding.",
+          "actual_outcome": "The config team (Sheila) confirmed \"This client has been added to the Hub\" \u2014 a straightforward manual add without needing the clarification the AI suggested.",
+          "notes": "Correctly confirmed the customer didn't exist in Collaterate. Recommendations were overly cautious \u2014 the config team knew exactly what to do."
         },
         {
           "seq": 43,
           "ticket_id": "83483",
           "title": "2021253 No Print Issue",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 95
+          "accuracy_pct": 95,
+          "conclusion": "Order 2021253's device was changed from \"No Device - Vendor Produced\" ($0 press cost) to \"Small Format B2\" ($6.67/unit), causing the price to spike. All operations had 0 estimated production time. Root cause identified as PJC configuration issue and incorrect device selection.",
+          "actual_outcome": "The config team confirmed: \"Our high quantity brochure product is created to be outsourced to Litho, which is why you aren't seeing our B2 devices on the job and without production times.\"",
+          "notes": "Nailed the root cause \u2014 the product was intended for vendor/litho production. The price history, device analysis, and zero-production-time explanation were all directly corroborated."
         },
         {
           "seq": 44,
           "ticket_id": "83575",
           "title": "Unable to refund on an order in collaterate",
           "accuracy_label": "Partially Accurate",
-          "accuracy_pct": 55
+          "accuracy_pct": 55,
+          "conclusion": "The user was unable to apply a $500 partial credit/refund due to ONESOURCE tax estimation call failing. Attributed to the `tax_applicable: true` flag on the credit account template gating the operation.",
+          "actual_outcome": "The actual root cause was a **permissions issue** \u2014 the user lacked the \"Site Credit Manager\" role. The tax error message was masking an `AccessDeniedException` on the estimateTax endpoint.",
+          "notes": "Correctly identified the failing endpoint and error symptoms, but misdiagnosed the root cause. The misleading error message (tax failure vs. permissions denial) threw off the analysis."
         },
         {
           "seq": 45,
           "ticket_id": "83585",
           "title": "Custom quote description detail auto-generation",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 90
+          "accuracy_pct": 90,
+          "conclusion": "This is a new feature request with no existing Jira ticket. Confirmed no prior ticket exists. Found related infrastructure and recommended creating a new Jira story in the TTI project.",
+          "actual_outcome": "The dev team confirmed it's a valid, feasible request (\"Looks small in scope\") but recommended waiting 2 weeks for the REST-based implementation migration. A developer engaged directly with the requester for scoping.",
+          "notes": "Correctly confirmed no prior ticket existed and the request's validity. The dev team's quick engagement validated the investigator's assessment."
         },
         {
           "seq": 46,
           "ticket_id": "83592",
           "title": "Diamond Sku 101897338-0001 qtys off",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 92
+          "accuracy_pct": 92,
+          "conclusion": "SKU 101897338-0001 has a corrupted negative `reserved_inventory` of -2318 in the database (variant ID 89732). The available shows 2395 due to the negative offset. Recommended a database correction to set actual=2395, reserved=0.",
+          "actual_outcome": "The support agent adjusted the inventory within minutes and confirmed \"Inventory has been adjusted.\" Requester confirmed with \"Thank you!\"",
+          "notes": "Correctly identified the corrupted negative reserved value and the exact variant ID. The recommended fix was directly applied."
         },
         {
           "seq": 47,
           "ticket_id": "83621",
           "title": "Diamond Sku 101897350 Adjustment",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 95
+          "accuracy_pct": 95,
+          "conclusion": "SKU 101897350 (variant ID 89733) has a corrupted `reserved_inventory` of -2318, causing available inventory to show 4,492 instead of the correct 2,174. Only reserved needs to be set to 0.",
+          "actual_outcome": "The support agent confirmed the inventory details matched the AI's analysis, then stated \"Reserved quantity has been adjusted.\" Ticket closed.",
+          "notes": "Perfectly identified the problem (negative reserved, correct actual) and the exact fix needed. Support agent used the findings directly."
         },
         {
           "seq": 48,
           "ticket_id": "83639",
           "title": "Product Artwork Error",
           "accuracy_label": "Inaccurate",
-          "accuracy_pct": 30
+          "accuracy_pct": 30,
+          "conclusion": "The artwork section error was caused by a database memory exhaustion event on `collaterate-aurora-prod-2` (swap usage spike to 6.8GB, FreeableMemory crash). Recommended rebooting the Aurora instance.",
+          "actual_outcome": "The actual root cause was a transient eDoc Builder service outage returning HTTP 503 (Service Unavailable). The issue self-resolved. The support team confirmed \"This was a transient issue with eDoc.\"",
+          "notes": "The investigator identified a real infrastructure concern (Aurora memory issues) but misattributed the artwork error to it. The actual cause was an external eDoc Builder service outage (503 errors)."
         },
         {
           "seq": 49,
           "ticket_id": "83666",
           "title": "WPN: Product Set Issue: MTG The Hobbit Launch Bundle",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 92
+          "accuracy_pct": 92,
+          "conclusion": "The parent bundle product is being incorrectly consolidated into Small Format - MN shipments instead of getting its own \"Product Sets - Parent Product\" shipment. Identified the pattern (happens when other SF items exist in the order). Noted `shippable=false` isn't viable since it cascades to children. Recommended a dev fix.",
+          "actual_outcome": "The support team confirmed the issue is intermittent and order-dependent, identified it as a known bug (TEM-9474), and found the race condition in `TBGBOOrderServiceImpl`. Provided a workaround (create planned shipment manually) and escalated for a permanent fix.",
+          "notes": "Correctly identified the shipment allocation consolidation bug, the shippable=true/false dilemma, and the pattern of affected orders. The team confirmed TEM-9474 tracks this exact issue."
         },
         {
           "seq": 50,
           "ticket_id": "83691",
           "title": "Integration Error",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 90
+          "accuracy_pct": 90,
+          "conclusion": "Initially misdiagnosed as a HubSpot integration DynamoDB issue. Self-corrected with a follow-up identifying the actual root cause: a data-entry error on order 2027118 where the Kit ID field contained 62754 (a Subproject ID) instead of a valid Pace kit. Recommended correcting Kit ID to 27214.",
+          "actual_outcome": "The Pace admin confirmed kit 62754 doesn't exist and that updating to a valid Kit ID would fix the integration. The requester confirmed \"Everything is updated correctly and we should be good to go now.\"",
+          "notes": "The initial diagnosis was wrong (HubSpot), but the investigator self-corrected and the final analysis was spot-on and directly used by the team."
         },
         {
           "seq": 51,
           "ticket_id": "83758",
           "title": "Kohler Prof Chan - BOM Builder missing skus - 2024327",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 88
+          "accuracy_pct": 88,
+          "conclusion": "SKU S-1573765 does not exist in Collaterate's system_offerings or site_offerings. Identified it as a gap in the Maxis Slat Wall sequence. Concluded the SKU was never created or was deleted. Recommended creating the missing SKU.",
+          "actual_outcome": "S-1573765 had been retired on the Kohler channel while the display configuration still referenced it. An active offering was recreated and the order re-triggered successfully.",
+          "notes": "Correctly identified the missing SKU and recommended creating it. The actual cause (retired vs. never created) is a minor distinction \u2014 the fix was identical."
         },
         {
           "seq": 52,
           "ticket_id": "83760",
           "title": "Kohler Prof Chan - Order 2022481 - BOM Builder error",
           "accuracy_label": "Partially Accurate",
-          "accuracy_pct": 65
+          "accuracy_pct": 65,
+          "conclusion": "Order 2022481 on hold due to missing SKU S-1631892. Found that a system offering exists (product_id '1631892') but the BOM Builder searches with the 'S-' prefix. Identified it as a SKU format discrepancy.",
+          "actual_outcome": "The config team \"turned that sku active again within Collaterate.\" The product had been retired. The issue was a retired SKU, not a prefix format mismatch.",
+          "notes": "Correctly found the existing system offering and identified the BOM Builder error. However, the root cause was a retired SKU, not a prefix format mismatch as concluded."
         },
         {
           "seq": 53,
           "ticket_id": "83761",
           "title": "Kohler Prof Chan - Order 2024105 - BOM Builder error",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 88
+          "accuracy_pct": 88,
+          "conclusion": "Order 2024105 on hold due to missing SKU S-1573765 (same SKU as #83758). Confirmed no matching record exists in Collaterate. Recommended creating the SKU and resuming the order build.",
+          "actual_outcome": "Same resolution as #83758: S-1573765 was retired and reactivated. Order re-triggered successfully through BOM Builder.",
+          "notes": "Same pattern as #83758. Correctly identified the problem and recommended the right fix. The \"retired vs never created\" distinction is minor."
         },
         {
           "seq": 54,
           "ticket_id": "83766",
           "title": "Print Points Account Issue",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 95
+          "accuracy_pct": 95,
+          "conclusion": "Two issues identified: (1) Points discrepancy of 203,153 is due to a PENDING redemption (coupon DKntkSK6) \u2014 the SmartPress display is actually correct. (2) Tier was incorrectly downgraded to Magenta during balance transfer when it should be Black (user has $80,630 lifetime spend). Identified the tier recalculation bug in the balance transfer flow.",
+          "actual_outcome": "The support team confirmed both findings: fixed the tier with a reconciliation move to Black Tier, and identified the pending redemption as the balance discrepancy. The team directly cited the AI's analysis (\"Kiro Investigation\") and adopted its code-level fix recommendations.",
+          "notes": "Exceptional analysis. Correctly identified both issues, explained the point difference, identified the tier bug root cause, and the team directly used and cited the findings."
         },
         {
           "seq": 55,
           "ticket_id": "83796",
           "title": "Collaterate laggy",
           "accuracy_label": "Partially Accurate",
-          "accuracy_pct": 60
+          "accuracy_pct": 60,
+          "conclusion": "Performance degradation caused by slow database queries on production Aurora PostgreSQL \u2014 worst queries hitting 27 seconds. Identified a complex `RankedRecords` CTE query and QuickSight reporting competing with app queries. Also noted Prod-2-Swap-Usage alarm active.",
+          "actual_outcome": "The support team stated: \"There are some pending async events processing around 3 PM; now all cleared and collaterate loading fine.\" The issue was transient and self-resolved.",
+          "notes": "Identified real infrastructure concerns (slow queries, memory alarms) that likely contributed, but the actual resolution was simpler \u2014 backed-up async events cleared on their own. Long-term recommendations remain valid."
         },
         {
           "seq": 56,
           "ticket_id": "84065",
           "title": "Not being able to view or start jitbit tickets",
           "accuracy_label": "Partially Accurate",
-          "accuracy_pct": 65
+          "accuracy_pct": 65,
+          "conclusion": "Jitbit is a third-party SaaS not hosted by TBG. No TBG infrastructure issues found. User's Collaterate accounts are active with no lockouts. Likely an SSO/SAML session issue or Jitbit platform maintenance.",
+          "actual_outcome": "The support team confirmed \"Need to login manually as jitbit has deprecated the version. This is currently an ongoing issue.\" A known Jitbit version deprecation broke automatic login.",
+          "notes": "Correctly identified Jitbit as third-party SaaS and that TBG infra was fine, but missed the specific cause (Jitbit version deprecation). The support team had prior knowledge of this ongoing issue."
         },
         {
           "seq": 57,
           "ticket_id": "84063",
           "title": "HealthMarkets - Custom Quote #340c-280726",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 85
+          "accuracy_pct": 85,
+          "conclusion": "Customer submitted the same Custom Quote checkout multiple times, resulting in 2 duplicate orders within 2 minutes. No backend errors recorded \u2014 the issue is a UX/frontend feedback problem. Recommended adding idempotency protection and improving post-checkout confirmation.",
+          "actual_outcome": "The support team acknowledged this is a known recurring issue: \"There are just some quotes where customer faces an error, we are not sure why.\" Ticket remains open. No definitive root cause identified by the team either.",
+          "notes": "Correctly identified duplicate orders, confirmed no backend errors, and proposed a plausible UX explanation. The team's \"not sure why\" response suggests the investigator's analysis was at least as good as existing understanding."
         },
         {
           "seq": 58,
           "ticket_id": "84060",
           "title": "Smartpress jobs not being podded",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 98
+          "accuracy_pct": 98,
+          "conclusion": "Identified a transient 28-minute failure in the async event dispatcher on 7/24 (17:06\u201317:34 UTC) causing 16 consecutive ORDER_CREATED events to fail. The event-handler-order-created Lambda (PC assignment) was never invoked. Not department-specific \u2014 spans multiple sites. Listed all 16 affected orders.",
+          "actual_outcome": "The support team directly cited the investigator's findings: \"Based on the fresh service investigator investigation, this issue was caused by a temporary failure in the Collaterate monolith's internal async event dispatcher on 2026-07-24.\" Verified in staging that the pipeline works correctly now. Confirmed as one-time transient infrastructure issue.",
+          "notes": "Exceptional. The investigator's self-correcting analysis was directly cited and adopted by the support team. The 16-order window, timestamps, and multi-site scope were all confirmed."
         },
         {
           "seq": 59,
           "ticket_id": "84097",
           "title": "Site update/Ticket Config - Flat/Finished Size",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 92
+          "accuracy_pct": 92,
+          "conclusion": "Product enhancement request, not incident. Audited all relevant PJC `dimensions_tip` fields \u2014 found inconsistent terminology (Greeting Cards/Cards mix \"finished\" and \"unfolded\"; booklets have empty tooltips). No fold-type selector exists. Recommended tooltip updates + longer-term fold-selector feature.",
+          "actual_outcome": "Ticket remains open (status=2). Routed to Config team and Matt Tonak. No resolution yet but the investigator's analysis is the definitive technical assessment.",
+          "notes": "Thorough audit of every relevant PJC tooltip in the database. Correctly categorized as feature request with actionable quick-wins identified."
         },
         {
           "seq": 60,
           "ticket_id": "84095",
           "title": "Door Hours Sign (Crisp and Green)",
           "accuracy_label": "Partially Accurate",
-          "accuracy_pct": 60
+          "accuracy_pct": 60,
+          "conclusion": "Jobs correctly captured the \"Hours 8am-9pm\" version with a ~49 minute delay in stored artwork attachment. Attributed the delay to newer files having `migration_status = NULL` vs older files with `SUCCESS`, suggesting the migration Lambda is causing lag.",
+          "actual_outcome": "A human engineer disproved the migration theory with 5 pieces of evidence: the file was already in S3 (uploaded directly on 7/23), the MigrateFileToS3 Lambda is unrelated (EFS-to-S3 tool, not order processing), and the Java code doesn't even check `migration_status`. The actual delay was in Pace integration server taking 49 minutes to process.",
+          "notes": "Correctly identified the ~49 minute delay and that jobs eventually resolved correctly. However, root cause attribution to `migration_status` was proven incorrect. The actual bottleneck was Pace processing time, not Collaterate."
         },
         {
           "seq": 61,
           "ticket_id": "84102",
           "title": "Assisted Sale \"Site User\" Field Issue",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 92
+          "accuracy_pct": 92,
+          "conclusion": "Bug in the CQ \"Site User\" toggle during requote. The `requestRequote()` flow copies the prior quote's `requester_id` without resetting toggle state. The DB schema makes `requester_id` and `requester_name/email` mutually exclusive, so saving clears manual fields. Found related bug TK-157. Identified code path and fix owner (Cameron Bjork).",
+          "actual_outcome": "Team reproduced the issue in staging, confirmed it was the requote flow, escalated to Cameron Bjork as recommended. Ticket resolved (status=5). Internal note: \"Issue has been resolved.\"",
+          "notes": "Correctly identified root cause code path, DB schema design, and fix owner. The workaround and code-level detail were directly useful."
         },
         {
           "seq": 62,
           "ticket_id": "84103",
           "title": "Collaterate login",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 88
+          "accuracy_pct": 88,
+          "conclusion": "No site named \"Job Find\" exists in Collaterate. Chad Rugg has active accounts on 4 sites with no lockouts. Recommended clarifying which app and providing username for password reset.",
+          "actual_outcome": "Sheila asked Chad to clarify and provided his username. Another agent identified it as \"JobFinder\" (c.collaterate.com). Chad replied \"I was able to get in last night\" \u2014 self-resolved.",
+          "notes": "Correctly identified no \"Job Find\" site, flagged need for clarification, and noted no lockout. Couldn't guess \"JobFinder\" but the recommendation to clarify + offer password reset was exactly what the team did."
         },
         {
           "seq": 63,
           "ticket_id": "84106",
           "title": "Kohler Professional Channel - Fulfillment Center for configurator orders",
           "accuracy_label": "Partially Accurate",
-          "accuracy_pct": 50
+          "accuracy_pct": 50,
+          "conclusion": "All 6 orders routed to Distribution Center (FC 460) instead of TBG Fixtures (FC 560). Root cause: MWD_P_* products don't have FC override to 560, falling to site default (DC). Recommended reassigning orders and fixing FC assignments.",
+          "actual_outcome": "The actual handler asked for more info, then spoke with Rachel who said the DC routing was INTENTIONAL (\"we've set these as DC for the last several years\"). The real issue was a reporting display problem. Jill: \"Sorry for the confusion.\"",
+          "notes": "Correctly mapped the FC routing data, but incorrectly assumed it was misconfiguration. The DC routing was intentional \u2014 the actual issue was a report display problem, not a routing bug."
         },
         {
           "seq": 64,
           "ticket_id": "84128",
           "title": "Reorder error",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 95
+          "accuracy_pct": 95,
+          "conclusion": "The reorder inherited correct product/SKU/dimensions but added a Folding operation not present on the original. Original had Cutting only; reorder got Cutting + Folding (tri-fold). The `offering_metadata` is empty, so fold config wasn't persisted for reorder replay. Root cause is in PJC operation cloning logic.",
+          "actual_outcome": "The support team confirmed the same finding \u2014 the reorder shows tri-fold defaulting in the PJC config. Escalated to Christi asking if \"Folding - Updated Costing (old) Tri-fold\" being checked is the cause. Ticket still open.",
+          "notes": "Spot-on diagnosis. Correctly identified the exact divergence (Cutting-only vs Cutting+Folding), empty metadata preventing replay, and PJC operation cloning as root cause. Team's follow-up directly validates this."
         },
         {
           "seq": 65,
           "ticket_id": "84120",
           "title": "Remove Option for Reworks to select None",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 92
+          "accuracy_pct": 92,
+          "conclusion": "Missing validation bug in V2 Add Rework modals (`AddCustomerReworkModal.tsx` and `CreateInternalReworkModal.tsx`). The `handleSave()` doesn't validate reworkCode selection. The Edit modal correctly blocks saving. Provided exact file paths and fix approach.",
+          "actual_outcome": "The support team directly cited the investigator's findings: \"I went through the Freshservice Investigator findings, which pointed to the new V2 React modals: AddCustomerReworkModal.tsx and CreateInternalReworkModal.tsx.\" They confirmed the validation gap between add/create vs edit flows. The requester later noted it may also be in Producer. Investigation ongoing.",
+          "notes": "Code-level analysis directly adopted by the team \u2014 they explicitly cited the file names and validation gap identified by the investigator."
         },
         {
           "seq": 66,
           "ticket_id": "84153",
           "title": "Lucid sku 101408827-0002 qtys",
           "accuracy_label": "Accurate",
-          "accuracy_pct": 85
+          "accuracy_pct": 85,
+          "conclusion": "SKU has `actual_inventory = -2` and `backorder_inventory = 0`, should be `actual = 0, backorder = 2`. Identified variant (id 83422), site (Lucid Diagnostics, ID 523), and an open order. Recommended updating via admin UI or DB.",
+          "actual_outcome": "Support agent adjusted inventory. However, they noted \"Backorder is disabled for this site\" \u2014 the backorder field couldn't be set as recommended. Rachel confirmed \"4 is correct\" for the order quantity.",
+          "notes": "Correctly identified wrong values and target state. Missed that backorders are disabled for this site, limiting the recommended fix path. Support team worked around it."
         }
       ]
     }
