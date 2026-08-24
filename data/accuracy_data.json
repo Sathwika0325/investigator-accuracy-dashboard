@@ -1,0 +1,485 @@
+{
+  "documents": [
+    {
+      "file": "investigator_accuracy_audit_july1st2026_July_31_2026.md",
+      "doc_title": "TE Investigator Accuracy Audit \u2014 July 2026",
+      "period": "July 1\u201331, 2026",
+      "ticket_count": 66,
+      "tickets": [
+        {
+          "seq": 1,
+          "ticket_id": "82486",
+          "title": "Printing from Collaterate",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90
+        },
+        {
+          "seq": 2,
+          "ticket_id": "82478",
+          "title": "Hard Proof Completed - Auto Email (received in error?)",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 100
+        },
+        {
+          "seq": 3,
+          "ticket_id": "82494",
+          "title": "403 Error - https://reports.thebernardgroup.com/query/161/",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 60
+        },
+        {
+          "seq": 4,
+          "ticket_id": "82493",
+          "title": "Decals 404",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95
+        },
+        {
+          "seq": 5,
+          "ticket_id": "82546",
+          "title": "Auto ship by dates to take in account non production holidays",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85
+        },
+        {
+          "seq": 6,
+          "ticket_id": "82551",
+          "title": "Collaterate Unable to leave an internal comment",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 55
+        },
+        {
+          "seq": 7,
+          "ticket_id": "82552",
+          "title": "Collaterate - Activity Log (WIDESPREAD ISSUE)",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 65
+        },
+        {
+          "seq": 8,
+          "ticket_id": "82505",
+          "title": "Dairy Queen MOD to South Carolina",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90
+        },
+        {
+          "seq": 9,
+          "ticket_id": "82583",
+          "title": "Petco TBG SKU#100265444 - Clear out Inventory",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95
+        },
+        {
+          "seq": 10,
+          "ticket_id": "82629",
+          "title": "Toolkit / Triptych potential Connection Issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85
+        },
+        {
+          "seq": 11,
+          "ticket_id": "82662",
+          "title": "Kohler Professional Channel configurator error",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85
+        },
+        {
+          "seq": 12,
+          "ticket_id": "82694",
+          "title": "2010448 - Uploaded proof file not generating link to proof",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95
+        },
+        {
+          "seq": 13,
+          "ticket_id": "82695",
+          "title": "12pt C1S stock adjustments",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90
+        },
+        {
+          "seq": 14,
+          "ticket_id": "82714",
+          "title": "Folder structure on Color Work jobs",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90
+        },
+        {
+          "seq": 15,
+          "ticket_id": "82847",
+          "title": "Configurator Orders are not presenting in AOD as expected",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 70
+        },
+        {
+          "seq": 16,
+          "ticket_id": "82865",
+          "title": "Not able to mark some jobs complete in producer off press",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85
+        },
+        {
+          "seq": 17,
+          "ticket_id": "55483",
+          "title": "Color Critical",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95
+        },
+        {
+          "seq": 18,
+          "ticket_id": "82899",
+          "title": "Collaterate Quote Information",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 70
+        },
+        {
+          "seq": 19,
+          "ticket_id": "82900",
+          "title": "2016509 - Integration issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 80
+        },
+        {
+          "seq": 20,
+          "ticket_id": "82903",
+          "title": "SCHWEIGER SKU 102288752-0001",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 100
+        },
+        {
+          "seq": 21,
+          "ticket_id": "82906",
+          "title": "Collaterate Error",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 55
+        },
+        {
+          "seq": 22,
+          "ticket_id": "68152",
+          "title": "Size / RDC Code Disable Logic",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95
+        },
+        {
+          "seq": 23,
+          "ticket_id": "57480",
+          "title": "Hiding a notification - ship date removal",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 100
+        },
+        {
+          "seq": 24,
+          "ticket_id": "64429",
+          "title": "Footprint/Collaterate Inventory synch",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90
+        },
+        {
+          "seq": 25,
+          "ticket_id": "82969",
+          "title": "PM Shelf: Parts Added - Automated Email",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95
+        },
+        {
+          "seq": 26,
+          "ticket_id": "82986",
+          "title": "Incorrect Ticket coming to Prep based on collaterate Data",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95
+        },
+        {
+          "seq": 27,
+          "ticket_id": "82988",
+          "title": "Sephora: Inventory sku 22867-AU",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90
+        },
+        {
+          "seq": 28,
+          "ticket_id": "82982",
+          "title": "Omnicell: User Account/Checkout Issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 98
+        },
+        {
+          "seq": 29,
+          "ticket_id": "82997",
+          "title": "4529659 - new templated file needed",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85
+        },
+        {
+          "seq": 30,
+          "ticket_id": "83011",
+          "title": "Add Ink Configuration Option",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 92
+        },
+        {
+          "seq": 31,
+          "ticket_id": "83087",
+          "title": "2005014 - Charge not processing",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 70
+        },
+        {
+          "seq": 32,
+          "ticket_id": "83015",
+          "title": "Shipment classification issue causing Routing map problems",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 65
+        },
+        {
+          "seq": 33,
+          "ticket_id": "73378",
+          "title": "PC Queue Update - Remaining Production Time",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 100
+        },
+        {
+          "seq": 34,
+          "ticket_id": "83123",
+          "title": "Wrong name showing in HUB when I'm logged in",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 98
+        },
+        {
+          "seq": 35,
+          "ticket_id": "83134",
+          "title": "Product Not Loading Proof: #4517003",
+          "accuracy_label": "Inaccurate",
+          "accuracy_pct": 10
+        },
+        {
+          "seq": 36,
+          "ticket_id": "83191",
+          "title": "Add Shipping Speed Category in PC Queue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90
+        },
+        {
+          "seq": 37,
+          "ticket_id": "83178",
+          "title": "Woodhouse: Quantity Drop Down not working as needed",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95
+        },
+        {
+          "seq": 38,
+          "ticket_id": "83322",
+          "title": "Collaterate Error Message",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 50
+        },
+        {
+          "seq": 39,
+          "ticket_id": "78065",
+          "title": "Nonprofit Discount error",
+          "accuracy_label": "No comment",
+          "accuracy_pct": null
+        },
+        {
+          "seq": 40,
+          "ticket_id": "83404",
+          "title": "updating location",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 65
+        },
+        {
+          "seq": 41,
+          "ticket_id": "83418",
+          "title": "4541337 - special order envelopes",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90
+        },
+        {
+          "seq": 42,
+          "ticket_id": "83473",
+          "title": "Need to add a customer to Collaterate",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85
+        },
+        {
+          "seq": 43,
+          "ticket_id": "83483",
+          "title": "2021253 No Print Issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95
+        },
+        {
+          "seq": 44,
+          "ticket_id": "83575",
+          "title": "Unable to refund on an order in collaterate",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 55
+        },
+        {
+          "seq": 45,
+          "ticket_id": "83585",
+          "title": "Custom quote description detail auto-generation",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90
+        },
+        {
+          "seq": 46,
+          "ticket_id": "83592",
+          "title": "Diamond Sku 101897338-0001 qtys off",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 92
+        },
+        {
+          "seq": 47,
+          "ticket_id": "83621",
+          "title": "Diamond Sku 101897350 Adjustment",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95
+        },
+        {
+          "seq": 48,
+          "ticket_id": "83639",
+          "title": "Product Artwork Error",
+          "accuracy_label": "Inaccurate",
+          "accuracy_pct": 30
+        },
+        {
+          "seq": 49,
+          "ticket_id": "83666",
+          "title": "WPN: Product Set Issue: MTG The Hobbit Launch Bundle",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 92
+        },
+        {
+          "seq": 50,
+          "ticket_id": "83691",
+          "title": "Integration Error",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90
+        },
+        {
+          "seq": 51,
+          "ticket_id": "83758",
+          "title": "Kohler Prof Chan - BOM Builder missing skus - 2024327",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 88
+        },
+        {
+          "seq": 52,
+          "ticket_id": "83760",
+          "title": "Kohler Prof Chan - Order 2022481 - BOM Builder error",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 65
+        },
+        {
+          "seq": 53,
+          "ticket_id": "83761",
+          "title": "Kohler Prof Chan - Order 2024105 - BOM Builder error",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 88
+        },
+        {
+          "seq": 54,
+          "ticket_id": "83766",
+          "title": "Print Points Account Issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95
+        },
+        {
+          "seq": 55,
+          "ticket_id": "83796",
+          "title": "Collaterate laggy",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 60
+        },
+        {
+          "seq": 56,
+          "ticket_id": "84065",
+          "title": "Not being able to view or start jitbit tickets",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 65
+        },
+        {
+          "seq": 57,
+          "ticket_id": "84063",
+          "title": "HealthMarkets - Custom Quote #340c-280726",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85
+        },
+        {
+          "seq": 58,
+          "ticket_id": "84060",
+          "title": "Smartpress jobs not being podded",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 98
+        },
+        {
+          "seq": 59,
+          "ticket_id": "84097",
+          "title": "Site update/Ticket Config - Flat/Finished Size",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 92
+        },
+        {
+          "seq": 60,
+          "ticket_id": "84095",
+          "title": "Door Hours Sign (Crisp and Green)",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 60
+        },
+        {
+          "seq": 61,
+          "ticket_id": "84102",
+          "title": "Assisted Sale \"Site User\" Field Issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 92
+        },
+        {
+          "seq": 62,
+          "ticket_id": "84103",
+          "title": "Collaterate login",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 88
+        },
+        {
+          "seq": 63,
+          "ticket_id": "84106",
+          "title": "Kohler Professional Channel - Fulfillment Center for configurator orders",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 50
+        },
+        {
+          "seq": 64,
+          "ticket_id": "84128",
+          "title": "Reorder error",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95
+        },
+        {
+          "seq": 65,
+          "ticket_id": "84120",
+          "title": "Remove Option for Reworks to select None",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 92
+        },
+        {
+          "seq": 66,
+          "ticket_id": "84153",
+          "title": "Lucid sku 101408827-0002 qtys",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_documents": 1,
+    "total_tickets": 66,
+    "rated_tickets": 65,
+    "average_accuracy": 82.0,
+    "buckets": {
+      "accurate": 46,
+      "partial": 17,
+      "inaccurate": 2
+    }
+  }
+}

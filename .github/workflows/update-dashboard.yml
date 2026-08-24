@@ -1,0 +1,62 @@
+name: Update accuracy dashboard
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "audits/**.md"
+      - "scripts/parse_audits.py"
+  workflow_dispatch: {}   # lets you trigger it manually from the Actions tab
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Parse audit docs (deterministic, no AI calls)
+        run: python3 scripts/parse_audits.py
+
+      - name: Commit updated data file
+        run: |
+          git config user.name "accuracy-dashboard-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/accuracy_data.json
+          git diff --cached --quiet && echo "No data changes." || git commit -m "chore: regenerate accuracy_data.json"
+          git push
+
+  deploy:
+    needs: build-data
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out repo (post-commit)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

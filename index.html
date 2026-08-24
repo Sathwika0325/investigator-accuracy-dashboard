@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investigator Accuracy — Audit Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0d1013;
+    --panel:#151a1f;
+    --panel-2:#1b2129;
+    --line:#262e37;
+    --text:#e7e9ea;
+    --muted:#8b96a3;
+    --accurate:#3ecf8e;
+    --partial:#e8b339;
+    --inaccurate:#e8593f;
+    --accent:#5bc0be;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Space Grotesk', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.5;
+  }
+  .scanline{
+    position:fixed; inset:0; pointer-events:none; z-index:50;
+    background:repeating-linear-gradient(to bottom, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
+  }
+  header{
+    padding:32px 40px 24px;
+    border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;
+  }
+  .brand-eyebrow{
+    font-family:var(--mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--accent); margin:0 0 6px;
+  }
+  h1{ margin:0; font-size:28px; font-weight:600; letter-spacing:-0.01em; }
+  .doc-meta{ font-family:var(--mono); font-size:12px; color:var(--muted); text-align:right; }
+  main{ max-width:1180px; margin:0 auto; padding:32px 40px 80px; }
+
+  .cards{ display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:14px; margin-bottom:28px; }
+  .card{
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:18px 20px; position:relative; overflow:hidden;
+  }
+  .card::before{ content:''; position:absolute; top:0; left:0; width:3px; height:100%; background:var(--card-accent, var(--accent)); }
+  .card .label{ font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); }
+  .card .value{ font-family:var(--mono); font-size:32px; font-weight:700; margin-top:6px; }
+  .card.accurate{ --card-accent: var(--accurate); }
+  .card.partial{ --card-accent: var(--partial); }
+  .card.inaccurate{ --card-accent: var(--inaccurate); }
+
+  .grid-2{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:20px; margin-bottom:28px; }
+  @media (max-width:860px){ .grid-2{ grid-template-columns:1fr; } }
+
+  .panel{ background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:22px; }
+  .panel h2{ margin:0 0 16px; font-size:14px; font-family:var(--mono); text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-weight:600; }
+
+  .controls{ display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap; align-items:center; }
+  input[type="search"]{
+    flex:1; min-width:180px; background:var(--panel-2); border:1px solid var(--line); color:var(--text);
+    padding:9px 12px; border-radius:7px; font-family:var(--sans); font-size:13px; outline:none;
+  }
+  input[type="search"]:focus{ border-color:var(--accent); }
+  .chip{
+    font-family:var(--mono); font-size:11px; padding:6px 11px; border-radius:20px; cursor:pointer;
+    border:1px solid var(--line); background:var(--panel-2); color:var(--muted); user-select:none;
+  }
+  .chip.active{ color:var(--bg); font-weight:700; border-color:transparent; }
+  .chip[data-bucket="accurate"].active{ background:var(--accurate); }
+  .chip[data-bucket="partial"].active{ background:var(--partial); }
+  .chip[data-bucket="inaccurate"].active{ background:var(--inaccurate); }
+  .chip[data-bucket="all"].active{ background:var(--accent); }
+
+  table{ width:100%; border-collapse:collapse; font-size:13px; }
+  thead th{
+    text-align:left; font-family:var(--mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--muted); padding:8px 10px; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--panel);
+  }
+  tbody td{ padding:10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  tbody tr:hover{ background:var(--panel-2); }
+  .ticket-id{ font-family:var(--mono); color:var(--accent); white-space:nowrap; }
+  .bucket-dot{ display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:8px; }
+  .bucket-dot.accurate{ background:var(--accurate); }
+  .bucket-dot.partial{ background:var(--partial); }
+  .bucket-dot.inaccurate{ background:var(--inaccurate); }
+  .pct{ font-family:var(--mono); font-weight:700; }
+  .table-wrap{ max-height:520px; overflow:auto; border:1px solid var(--line); border-radius:8px; }
+
+  .obs-list{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; }
+  .obs-list li{ font-size:13px; color:var(--muted); padding-left:16px; position:relative; }
+  .obs-list li::before{ content:'—'; position:absolute; left:0; color:var(--accent); }
+
+  footer{ text-align:center; padding:24px; font-family:var(--mono); font-size:11px; color:var(--muted); border-top:1px solid var(--line); }
+  .loading, .error{ font-family:var(--mono); color:var(--muted); padding:40px; text-align:center; }
+</style>
+</head>
+<body>
+<div class="scanline"></div>
+<header>
+  <div>
+    <p class="brand-eyebrow">Freshservice AI Investigator</p>
+    <h1>Accuracy Audit Dashboard</h1>
+  </div>
+  <div class="doc-meta" id="docMeta">loading…</div>
+</header>
+
+<main>
+  <div id="content" class="loading">Reading data/accuracy_data.json…</div>
+</main>
+
+<footer>Rebuilt automatically from /audits on every push · no manual edits needed</footer>
+
+<script>
+async function init(){
+  const contentEl = document.getElementById('content');
+  let data;
+  try{
+    const res = await fetch('data/accuracy_data.json', {cache:'no-store'});
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    data = await res.json();
+  }catch(e){
+    contentEl.innerHTML = '<div class="error">Could not load data/accuracy_data.json — run scripts/parse_audits.py, or check the workflow logs.<br>(' + e.message + ')</div>';
+    return;
+  }
+
+  const docs = data.documents || [];
+  const allTickets = docs.flatMap(d => d.tickets.map(t => ({...t, source: d.file, period: d.period})));
+  const rated = allTickets.filter(t => t.accuracy_pct !== null);
+
+  document.getElementById('docMeta').textContent =
+    docs.length ? `${docs.length} audit doc${docs.length>1?'s':''} · latest period: ${docs[docs.length-1].period || '—'}` : 'no audit docs found';
+
+  function bucketOf(pct){ if(pct>=85) return 'accurate'; if(pct>=50) return 'partial'; return 'inaccurate'; }
+  const counts = {accurate:0, partial:0, inaccurate:0};
+  rated.forEach(t => counts[bucketOf(t.accuracy_pct)]++);
+  const avg = rated.length ? (rated.reduce((s,t)=>s+t.accuracy_pct,0)/rated.length) : 0;
+
+  contentEl.innerHTML = `
+    <div class="cards">
+      <div class="card"><div class="label">Tickets audited</div><div class="value">${allTickets.length}</div></div>
+      <div class="card"><div class="label">Average accuracy</div><div class="value">${avg.toFixed(1)}%</div></div>
+      <div class="card accurate"><div class="label">Accurate (85%+)</div><div class="value">${counts.accurate}</div></div>
+      <div class="card partial"><div class="label">Partially accurate</div><div class="value">${counts.partial}</div></div>
+      <div class="card inaccurate"><div class="label">Inaccurate (&lt;50%)</div><div class="value">${counts.inaccurate}</div></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h2>Accuracy distribution</h2>
+        <canvas id="distChart" height="180"></canvas>
+      </div>
+      <div class="panel">
+        <h2>Average accuracy by period</h2>
+        <canvas id="trendChart" height="180"></canvas>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-bottom:28px;">
+      <h2>Ticket log</h2>
+      <div class="controls">
+        <input type="search" id="search" placeholder="Search ticket # or title…">
+        <span class="chip active" data-bucket="all">All</span>
+        <span class="chip" data-bucket="accurate">Accurate</span>
+        <span class="chip" data-bucket="partial">Partial</span>
+        <span class="chip" data-bucket="inaccurate">Inaccurate</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Ticket</th><th>Title</th><th>Period</th><th>Rating</th><th style="text-align:right;">Accuracy</th></tr></thead>
+          <tbody id="ticketBody"></tbody>
+        </table>
+      </div>
+    </div>
+  `;
+
+  // Distribution donut
+  new Chart(document.getElementById('distChart'), {
+    type:'doughnut',
+    data:{
+      labels:['Accurate','Partially accurate','Inaccurate'],
+      datasets:[{ data:[counts.accurate, counts.partial, counts.inaccurate],
+        backgroundColor:['#3ecf8e','#e8b339','#e8593f'], borderWidth:0 }]
+    },
+    options:{ plugins:{ legend:{ position:'bottom', labels:{ color:'#8b96a3', font:{family:'JetBrains Mono', size:11} } } }, cutout:'62%' }
+  });
+
+  // Trend by period (one point per doc, in file order)
+  const trendLabels = docs.map(d => d.period || d.file);
+  const trendData = docs.map(d => {
+    const r = d.tickets.filter(t => t.accuracy_pct !== null);
+    return r.length ? +(r.reduce((s,t)=>s+t.accuracy_pct,0)/r.length).toFixed(1) : null;
+  });
+  new Chart(document.getElementById('trendChart'), {
+    type:'line',
+    data:{ labels: trendLabels, datasets:[{ data: trendData, borderColor:'#5bc0be', backgroundColor:'rgba(91,192,190,0.15)', fill:true, tension:0.3, pointBackgroundColor:'#5bc0be' }] },
+    options:{
+      plugins:{ legend:{ display:false } },
+      scales:{
+        x:{ ticks:{ color:'#8b96a3', font:{family:'JetBrains Mono', size:10} }, grid:{ color:'#262e37' } },
+        y:{ ticks:{ color:'#8b96a3', font:{family:'JetBrains Mono', size:10} }, grid:{ color:'#262e37' }, suggestedMin:0, suggestedMax:100 }
+      }
+    }
+  });
+
+  // Ticket table
+  const tbody = document.getElementById('ticketBody');
+  let activeBucket = 'all';
+  let query = '';
+
+  function render(){
+    const rows = allTickets.filter(t => {
+      const b = t.accuracy_pct !== null ? bucketOf(t.accuracy_pct) : 'none';
+      if(activeBucket !== 'all' && b !== activeBucket) return false;
+      if(query && !(t.ticket_id.includes(query) || t.title.toLowerCase().includes(query))) return false;
+      return true;
+    });
+    tbody.innerHTML = rows.map(t => {
+      const b = t.accuracy_pct !== null ? bucketOf(t.accuracy_pct) : null;
+      return `<tr>
+        <td class="ticket-id">#${t.ticket_id}</td>
+        <td>${t.title}</td>
+        <td style="color:var(--muted); font-family:var(--mono); font-size:11px;">${t.period || ''}</td>
+        <td>${b ? `<span class="bucket-dot ${b}"></span>${t.accuracy_label}` : (t.accuracy_label||'—')}</td>
+        <td style="text-align:right;" class="pct">${t.accuracy_pct !== null ? t.accuracy_pct + '%' : '—'}</td>
+      </tr>`;
+    }).join('') || '<tr><td colspan="5" style="color:var(--muted); text-align:center; padding:24px;">No matching tickets</td></tr>';
+  }
+
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeBucket = chip.dataset.bucket;
+      render();
+    });
+  });
+  document.getElementById('search').addEventListener('input', e => {
+    query = e.target.value.trim().toLowerCase();
+    render();
+  });
+
+  render();
+}
+init();
+</script>
+</body>
+</html>
