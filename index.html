@@ -102,6 +102,7 @@
 
   footer{ text-align:center; padding:24px; font-family:var(--mono); font-size:11px; color:var(--muted); border-top:1px solid var(--line); }
   .loading, .error{ font-family:var(--mono); color:var(--muted); padding:40px; text-align:center; }
+  .chart-fallback{ font-family:var(--mono); font-size:13px; color:var(--text); padding:40px 10px; text-align:center; line-height:2; }
 </style>
 </head>
 <body>
@@ -183,34 +184,49 @@ async function init(){
     </div>
   `;
 
-  // Distribution donut
-  new Chart(document.getElementById('distChart'), {
-    type:'doughnut',
-    data:{
-      labels:['Accurate','Partially accurate','Inaccurate'],
-      datasets:[{ data:[counts.accurate, counts.partial, counts.inaccurate],
-        backgroundColor:['#3ecf8e','#e8b339','#e8593f'], borderWidth:0 }]
-    },
-    options:{ plugins:{ legend:{ position:'bottom', labels:{ color:'#8b96a3', font:{family:'JetBrains Mono', size:11} } } }, cutout:'62%' }
-  });
-
-  // Trend by period (one point per doc, in file order)
-  const trendLabels = docs.map(d => d.period || d.file);
-  const trendData = docs.map(d => {
-    const r = d.tickets.filter(t => t.accuracy_pct !== null);
-    return r.length ? +(r.reduce((s,t)=>s+t.accuracy_pct,0)/r.length).toFixed(1) : null;
-  });
-  new Chart(document.getElementById('trendChart'), {
-    type:'line',
-    data:{ labels: trendLabels, datasets:[{ data: trendData, borderColor:'#5bc0be', backgroundColor:'rgba(91,192,190,0.15)', fill:true, tension:0.3, pointBackgroundColor:'#5bc0be' }] },
-    options:{
-      plugins:{ legend:{ display:false } },
-      scales:{
-        x:{ ticks:{ color:'#8b96a3', font:{family:'JetBrains Mono', size:10} }, grid:{ color:'#262e37' } },
-        y:{ ticks:{ color:'#8b96a3', font:{family:'JetBrains Mono', size:10} }, grid:{ color:'#262e37' }, suggestedMin:0, suggestedMax:100 }
-      }
+  // Charts are wrapped in try/catch so a Chart.js load failure (e.g. blocked
+  // CDN on a corporate network) never prevents the ticket table below from
+  // rendering. If Chart.js didn't load, we swap in a plain-text fallback.
+  function renderCharts(){
+    if (typeof Chart === 'undefined') {
+      document.getElementById('distChart').outerHTML =
+        `<div class="chart-fallback">Accurate: ${counts.accurate} · Partial: ${counts.partial} · Inaccurate: ${counts.inaccurate}<br><span style="color:var(--muted); font-size:11px;">(Chart.js failed to load \u2014 likely blocked by a network/firewall filter)</span></div>`;
+      document.getElementById('trendChart').outerHTML =
+        `<div class="chart-fallback">${docs.map(d => (d.period||d.file) + ': ' + (d.tickets.filter(t=>t.accuracy_pct!==null).length ? (d.tickets.filter(t=>t.accuracy_pct!==null).reduce((s,t)=>s+t.accuracy_pct,0)/d.tickets.filter(t=>t.accuracy_pct!==null).length).toFixed(1) : 'n/a') + '%').join('<br>')}</div>`;
+      return;
     }
-  });
+    try {
+      new Chart(document.getElementById('distChart'), {
+        type:'doughnut',
+        data:{
+          labels:['Accurate','Partially accurate','Inaccurate'],
+          datasets:[{ data:[counts.accurate, counts.partial, counts.inaccurate],
+            backgroundColor:['#3ecf8e','#e8b339','#e8593f'], borderWidth:0 }]
+        },
+        options:{ plugins:{ legend:{ position:'bottom', labels:{ color:'#8b96a3', font:{family:'JetBrains Mono', size:11} } } }, cutout:'62%' }
+      });
+
+      const trendLabels = docs.map(d => d.period || d.file);
+      const trendData = docs.map(d => {
+        const r = d.tickets.filter(t => t.accuracy_pct !== null);
+        return r.length ? +(r.reduce((s,t)=>s+t.accuracy_pct,0)/r.length).toFixed(1) : null;
+      });
+      new Chart(document.getElementById('trendChart'), {
+        type:'line',
+        data:{ labels: trendLabels, datasets:[{ data: trendData, borderColor:'#5bc0be', backgroundColor:'rgba(91,192,190,0.15)', fill:true, tension:0.3, pointBackgroundColor:'#5bc0be' }] },
+        options:{
+          plugins:{ legend:{ display:false } },
+          scales:{
+            x:{ ticks:{ color:'#8b96a3', font:{family:'JetBrains Mono', size:10} }, grid:{ color:'#262e37' } },
+            y:{ ticks:{ color:'#8b96a3', font:{family:'JetBrains Mono', size:10} }, grid:{ color:'#262e37' }, suggestedMin:0, suggestedMax:100 }
+          }
+        }
+      });
+    } catch(err) {
+      console.error('Chart render failed:', err);
+    }
+  }
+  renderCharts();
 
   // Ticket table
   const tbody = document.getElementById('ticketBody');
