@@ -41,6 +41,26 @@ NOTES_RE = re.compile(
 PERIOD_RE = re.compile(r"\*\*Period:\*\*\s*(.+)")
 TITLE_RE = re.compile(r"^#\s+(.+)$", re.MULTILINE)
 
+MONTHS = {
+    "january": 1, "february": 2, "march": 3, "april": 4, "may": 5, "june": 6,
+    "july": 7, "august": 8, "september": 9, "october": 10, "november": 11,
+    "december": 12,
+}
+
+
+def period_sort_key(doc: dict):
+    """Chronological sort key (year, month) parsed from the doc's period/title.
+
+    Falls back to a large sentinel so unparseable docs sort last but stay stable.
+    """
+    text = f"{doc.get('period') or ''} {doc.get('doc_title') or ''}".lower()
+    month = next((num for name, num in MONTHS.items() if name in text), None)
+    year_match = re.search(r"(19|20)\d{2}", text)
+    year = int(year_match.group(0)) if year_match else None
+    if month is None or year is None:
+        return (9999, 99, doc.get("file", ""))
+    return (year, month, doc.get("file", ""))
+
 
 def parse_doc(path: Path) -> dict:
     text = path.read_text(encoding="utf-8")
@@ -92,6 +112,9 @@ def build_dataset() -> dict:
 
     doc_paths = sorted(AUDITS_DIR.glob("*.md"))
     documents = [parse_doc(p) for p in doc_paths]
+    # Order documents chronologically by their reporting period (April, May,
+    # June, ...) rather than alphabetically by filename.
+    documents.sort(key=period_sort_key)
 
     all_tickets = [t for d in documents for t in d["tickets"]]
     rated = [t for t in all_tickets if t["accuracy_pct"] is not None]
