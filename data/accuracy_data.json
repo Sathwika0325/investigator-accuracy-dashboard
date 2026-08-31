@@ -2123,17 +2123,945 @@
           "notes": "Core diagnosis matched, including the \"checkbox never existed\" clarification."
         }
       ]
+    },
+    {
+      "file": "investigator_accuracy_audit_may2026.md",
+      "doc_title": "TE Investigator Accuracy Audit \u2014 May 2026",
+      "period": "May 1\u201331, 2026",
+      "ticket_count": 92,
+      "tickets": [
+        {
+          "seq": 1,
+          "ticket_id": "79712",
+          "title": "Smartpress order / L# porting",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Diagnosed the order/L# porting issue and pointed to the data condition blocking Pace flow.",
+          "actual_outcome": "Consistent with the confirmed handling.",
+          "notes": "Solid root-cause direction."
+        },
+        {
+          "seq": 2,
+          "ticket_id": "79725",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 60,
+          "conclusion": "Plausible root cause with supporting data.",
+          "actual_outcome": "Partially matched; some specifics unverified.",
+          "notes": "Directionally reasonable."
+        },
+        {
+          "seq": 3,
+          "ticket_id": "79732",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 65,
+          "conclusion": "Diagnosis with recommendations.",
+          "actual_outcome": "Partial alignment.",
+          "notes": "Partial root-cause match."
+        },
+        {
+          "seq": 4,
+          "ticket_id": "79735",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 60,
+          "conclusion": "Diagnosis with next steps.",
+          "actual_outcome": "Partial match.",
+          "notes": "Unconfirmed specifics."
+        },
+        {
+          "seq": 5,
+          "ticket_id": "79739",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 55,
+          "conclusion": "Hypothesis with recommendations.",
+          "actual_outcome": "Weak/partial alignment.",
+          "notes": "Limited confirmation."
+        },
+        {
+          "seq": 6,
+          "ticket_id": "79753",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 55,
+          "conclusion": "Hypothesis with recommendations.",
+          "actual_outcome": "Weak/partial alignment.",
+          "notes": "Specifics unverified."
+        },
+        {
+          "seq": 7,
+          "ticket_id": "79757",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 50,
+          "conclusion": "General diagnosis.",
+          "actual_outcome": "Borderline partial alignment.",
+          "notes": "Limited confirmation."
+        },
+        {
+          "seq": 8,
+          "ticket_id": "79756",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Clear diagnosis with actionable steps.",
+          "actual_outcome": "Matched the handling.",
+          "notes": "Good alignment."
+        },
+        {
+          "seq": 9,
+          "ticket_id": "79788",
+          "title": "Collaterate config/data",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Identified exact records/config to change.",
+          "actual_outcome": "Matched the applied fix.",
+          "notes": "Precise and actionable."
+        },
+        {
+          "seq": 10,
+          "ticket_id": "79789",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 55,
+          "conclusion": "Plausible hypothesis.",
+          "actual_outcome": "Partial alignment.",
+          "notes": "Unconfirmed specifics."
+        },
+        {
+          "seq": 11,
+          "ticket_id": "79794",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Diagnosis with actionable steps.",
+          "actual_outcome": "Matched the outcome.",
+          "notes": "Good alignment."
+        },
+        {
+          "seq": 12,
+          "ticket_id": "79804",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 65,
+          "conclusion": "Hypothesis and next steps.",
+          "actual_outcome": "Partial alignment.",
+          "notes": "Partial confirmation."
+        },
+        {
+          "seq": 13,
+          "ticket_id": "79814",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Clear diagnosis with recommendation.",
+          "actual_outcome": "Matched the handling.",
+          "notes": "Aligned."
+        },
+        {
+          "seq": 14,
+          "ticket_id": "79815",
+          "title": "Collaterate config/data",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Identified exact fix.",
+          "actual_outcome": "Applied fix matched.",
+          "notes": "Precise."
+        },
+        {
+          "seq": 15,
+          "ticket_id": "75133",
+          "title": "Collaterate config/data",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Identified exact records and fix.",
+          "actual_outcome": "Matched the applied fix.",
+          "notes": "Precise and actionable."
+        },
+        {
+          "seq": 16,
+          "ticket_id": "79819",
+          "title": "Collaterate config/data",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Identified exact fix.",
+          "actual_outcome": "Matched the applied fix.",
+          "notes": "Precise."
+        },
+        {
+          "seq": 17,
+          "ticket_id": "79843",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 55,
+          "conclusion": "Plausible hypothesis.",
+          "actual_outcome": "Partial alignment.",
+          "notes": "Unconfirmed specifics."
+        },
+        {
+          "seq": 18,
+          "ticket_id": "79844",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Clear diagnosis.",
+          "actual_outcome": "Matched the handling.",
+          "notes": "Aligned."
+        },
+        {
+          "seq": 19,
+          "ticket_id": "79845",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 55,
+          "conclusion": "Plausible hypothesis.",
+          "actual_outcome": "Partial alignment.",
+          "notes": "Unconfirmed specifics."
+        },
+        {
+          "seq": 20,
+          "ticket_id": "79860",
+          "title": "Collaterate config/data",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Identified exact fix.",
+          "actual_outcome": "Matched the applied fix.",
+          "notes": "Precise."
+        },
+        {
+          "seq": 21,
+          "ticket_id": "79869",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Clear diagnosis.",
+          "actual_outcome": "Matched the handling.",
+          "notes": "Aligned."
+        },
+        {
+          "seq": 22,
+          "ticket_id": "79873",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95,
+          "conclusion": "Detailed root cause with exact data.",
+          "actual_outcome": "Matched confirmed fix.",
+          "notes": "Excellent, precise diagnosis."
+        },
+        {
+          "seq": 23,
+          "ticket_id": "79884",
+          "title": "Collaterate config/data",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Identified exact fix.",
+          "actual_outcome": "Matched the applied fix.",
+          "notes": "Precise."
+        },
+        {
+          "seq": 24,
+          "ticket_id": "79894",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95,
+          "conclusion": "Detailed, precise root cause.",
+          "actual_outcome": "Confirmed by dev.",
+          "notes": "Excellent."
+        },
+        {
+          "seq": 25,
+          "ticket_id": "79896",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95,
+          "conclusion": "Detailed, precise root cause.",
+          "actual_outcome": "Confirmed by dev.",
+          "notes": "Excellent."
+        },
+        {
+          "seq": 26,
+          "ticket_id": "79898",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95,
+          "conclusion": "Detailed, precise root cause.",
+          "actual_outcome": "Confirmed by dev.",
+          "notes": "Excellent."
+        },
+        {
+          "seq": 27,
+          "ticket_id": "79899",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95,
+          "conclusion": "Detailed, precise root cause.",
+          "actual_outcome": "Confirmed by dev.",
+          "notes": "Excellent."
+        },
+        {
+          "seq": 28,
+          "ticket_id": "79900",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95,
+          "conclusion": "Detailed, precise root cause.",
+          "actual_outcome": "Confirmed by dev.",
+          "notes": "Excellent."
+        },
+        {
+          "seq": 29,
+          "ticket_id": "79916",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95,
+          "conclusion": "Detailed, precise root cause.",
+          "actual_outcome": "Confirmed by dev.",
+          "notes": "Excellent."
+        },
+        {
+          "seq": 30,
+          "ticket_id": "79955",
+          "title": "Collaterate config/data",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Identified exact fix.",
+          "actual_outcome": "Matched the applied fix.",
+          "notes": "Precise."
+        },
+        {
+          "seq": 31,
+          "ticket_id": "79959",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Clear diagnosis.",
+          "actual_outcome": "Matched the handling.",
+          "notes": "Aligned."
+        },
+        {
+          "seq": 32,
+          "ticket_id": "79969",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Clear diagnosis.",
+          "actual_outcome": "Matched the handling.",
+          "notes": "Aligned."
+        },
+        {
+          "seq": 33,
+          "ticket_id": "79987",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 55,
+          "conclusion": "Plausible hypothesis.",
+          "actual_outcome": "Partial alignment.",
+          "notes": "Unconfirmed specifics."
+        },
+        {
+          "seq": 34,
+          "ticket_id": "79999",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 65,
+          "conclusion": "Diagnosis with next steps.",
+          "actual_outcome": "Partial alignment.",
+          "notes": "Partial confirmation."
+        },
+        {
+          "seq": 35,
+          "ticket_id": "80006",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Clear diagnosis.",
+          "actual_outcome": "Matched the handling.",
+          "notes": "Aligned."
+        },
+        {
+          "seq": 36,
+          "ticket_id": "79994",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 65,
+          "conclusion": "Diagnosis with next steps.",
+          "actual_outcome": "Partial alignment.",
+          "notes": "Partial confirmation."
+        },
+        {
+          "seq": 37,
+          "ticket_id": "80034",
+          "title": "Collaterate issue",
+          "accuracy_label": "Inaccurate",
+          "accuracy_pct": 35,
+          "conclusion": "Proposed a root cause.",
+          "actual_outcome": "Actual cause differed materially; dev found a different cause.",
+          "notes": "Wrong root cause."
+        },
+        {
+          "seq": 38,
+          "ticket_id": "80036",
+          "title": "Collaterate config/data",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Identified exact fix.",
+          "actual_outcome": "Matched the applied fix.",
+          "notes": "Precise."
+        },
+        {
+          "seq": 39,
+          "ticket_id": "79817",
+          "title": "Collaterate config/data",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Identified exact fix.",
+          "actual_outcome": "Matched the applied fix.",
+          "notes": "Precise."
+        },
+        {
+          "seq": 40,
+          "ticket_id": "80047",
+          "title": "Collaterate config/data",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Identified exact fix.",
+          "actual_outcome": "Matched the applied fix.",
+          "notes": "Precise."
+        },
+        {
+          "seq": 41,
+          "ticket_id": "80054",
+          "title": "Collaterate config/data",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Identified exact fix.",
+          "actual_outcome": "Matched the applied fix.",
+          "notes": "Precise."
+        },
+        {
+          "seq": 42,
+          "ticket_id": "80070",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Clear diagnosis.",
+          "actual_outcome": "Matched the handling.",
+          "notes": "Aligned."
+        },
+        {
+          "seq": 43,
+          "ticket_id": "80089",
+          "title": "Collaterate config/data",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Identified exact fix.",
+          "actual_outcome": "Matched the applied fix.",
+          "notes": "Precise."
+        },
+        {
+          "seq": 44,
+          "ticket_id": "80098",
+          "title": "Collaterate config/data",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Identified exact fix.",
+          "actual_outcome": "Matched the applied fix.",
+          "notes": "Precise."
+        },
+        {
+          "seq": 45,
+          "ticket_id": "80102",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Clear diagnosis.",
+          "actual_outcome": "Matched the handling.",
+          "notes": "Aligned."
+        },
+        {
+          "seq": 46,
+          "ticket_id": "80111",
+          "title": "36pt cardstock error in HUB",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 60,
+          "conclusion": "Missing print_substrate record + missing cost table points config gap.",
+          "actual_outcome": "Actual error was a device-mapping issue (\"No actual devices found for selected press sheet and device choices\") that dev took on; AI's specific root cause partly off.",
+          "notes": "Right area (config/device) but specific cause partly incorrect."
+        },
+        {
+          "seq": 47,
+          "ticket_id": "80131",
+          "title": "Kohler Elevate Section M only kitchen faucets",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "bays.json Section M pods all mapped to KE_P_004.x (kitchen), missing KE_P_002 (bathroom); gave exact pod fix.",
+          "actual_outcome": "Dev applied a nearly-exact pod fix in configurator-assets.",
+          "notes": "Precise, matched the fix."
+        },
+        {
+          "seq": 48,
+          "ticket_id": "80138",
+          "title": "TBG Events can't create charge",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Order billing_address NULL; tax calc needs it; update billing address.",
+          "actual_outcome": "CJ ran the exact UPDATE SQL; resolved.",
+          "notes": "Correct root cause and fix."
+        },
+        {
+          "seq": 49,
+          "ticket_id": "80142",
+          "title": "Finland shipping not an option",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Finland not in site_countries for Smartpress/SPDC; add it.",
+          "actual_outcome": "Config added Finland to SPDC.",
+          "notes": "Correct."
+        },
+        {
+          "seq": 50,
+          "ticket_id": "80153",
+          "title": "Can't scroll activity log",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Only a few entries; nothing to scroll; likely not a bug.",
+          "actual_outcome": "User confirmed hidden bottom line; refresh fixed it.",
+          "notes": "Correctly identified as non-bug."
+        },
+        {
+          "seq": 51,
+          "ticket_id": "80178",
+          "title": "Smartpress orders not pulling Divisions",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Division not copied from user profile to order at checkout; systemic; checkout-flow copy issue.",
+          "actual_outcome": "Dev confirmed reproducible scenario \u2014 cart created before division assigned so division not carried to order; fix PR #6945 deployed.",
+          "notes": "Core checkout-copy root cause matched the confirmed cause and fix."
+        },
+        {
+          "seq": 52,
+          "ticket_id": "80196",
+          "title": "Update Prepress usernames",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Found all 3 admin_users; exact lname updates; correct SQL.",
+          "actual_outcome": "Agent made the exact adjustments.",
+          "notes": "Precise."
+        },
+        {
+          "seq": 53,
+          "ticket_id": "80242",
+          "title": "QuickSight login",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Entering email on wrong screen; account name is tbg-data.",
+          "actual_outcome": "User confirmed \"I'm in!\" after clarification.",
+          "notes": "Correct."
+        },
+        {
+          "seq": 54,
+          "ticket_id": "80176",
+          "title": "QR Code Proof Validation (THD)",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Manual QR validation, already resolved.",
+          "actual_outcome": "Confirmed resolved.",
+          "notes": "Correct though trivial."
+        },
+        {
+          "seq": 55,
+          "ticket_id": "80237",
+          "title": "Kohler Configurator Error (BOM Builder)",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 70,
+          "conclusion": "BOM Builder Lambda completed without errors but produced no items (silent failure); SILENT_MODE; order not On Hold.",
+          "actual_outcome": "Thorough, plausible; no dev confirmation of root cause in the ticket.",
+          "notes": "Well-evidenced but unconfirmed."
+        },
+        {
+          "seq": 56,
+          "ticket_id": "80293",
+          "title": "CC orders stuck \"Authorized\"",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Settlement/capture step never fired; failure in post-authorization capture workflow.",
+          "actual_outcome": "Dev confirmed the transaction failed at the settlement action method in BraintreePaymentProvider.java.",
+          "notes": "Core diagnosis confirmed."
+        },
+        {
+          "seq": 57,
+          "ticket_id": "80304",
+          "title": "Can't enter Customer Reworks",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95,
+          "conclusion": "`visible_to_customer` NOT NULL constraint from migration ahead of code; exact column, migration file.",
+          "actual_outcome": "Dev reproduced the exact null-value constraint error and fixed it.",
+          "notes": "Exact diagnosis."
+        },
+        {
+          "seq": 58,
+          "ticket_id": "80313",
+          "title": "HUB media dropdown",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Substrate exists; needs classification-to-substrate link on ID 513; exact table + IDs.",
+          "actual_outcome": "Config team applied matching change.",
+          "notes": "Precise."
+        },
+        {
+          "seq": 59,
+          "ticket_id": "80268",
+          "title": "QR Code Proof Validation (THD 1975809)",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Manual QR validation, already completed.",
+          "actual_outcome": "Confirmed completed.",
+          "notes": "Correct though trivial."
+        },
+        {
+          "seq": 60,
+          "ticket_id": "80271",
+          "title": "Board Printing Lam Update",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "PID 5998\u219230586 laminate swap; 30586 already in dropdown; needs to change existing jobs.",
+          "actual_outcome": "Agent's fix: use Requote on existing jobs to pick up the new PID \u2014 matched interpretation.",
+          "notes": "Interpretation aligned with resolution."
+        },
+        {
+          "seq": 61,
+          "ticket_id": "80322",
+          "title": "TBG Events user checkout failure",
+          "accuracy_label": "Inaccurate",
+          "accuracy_pct": 40,
+          "conclusion": "Bronze Sponsorship inventory fully reserved was \"almost certainly\" the root cause.",
+          "actual_outcome": "Real cause was missing billing address on payment page + REST-based checkout config (fixed by enabling REST-based Order List/Checkout). Inventory theory wrong.",
+          "notes": "Wrong primary root cause; correctly noted CC charge without completed order."
+        },
+        {
+          "seq": 62,
+          "ticket_id": "80379",
+          "title": "Cover Sheets for FGI Sets Hotfolder",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Feature/automation request; reclassify and route to workflow team.",
+          "actual_outcome": "Moved to workflow agents / Jitbit as a Feature Request.",
+          "notes": "Correct classification and routing."
+        },
+        {
+          "seq": 63,
+          "ticket_id": "80381",
+          "title": "Pace access + email group (Tomas Gallardo)",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Both tasks already complete; close ticket.",
+          "actual_outcome": "Confirmed both complete.",
+          "notes": "Correct though trivial."
+        },
+        {
+          "seq": 64,
+          "ticket_id": "80421",
+          "title": "\"City name too long\" Ship-It error",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95,
+          "conclusion": "43-char city exceeds FedEx 35-char limit; missing `.max(35)` validation in admin shipping UI; exact files.",
+          "actual_outcome": "Dev confirmed no validation in OrderDetailControllerShipping.js; raised PR.",
+          "notes": "Exact match, precise files."
+        },
+        {
+          "seq": 65,
+          "ticket_id": "80364",
+          "title": "Authority Brands Downloadable Templates missing",
+          "accuracy_label": "Inaccurate",
+          "accuracy_pct": 35,
+          "conclusion": "cjohnson bulk-hid 43 products via visibility_type_id.",
+          "actual_outcome": "Dev said it was NOT CJ's script or hidden visibility \u2014 a different DIGITAL-products issue.",
+          "notes": "Root cause disproved by dev."
+        },
+        {
+          "seq": 66,
+          "ticket_id": "80526",
+          "title": "Unable to open order 1975261",
+          "accuracy_label": "Inaccurate",
+          "accuracy_pct": 35,
+          "conclusion": "Order intact; \"most likely\" issue flag + pending CSR photo action; no app errors found.",
+          "actual_outcome": "Dev reproduced a 500 from an Orika MappingException (BigDecimal\u2192double). Code-level mapping exception, not the issue flag.",
+          "notes": "Wrong root cause; incorrectly stated no app errors."
+        },
+        {
+          "seq": 67,
+          "ticket_id": "80451",
+          "title": "Chili blank/missing template files",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Chili PDF export callback silently failing (session closed, no file URL); intermittent, single environment; engage Chili support + retry/monitoring.",
+          "actual_outcome": "Dev reproduced blank file; assets intermittently present/absent on Chili backend \u2014 consistent with AI's theory.",
+          "notes": "Strong analysis matching observed behavior."
+        },
+        {
+          "seq": 68,
+          "ticket_id": "80533",
+          "title": "\"Collaterate is down\"",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Infra fully healthy; no outage; gather context / cache clear.",
+          "actual_outcome": "Cache clear suggested; user confirmed \"that seemed to help.\"",
+          "notes": "Correctly ruled out infra outage."
+        },
+        {
+          "seq": 69,
+          "ticket_id": "80497",
+          "title": "Direct Mail template not loading",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 55,
+          "conclusion": "Missing edoc template config was \"most likely\" cause; order already shipped via cancel+recreate.",
+          "actual_outcome": "Dev found the actual error: Chili PDF generation failed \u2014 \"asset not found.\"",
+          "notes": "edoc-config theory off; correctly flagged Chili/template area and CloudWatch logs."
+        },
+        {
+          "seq": 70,
+          "ticket_id": "80538",
+          "title": "Invoice discrepancy (1840003)",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "DB has correct adjusted quantities; invoice generated before adjustments; needs manual correction in Pace.",
+          "actual_outcome": "Agents confirmed invoice is before adjustments, needs Pace adjustment.",
+          "notes": "Matched exactly."
+        },
+        {
+          "seq": 71,
+          "ticket_id": "80578",
+          "title": "Sephora inventory backordered (25756)",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Ticket referenced wrong inventory ID; real issue on variant 119027; clear backorder/reserved + `stock_backorder_quantity` on order_items.",
+          "actual_outcome": "Dev cleared the SKU, then ran UPDATE clearing `stock_backorder_quantity = 0` on order_items \u2014 matching AI's secondary recommendation; resolved.",
+          "notes": "Identified the mis-referenced record and the order-item fix."
+        },
+        {
+          "seq": 72,
+          "ticket_id": "80568",
+          "title": "DC orders not assigning to PC",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 70,
+          "conclusion": "Hit max iterations; confirmed systemic scale (May 6, near-total since May 14); pointed to `TBGBOOrderServiceImpl` / `orderAutoAssignProps`; recommended deploy check + backfill.",
+          "actual_outcome": "Dev (TSP-531/TSP-603) confirmed a code issue; fix in release-v4-36. One AI sub-guess (fulfillment-center condition) was off.",
+          "notes": "Correct scale and code area; exact root cause not pinned."
+        },
+        {
+          "seq": 73,
+          "ticket_id": "80653",
+          "title": "Job not filtering out when proofed",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Pending Review is expected; \"Not Created\" = production_status null; no bug.",
+          "actual_outcome": "Cache clear suggested; user said \"it finally went through\" \u2014 transient, no bug.",
+          "notes": "Correctly identified no bug."
+        },
+        {
+          "seq": 74,
+          "ticket_id": "80666",
+          "title": "HealthMarkets SKU reserved qty (101867681-0001)",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "reserved_inventory = -1; exact variant ID + UPDATE SQL to set 0.",
+          "actual_outcome": "Agent adjusted; user confirmed \"looks good.\"",
+          "notes": "Precise, matched fix."
+        },
+        {
+          "seq": 75,
+          "ticket_id": "80671",
+          "title": "Unable to submit internal rework",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 50,
+          "conclusion": "Analyzed the wrong order initially (user gave wrong number); general theory that production-item status blocks rework.",
+          "actual_outcome": "Correct job (4427171): dev found \"production item status GANG_PLANNING/null not eligible\"; resolved by processing as single from gang.",
+          "notes": "AI comment analyzed the wrong job; general direction aligned."
+        },
+        {
+          "seq": 76,
+          "ticket_id": "80673",
+          "title": "Configurator Update build review",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Build-review notification, not an incident; analyzed configurator-assets repo state; recommended commit to feature branch/PR.",
+          "actual_outcome": "Confirmed a build review handled iteratively by dev.",
+          "notes": "Correct classification and useful repo context."
+        },
+        {
+          "seq": 77,
+          "ticket_id": "80676",
+          "title": "Proof won't attach",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 55,
+          "conclusion": "Instant Proof session `isProofable: false`; pipeline stalled; system flagged job not proofable.",
+          "actual_outcome": "Dev found the real cause: uploaded file dimensions didn't match order size (needs 8x6 spread), a file-specific issue.",
+          "notes": "DynamoDB observations real but root-cause framing missed the file-dimension cause."
+        },
+        {
+          "seq": 78,
+          "ticket_id": "80716",
+          "title": "Calculator unavailable in Collaterate",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Misconfigured LF print job classification 591 (dimensions all 0.0, edit_dimensions false); fix the classification / JSON defaults.",
+          "actual_outcome": "Config team added JSON/job config defaults (from Smartpress equivalents) to both products; resolved.",
+          "notes": "Correct config-gap root cause; a stakeholder praised the AI comment's usefulness."
+        },
+        {
+          "seq": 79,
+          "ticket_id": "80674",
+          "title": "Crisp & Green product set artwork not pulling",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "All 12 stored artwork files have `migration_status = 'SKIP-No file_Exist'`; physical files missing; re-upload + fix status; SF PC auto-assign secondary.",
+          "actual_outcome": "Agents confirmed \"the file issue has been fixed\"; PC assignment handled manually.",
+          "notes": "Root cause (registered but missing files) aligned with the fix."
+        },
+        {
+          "seq": 80,
+          "ticket_id": "80712",
+          "title": "HealthMarkets Print Points bug",
+          "accuracy_label": "Inaccurate",
+          "accuracy_pct": 40,
+          "conclusion": "Could not open the .pptx; investigated loyalty config and flagged stale reconciliation (~9 months) as possible cause.",
+          "actual_outcome": "Actual bug: removing a cart item doesn't deduct applied Print Points; a component/plugin issue not \"finding\" existing redemption. Stale reconciliation was not the cause.",
+          "notes": "Guessed in the wrong direction; couldn't read the attachment describing the symptom."
+        },
+        {
+          "seq": 81,
+          "ticket_id": "80709",
+          "title": "Planning Dashboard metrics not updating",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 60,
+          "conclusion": "Superset on ECS Fargate; tied staleness to a May 26 AZ-rebalancing task-failure; recommended LB AZ fix + monitoring.",
+          "actual_outcome": "User reported staleness from May 21; the cited May 26 event postdates the complaint. Agent treated it as a transient ingestion hiccup resolved by refresh.",
+          "notes": "Thorough infra analysis and correct \"transient\" conclusion, but the cited event was timing-mismatched."
+        },
+        {
+          "seq": 82,
+          "ticket_id": "72920",
+          "title": "Weight Calculation (1885526)",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 60,
+          "conclusion": "Substrate `square_foot_weight = 0` causing fallback/default package weight; $40.49 credit already issued; couldn't reproduce.",
+          "actual_outcome": "Dev/config also couldn't reproduce (correct 1lb in staging); non-reproducible and closed.",
+          "notes": "Detailed, plausible but unconfirmed; issue non-reproducible."
+        },
+        {
+          "seq": 83,
+          "ticket_id": "80755",
+          "title": "HealthMarkets Third Party Credit Account",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "401 Unauthorized on creditEventProcessor Lambda calling LeadConnect API; externally-managed balances stale; per-user breakdown; HealthMarkets credentials likely expired.",
+          "actual_outcome": "TBG dev confirmed no Collaterate code issue and the 401 was active; escalated to HealthMarkets. Client's developer contested \"expired credentials\"; unresolved at close.",
+          "notes": "401 real and verified; TBG dev agreed. The \"whose credentials\" layer remained contested."
+        },
+        {
+          "seq": 84,
+          "ticket_id": "80848",
+          "title": "Payment showing as n/a (1981369)",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "No cc_payment_info_id / no captured payment; not on terms; refund UI unavailable because nothing to refund against.",
+          "actual_outcome": "Dev confirmed cc_payment_info_id NULL on some early-May Smartpress CC orders; fixed in TSP-604 / release 4.36.",
+          "notes": "Nailed the DB-level root cause."
+        },
+        {
+          "seq": 85,
+          "ticket_id": "80831",
+          "title": "Meta SKU reserved -3 (102045913-0001)",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "reserved_inventory = -3; reconstructed picking/Footprint timeline; recommended +3 reserved adjustment.",
+          "actual_outcome": "Agent adjusted; user confirmed \"looks good.\"",
+          "notes": "Correct value and fix."
+        },
+        {
+          "seq": 86,
+          "ticket_id": "80792",
+          "title": "Crisp & Green admin-approval-hold orders \u2192 In Process",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Systemic pattern (6/7 orders auto-advanced despite approval hold); proof-approval event advancing status; flagged event-handler + a deploy window May 22\u219223.",
+          "actual_outcome": "Dev traced it to SyncStatus-Fn / event-handler-proof-approved and PROOF_STATUS_CHANGED events, effective May 23 \u2014 matching AI's timeline and code area.",
+          "notes": "Timeline and code area matched the dev investigation."
+        },
+        {
+          "seq": 87,
+          "ticket_id": "80802",
+          "title": "Extend file upload names",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "UI/CSS truncation (`truncatedCells`, no DB limit); exact files; fix options (scroll/wrap/tooltip); noted stored-artwork 30-char truncation.",
+          "actual_outcome": "Dev implemented file-name wrapping (PR #7073) + full path for stored artwork; feature shipped.",
+          "notes": "Correct root cause and shipped fix aligned with recommendation."
+        },
+        {
+          "seq": 88,
+          "ticket_id": "80913",
+          "title": "No ship date (1952143 / 1980935)",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Ship-date logic fires only on discrete events and doesn't re-evaluate after prepress-alert clearance; sales-estimate bypass and prepress-alert-at-approval as causes; recommended catch-up re-evaluation.",
+          "actual_outcome": "Dev reproduced extensively and confirmed: PREPRESS_JOB_UPDATED event published on alert clear but ship date not re-evaluated (OrderItemProvider.java / event-handler); sales-estimate and prepress-alert cases matched.",
+          "notes": "Matched the confirmed root cause and code area."
+        },
+        {
+          "seq": 89,
+          "ticket_id": "80897",
+          "title": "HUB PID# Updates",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 65,
+          "conclusion": "IDs map to system_offering_site_shares (OLD Sephora, mostly null PIDs; NEW J.Crew); request ambiguous \u2014 nothing to copy; clarify.",
+          "actual_outcome": "Config couldn't find the old PIDs in Collaterate; requester realized these are RIGI mailers in Pace used for kitting \u2014 nothing to update in HUB.",
+          "notes": "Correctly flagged ambiguity / nothing-to-copy, but framing (site_shares to update) missed that the items live in Pace, not HUB."
+        },
+        {
+          "seq": 90,
+          "ticket_id": "80873",
+          "title": "Order emails with ship-to info issues",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Email template outputting raw state_id integer instead of resolved State name; likely regression; TBGAbstractOrderTagHandler / getShipToState returns State object; dev template fix.",
+          "actual_outcome": "Dev confirmed TSP-531 migrated order creation to Hibernate entities; State lacks toString() override so it printed \"State id = 32\"; fix TSP-610 / PR #7014.",
+          "notes": "Root cause, regression source, and handler class matched precisely."
+        },
+        {
+          "seq": 91,
+          "ticket_id": "80885",
+          "title": "Remove Office/Address from template file (1985941)",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Template/variable-data edit request; POD file needs regeneration with fields removed; prepress action.",
+          "actual_outcome": "Config uploaded an updated file.",
+          "notes": "Correct classification and handling."
+        },
+        {
+          "seq": 92,
+          "ticket_id": "80945",
+          "title": "Stored Art file selection concerns",
+          "accuracy_label": "Inaccurate",
+          "accuracy_pct": 45,
+          "conclusion": "A `pathValidation()` security check + S3 migration around 5/20 causing \"Invalid file path\"; two issues (PDF + MP4).",
+          "actual_outcome": "Support couldn't reproduce; the fix leaned toward a permissions-related change (Megan/Nate), and the pathValidation regression was not confirmed as the cause.",
+          "notes": "Speculative root cause; actual direction was permissions, not the pathValidation theory."
+        }
+      ]
     }
   ],
   "summary": {
-    "total_documents": 3,
-    "total_tickets": 210,
-    "rated_tickets": 207,
-    "average_accuracy": 73.3,
+    "total_documents": 4,
+    "total_tickets": 302,
+    "rated_tickets": 299,
+    "average_accuracy": 74.9,
     "buckets": {
-      "accurate": 114,
-      "partial": 68,
-      "inaccurate": 25
+      "accurate": 178,
+      "partial": 90,
+      "inaccurate": 31
     }
   }
 }
