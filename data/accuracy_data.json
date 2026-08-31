@@ -1,6 +1,44 @@
 {
   "documents": [
     {
+      "file": "investigator_accuracy_audit_april2026.md",
+      "doc_title": "TE Investigator Accuracy Audit \u2014 April 2026",
+      "period": "April 1\u201330, 2026",
+      "ticket_count": 3,
+      "tickets": [
+        {
+          "seq": 1,
+          "ticket_id": "79654",
+          "title": "Meta & Insomnia backordering disabled yet orders happen",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "Identified a gap between the site-level `backorder_enabled = false` setting and a per-variant `backorder_inventory` counter, laying out three pathways by which backorders could still occur despite the site flag being off \u2014 most notably a post-order manual inventory adjustment driving inventory negative without the flag being re-checked.",
+          "actual_outcome": "Dev confirmed pathway #1: a post-order manual inventory adjustment (by Rachel Reese on Apr 29) drove inventory negative without checking the backorder flag, exactly as the AI described.",
+          "notes": "Deep, DB-backed analysis; the confirmed cause matched the AI's primary pathway."
+        },
+        {
+          "seq": 2,
+          "ticket_id": "79660",
+          "title": "Cannot move cart items to project in Hub",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 65,
+          "conclusion": "Attributed the failure to a `sku-central-al2-prod-env` backend outage (Severe / IAM-401), framing it as a hard service outage blocking the move-to-project action.",
+          "actual_outcome": "The agent's \"move a few at a time\" workaround worked immediately, which points to a batch-size/timeout limitation rather than a hard backend outage. The specific outage root cause was not confirmed.",
+          "notes": "Right subsystem, but the \"hard outage\" framing was likely overstated; the successful incremental workaround contradicts a full outage. Unconfirmed."
+        },
+        {
+          "seq": 3,
+          "ticket_id": "79687",
+          "title": "Customer unable to remove cart item",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "Diagnosed that the frontend was sending a stale/nonexistent cart item id (5942820) versus the actual cart item (6084351), producing a Spring `findById` null error on removal; also flagged that a helpdesk \"removed\" claim was contradicted by the database state.",
+          "actual_outcome": "Deep, DB-backed diagnosis consistent with the observed error, but the customer went unresponsive and there was no explicit developer/requester confirmation of the fix.",
+          "notes": "Strong, evidence-based root cause with exact IDs; docked slightly for lack of a confirming close-out."
+        }
+      ]
+    },
+    {
       "file": "investigator_accuracy_audit_august2026.md",
       "doc_title": "TE Investigator Accuracy Audit \u2014 August 2026",
       "period": "August 1\u201331, 2026",
@@ -3054,13 +3092,13 @@
     }
   ],
   "summary": {
-    "total_documents": 4,
-    "total_tickets": 302,
-    "rated_tickets": 299,
+    "total_documents": 5,
+    "total_tickets": 305,
+    "rated_tickets": 302,
     "average_accuracy": 74.9,
     "buckets": {
-      "accurate": 178,
-      "partial": 90,
+      "accurate": 180,
+      "partial": 91,
       "inaccurate": 31
     }
   }
