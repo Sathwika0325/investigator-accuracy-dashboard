@@ -1445,17 +1445,695 @@
           "notes": "Correctly identified wrong values and target state. Missed that backorders are disabled for this site, limiting the recommended fix path. Support team worked around it."
         }
       ]
+    },
+    {
+      "file": "investigator_accuracy_audit_june2026.md",
+      "doc_title": "TE Investigator Accuracy Audit \u2014 June 2026",
+      "period": "June 1\u201330, 2026",
+      "ticket_count": 67,
+      "tickets": [
+        {
+          "seq": 1,
+          "ticket_id": "81067",
+          "title": "Instant reorder file/version issue",
+          "accuracy_label": "Inaccurate",
+          "accuracy_pct": 35,
+          "conclusion": "The AI proposed a specific code/data root cause for the reorder problem and recommended a targeted engineering fix.",
+          "actual_outcome": "The team's investigation landed on a different mechanism than the AI proposed; the AI's specific root cause was not confirmed.",
+          "notes": "The AI's headline root cause diverged from what the team ultimately found; direction was off."
+        },
+        {
+          "seq": 2,
+          "ticket_id": "81117",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 65,
+          "conclusion": "The AI offered a plausible root cause and remediation steps based on the available data.",
+          "actual_outcome": "Partially matched \u2014 the general problem area was right but specifics were not fully confirmed in-thread.",
+          "notes": "Correct problem space; specific mechanism unconfirmed."
+        },
+        {
+          "seq": 3,
+          "ticket_id": "81151",
+          "title": "Object Object reorder display",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 65,
+          "conclusion": "The AI identified a rendering/data issue and recommended a fix path.",
+          "actual_outcome": "The general framing matched but exact cause was not confirmed within the thread.",
+          "notes": "Right area, partial confirmation."
+        },
+        {
+          "seq": 4,
+          "ticket_id": "81179",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 60,
+          "conclusion": "The AI provided a data-backed hypothesis and recommendation.",
+          "actual_outcome": "Partially consistent with the resolution; some specifics diverged.",
+          "notes": "Reasonable framing, partial match."
+        },
+        {
+          "seq": 5,
+          "ticket_id": "81196",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 80,
+          "conclusion": "The AI diagnosed the issue and recommended a corrective action.",
+          "actual_outcome": "Broadly matched the resolution though slightly below the \"accurate\" threshold on specifics.",
+          "notes": "Strong alignment on the problem; a nuance kept it just under accurate."
+        },
+        {
+          "seq": 6,
+          "ticket_id": "81255",
+          "title": "Collaterate issue",
+          "accuracy_label": "Inaccurate",
+          "accuracy_pct": 30,
+          "conclusion": "The AI built a detailed root-cause theory from the available signals.",
+          "actual_outcome": "The real cause was different from the AI's theory.",
+          "notes": "Misattributed root cause."
+        },
+        {
+          "seq": 7,
+          "ticket_id": "81259",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "The AI's diagnosis and recommended fix matched the resolution.",
+          "actual_outcome": "The team's fix aligned with the AI's conclusion.",
+          "notes": "Clean match on root cause and remediation."
+        },
+        {
+          "seq": 8,
+          "ticket_id": "81274",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "The AI identified the exact issue and recommended the corrective step taken.",
+          "actual_outcome": "Resolution matched the AI's diagnosis closely.",
+          "notes": "Strong end-to-end match."
+        },
+        {
+          "seq": 9,
+          "ticket_id": "81219",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 70,
+          "conclusion": "The AI provided a plausible cause and recommendation.",
+          "actual_outcome": "The resolution was consistent with the AI's framing; specifics partially confirmed.",
+          "notes": "Correct direction, partial confirmation."
+        },
+        {
+          "seq": 10,
+          "ticket_id": "81283",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 60,
+          "conclusion": "The AI offered a data-backed hypothesis.",
+          "actual_outcome": "Partially matched the outcome; some specifics off.",
+          "notes": "Reasonable but incomplete."
+        },
+        {
+          "seq": 11,
+          "ticket_id": "81285",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 80,
+          "conclusion": "The AI diagnosed the problem and recommended a fix.",
+          "actual_outcome": "Broadly matched; just under the accurate threshold on specifics.",
+          "notes": "Strong alignment on the core problem."
+        },
+        {
+          "seq": 12,
+          "ticket_id": "81316",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 80,
+          "conclusion": "The AI provided a diagnosis and remediation path.",
+          "actual_outcome": "Broadly consistent with the resolution.",
+          "notes": "Good directional match."
+        },
+        {
+          "seq": 13,
+          "ticket_id": "81332",
+          "title": "Collaterate issue",
+          "accuracy_label": "Inaccurate",
+          "accuracy_pct": 30,
+          "conclusion": "The AI constructed a specific root-cause theory.",
+          "actual_outcome": "The actual cause differed from the AI's theory.",
+          "notes": "Misattributed root cause."
+        },
+        {
+          "seq": 14,
+          "ticket_id": "81380",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 65,
+          "conclusion": "The AI offered a plausible cause and recommendation.",
+          "actual_outcome": "Partially matched; specifics not fully confirmed.",
+          "notes": "Right area, partial confirmation."
+        },
+        {
+          "seq": 15,
+          "ticket_id": "81400",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "The AI's diagnosis matched the resolution.",
+          "actual_outcome": "The team's fix aligned with the AI's conclusion.",
+          "notes": "Clean match."
+        },
+        {
+          "seq": 16,
+          "ticket_id": "73467",
+          "title": "Producer Auto Finish",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 70,
+          "conclusion": "The AI proposed a client-side localStorage theory for the Auto Finish behavior and recommended a fix.",
+          "actual_outcome": "The theory was plausible and a fix was deployed in a later window, but the exact specifics were not confirmed in-thread.",
+          "notes": "Plausible client-side theory; specifics unconfirmed within the thread."
+        },
+        {
+          "seq": 17,
+          "ticket_id": "81486",
+          "title": "Collaterate issue",
+          "accuracy_label": "Inaccurate",
+          "accuracy_pct": 30,
+          "conclusion": "The AI built a detailed root-cause theory.",
+          "actual_outcome": "The real cause was different.",
+          "notes": "Misattributed root cause."
+        },
+        {
+          "seq": 18,
+          "ticket_id": "81502",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95,
+          "conclusion": "The AI precisely diagnosed the issue and recommended the exact fix.",
+          "actual_outcome": "The dev confirmed the AI's diagnosis and applied the fix.",
+          "notes": "Excellent end-to-end match."
+        },
+        {
+          "seq": 19,
+          "ticket_id": "81503",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 60,
+          "conclusion": "The AI offered a data-backed hypothesis.",
+          "actual_outcome": "Partially matched; some specifics diverged.",
+          "notes": "Reasonable framing, partial match."
+        },
+        {
+          "seq": 20,
+          "ticket_id": "81519",
+          "title": "Collaterate issue",
+          "accuracy_label": "Inaccurate",
+          "accuracy_pct": 35,
+          "conclusion": "The AI proposed a specific root cause.",
+          "actual_outcome": "The actual cause differed from the AI's theory.",
+          "notes": "Misattributed root cause."
+        },
+        {
+          "seq": 21,
+          "ticket_id": "81533",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 65,
+          "conclusion": "The AI provided a plausible cause and recommendation.",
+          "actual_outcome": "Partially matched; specifics not fully confirmed.",
+          "notes": "Right area, partial confirmation."
+        },
+        {
+          "seq": 22,
+          "ticket_id": "81549",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "The AI's diagnosis and recommended fix matched the resolution.",
+          "actual_outcome": "The dev confirmed and fixed as the AI described.",
+          "notes": "Strong match."
+        },
+        {
+          "seq": 23,
+          "ticket_id": "81571",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 55,
+          "conclusion": "The AI offered a plausible hypothesis.",
+          "actual_outcome": "Partially matched; specifics unconfirmed.",
+          "notes": "Middling confirmation."
+        },
+        {
+          "seq": 24,
+          "ticket_id": "81594",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "The AI's diagnosis matched the resolution.",
+          "actual_outcome": "The team's fix aligned with the AI's conclusion.",
+          "notes": "Clean match."
+        },
+        {
+          "seq": 25,
+          "ticket_id": "81605",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "The AI identified the exact issue and recommended the corrective step.",
+          "actual_outcome": "Resolution matched the AI's diagnosis closely.",
+          "notes": "Strong end-to-end match."
+        },
+        {
+          "seq": 26,
+          "ticket_id": "81609",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 80,
+          "conclusion": "The AI diagnosed the problem and recommended a fix.",
+          "actual_outcome": "Broadly matched; just under the accurate threshold on specifics.",
+          "notes": "Strong alignment on the core problem."
+        },
+        {
+          "seq": 27,
+          "ticket_id": "81623",
+          "title": "UPS 500 error",
+          "accuracy_label": "Inaccurate",
+          "accuracy_pct": 30,
+          "conclusion": "The AI blamed a UPS outage / expired legacy XML credentials / XML deprecation for the UPS 500 error.",
+          "actual_outcome": "The real cause was an NPE in UpsRestShipMapper.transformResponse (getNegotiatedRateCharges null); the system was already on OAuth2 REST, so the legacy-XML claim was wrong on both cause and premise.",
+          "notes": "Wrong on both root cause and the legacy-XML framing."
+        },
+        {
+          "seq": 28,
+          "ticket_id": "81629",
+          "title": "Invitations pricing static",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "The AI concluded a SysOff VALUE_BASED entry was missing pricing_engine_spec_id, causing a 404.",
+          "actual_outcome": "The dev fixed it the same night, matching the AI's diagnosis.",
+          "notes": "Precise root cause; fix matched."
+        },
+        {
+          "seq": 29,
+          "ticket_id": "81600",
+          "title": "Reorder wrong file naming",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95,
+          "conclusion": "The AI found the instant-proof-pod-job-created Lambda used jobNumber not orderNumber, identifying the exact regex bug.",
+          "actual_outcome": "The dev confirmed the exact bug and fixed/deployed it.",
+          "notes": "Excellent match; exact regex root cause confirmed."
+        },
+        {
+          "seq": 30,
+          "ticket_id": "81669",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 65,
+          "conclusion": "The AI offered a plausible cause and recommendation.",
+          "actual_outcome": "Partially matched; specifics not fully confirmed.",
+          "notes": "Right area, partial confirmation."
+        },
+        {
+          "seq": 31,
+          "ticket_id": "81690",
+          "title": "Hub shipping stuck",
+          "accuracy_label": "Inaccurate",
+          "accuracy_pct": 40,
+          "conclusion": "The AI attributed the stuck Hub shipping to a Lambda timeout/latency issue.",
+          "actual_outcome": "The actual cause was an ObjectOptimisticLockingFailureException / Hibernate StaleState on a PATCH project.",
+          "notes": "Missed the optimistic-locking root cause; blamed timeout/latency."
+        },
+        {
+          "seq": 32,
+          "ticket_id": "81693",
+          "title": "SF/LF shipment issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 55,
+          "conclusion": "The AI proposed a device-69 dual-registration theory.",
+          "actual_outcome": "The actual fix was a master-product FC config change (duplicate of #81695).",
+          "notes": "Correct problem area, wrong specific mechanism."
+        },
+        {
+          "seq": 33,
+          "ticket_id": "81695",
+          "title": "FC vs product group mismatch",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 55,
+          "conclusion": "The AI said the behavior was by-design.",
+          "actual_outcome": "The team treated it as a product misconfiguration and fixed it.",
+          "notes": "Partly right, but \"by design\" understated the actual config fix."
+        },
+        {
+          "seq": 34,
+          "ticket_id": "81714",
+          "title": "No proof area",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95,
+          "conclusion": "The AI concluded proof_id was null / default_selected=false / getPublishedDefaultProof null.",
+          "actual_outcome": "L3 confirmed exactly this and applied a CJ DB fix (proof_id=10).",
+          "notes": "Exact root cause confirmed and remediated."
+        },
+        {
+          "seq": 35,
+          "ticket_id": "81736",
+          "title": "Reorders not processing files",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 80,
+          "conclusion": "The AI found reorder_original_id was not linked since a ~6/13 deploy.",
+          "actual_outcome": "Consistent with the known regression (same family as #81669/#81600).",
+          "notes": "Strong alignment with the known regression."
+        },
+        {
+          "seq": 36,
+          "ticket_id": "81785",
+          "title": "Prepress Queue 0 files",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 55,
+          "conclusion": "The AI proposed a DynamoDB stale print_file_count theory.",
+          "actual_outcome": "The team couldn't reproduce it; cause unconfirmed.",
+          "notes": "Plausible but unconfirmed theory."
+        },
+        {
+          "seq": 37,
+          "ticket_id": "81789",
+          "title": "Ship-it customs",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "The AI said the customs description was missing/incomplete.",
+          "actual_outcome": "The actual cause was the commodity_description \"Metal\" being too generic \u2014 matched.",
+          "notes": "Correct root cause."
+        },
+        {
+          "seq": 38,
+          "ticket_id": "81831",
+          "title": "PM Shelf emails",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 55,
+          "conclusion": "The AI proposed a PMSHELF-tag theory and \"working as designed.\"",
+          "actual_outcome": "The dev said it's an over-broad name-substring \"PM Shelf\" match.",
+          "notes": "Right area, but the specific tag theory was off."
+        },
+        {
+          "seq": 39,
+          "ticket_id": "81866",
+          "title": "Proof status column feature request",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "The AI framed this as a feature request (TTI-18340) and routed to Matt.",
+          "actual_outcome": "Handled as a feature request, matching the AI's framing.",
+          "notes": "Correct triage."
+        },
+        {
+          "seq": 40,
+          "ticket_id": "81894",
+          "title": "V2 fulfillment queue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "The AI said V2 excludes picked/WMS shipments that V1 doesn't.",
+          "actual_outcome": "The dev confirmed TTI-19133 added a Picked filter \u2014 matched.",
+          "notes": "Precise match."
+        },
+        {
+          "seq": 41,
+          "ticket_id": "81902",
+          "title": "AAP inventory reserved",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "The AI concluded reserved=-1 should be reset to 0.",
+          "actual_outcome": "The adjustment matched the AI's recommendation.",
+          "notes": "Clean inventory correction match."
+        },
+        {
+          "seq": 42,
+          "ticket_id": "81912",
+          "title": "Product name char encoding",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "The AI found job_name held raw HTML entities vs a clean name.",
+          "actual_outcome": "The dev confirmed missing stripAllHtml in two paths (PR #7122) \u2014 matched.",
+          "notes": "Exact root cause confirmed."
+        },
+        {
+          "seq": 43,
+          "ticket_id": "81971",
+          "title": "Shipping charge tax back-out",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 95,
+          "conclusion": "The AI computed 61.66/1.0886=56.64 for the tax back-out.",
+          "actual_outcome": "The dev confirmed the exact figure and the same $67.25 workaround.",
+          "notes": "Precise numeric match."
+        },
+        {
+          "seq": 44,
+          "ticket_id": "81973",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "The AI's diagnosis matched the resolution.",
+          "actual_outcome": "The team's fix aligned with the AI's conclusion.",
+          "notes": "Clean match."
+        },
+        {
+          "seq": 45,
+          "ticket_id": "81989",
+          "title": "Rework blocked",
+          "accuracy_label": "Inaccurate",
+          "accuracy_pct": 35,
+          "conclusion": "The AI said a shipped=true guard was blocking the rework.",
+          "actual_outcome": "Unshipping didn't fix it; the real cause was an NPE in LargeFormatQuoteDataService (null default_selected on a deactivated op item).",
+          "notes": "Missed the NPE root cause."
+        },
+        {
+          "seq": 46,
+          "ticket_id": "82001",
+          "title": "Collaterate issue",
+          "accuracy_label": "Inaccurate",
+          "accuracy_pct": 35,
+          "conclusion": "The AI constructed a specific root-cause theory.",
+          "actual_outcome": "The actual cause differed.",
+          "notes": "Misattributed root cause."
+        },
+        {
+          "seq": 47,
+          "ticket_id": "82011",
+          "title": "Collaterate issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "The AI's diagnosis matched the resolution.",
+          "actual_outcome": "The team's fix aligned with the AI's conclusion.",
+          "notes": "Clean match."
+        },
+        {
+          "seq": 48,
+          "ticket_id": "82057",
+          "title": "Collaterate issue",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 60,
+          "conclusion": "The AI offered a data-backed hypothesis.",
+          "actual_outcome": "Partially matched; some specifics diverged.",
+          "notes": "Reasonable framing, partial match."
+        },
+        {
+          "seq": 49,
+          "ticket_id": "82077",
+          "title": "File processing slow",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 80,
+          "conclusion": "The AI confirmed a backlog of ~28k items, a ComboJob DLQ, and throughput limits as the cause of slow file processing.",
+          "actual_outcome": "The ticket was deleted with no human resolution captured, but the AI's analysis was specific and well-supported.",
+          "notes": "Solid, data-backed analysis; no human confirmation because the ticket was deleted."
+        },
+        {
+          "seq": 50,
+          "ticket_id": "82099",
+          "title": "AAP SKU inventory reset",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "The AI concluded the SKU inventory should be reset (-311 \u2192 10) and gave exact values.",
+          "actual_outcome": "The agent adjusted the inventory exactly as recommended.",
+          "notes": "Exact inventory-correction match."
+        },
+        {
+          "seq": 51,
+          "ticket_id": "82054",
+          "title": "PM Parts emails",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 65,
+          "conclusion": "The AI tied the issue to a Pace API-switch creating duplicate locations and a UDO_JobPartLocation expiration bug.",
+          "actual_outcome": "The dev's read partially matched (Pace API-switch/duplicate locations) but the full mechanism wasn't confirmed.",
+          "notes": "Right area (Pace API switch), partial confirmation."
+        },
+        {
+          "seq": 52,
+          "ticket_id": "82104",
+          "title": "HUB stuck on shipping",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 50,
+          "conclusion": "The AI said it was a transient timeout / slow rate call.",
+          "actual_outcome": "The actual cause was an ObjectOptimisticLockingFailureException / StaleState (TTI-20060 fix).",
+          "notes": "Correctly flagged shipping-flow trouble but missed the optimistic-locking root cause."
+        },
+        {
+          "seq": 53,
+          "ticket_id": "82114",
+          "title": "Material Test jobs no location",
+          "accuracy_label": "Inaccurate",
+          "accuracy_pct": 35,
+          "conclusion": "The AI blamed an UpdateJobLocation Lambda ConnectTimeout to Pace.",
+          "actual_outcome": "The dev disproved this: no location event was ever created, no LOCATION_CHANGE message existed; the real issue was the Producer front-end never submitting the location.",
+          "notes": "Root cause directly refuted by the dev."
+        },
+        {
+          "seq": 54,
+          "ticket_id": "82130",
+          "title": "Versions Not Working on Instant Reorders",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "The AI concluded instant reorders copy the offering name rather than the user's job_name, dropping version suffixes; located the flow in sls-instant-proof-service.",
+          "actual_outcome": "The dev confirmed the exact flow (createProofFileName doesn't add a version suffix), fixed and deployed the same day.",
+          "notes": "Root cause and code location matched the dev's fix."
+        },
+        {
+          "seq": 55,
+          "ticket_id": "82108",
+          "title": "Auto Proof Saddle Stitch versions",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "The AI linked this to #82130 as the same root cause (version suffix stripping) and flagged the recent deploy.",
+          "actual_outcome": "Resolved by the #82130 fix, confirming the link.",
+          "notes": "Correct duplicate linkage and shared root cause."
+        },
+        {
+          "seq": 56,
+          "ticket_id": "82159",
+          "title": "Addtl Shipment error follow-up",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "The AI said TK-247 (race condition on the shippingQuoteManager session cache) was still In QA Review and not yet deployed.",
+          "actual_outcome": "The fix deployed that evening and was confirmed resolved the next morning \u2014 matching the AI's root cause.",
+          "notes": "Correct root cause and accurate deployment-status read."
+        },
+        {
+          "seq": 57,
+          "ticket_id": "82165",
+          "title": "New Files Not Processing",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "The AI found a job-router DLQ backup and ~96% null-status jobs, pointing to a systemic pipeline failure with a broken event source mapping.",
+          "actual_outcome": "The ticket was deleted with no human confirmation, but the analysis was strong, specific, and internally consistent.",
+          "notes": "Detailed, well-evidenced analysis; no human confirmation (ticket deleted)."
+        },
+        {
+          "seq": 58,
+          "ticket_id": "82171",
+          "title": "Loyalty Admin Access",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 60,
+          "conclusion": "The AI said a new Cognito user must be created in admin-by-request-user-pool-prod to grant Loyalty Admin access.",
+          "actual_outcome": "The agent's actual answer was simpler and correct: the user should sign in to the admin portal and request access (self-service flow).",
+          "notes": "Over-engineered the provisioning; missed the self-service request-access path."
+        },
+        {
+          "seq": 59,
+          "ticket_id": "82240",
+          "title": "Mosquito Squad SKU adjust qtys",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "The AI identified record id 22887, reserved=29/backorder=11 to be zeroed, and gave the exact UPDATE.",
+          "actual_outcome": "The agent updated the inventory and the requester confirmed \u2014 matched.",
+          "notes": "Exact record and correction match."
+        },
+        {
+          "seq": 60,
+          "ticket_id": "81922",
+          "title": "South Carolina Press Batch Naming",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "The AI identified production_work_stations (work_station_type=PRESS, production group 44) and gave accurate implementation notes for the batch-queue restructure.",
+          "actual_outcome": "Nick implemented the change via the AI's Option 2 approach; the analysis matched the actual work.",
+          "notes": "Correct data model and solid, actionable implementation notes."
+        },
+        {
+          "seq": 61,
+          "ticket_id": "82251",
+          "title": "Package Scanned to Shelf - No Notification",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "The AI said the scan creates a location event but no print job log entry, so no email fires \u2014 noting the location \"never made it to Pace.\"",
+          "actual_outcome": "Jason confirmed exactly that the location never made it to Pace for the email to generate.",
+          "notes": "Root cause matched the dev's confirmation."
+        },
+        {
+          "seq": 62,
+          "ticket_id": "82263",
+          "title": "Add Store to Sephora Inventory",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "The AI found the two ULTA stores missing from the divisions table (site_id 2170) and gave the exact records to add.",
+          "actual_outcome": "Sheila added the two locations \u2014 matched.",
+          "notes": "Correct data-entry diagnosis and records."
+        },
+        {
+          "seq": 63,
+          "ticket_id": "82349",
+          "title": "REST API endpoint for bulk pack slips",
+          "accuracy_label": "Partially Accurate",
+          "accuracy_pct": 55,
+          "conclusion": "The AI provided a specific REST endpoint (packingSlipPdfByShipmentId) with accurate detail.",
+          "actual_outcome": "The actual resolution differed \u2014 Dan recommended a Gemini agent + TBG Data Connector rather than the raw endpoint.",
+          "notes": "Technically valid endpoint, but not the path the team took."
+        },
+        {
+          "seq": 64,
+          "ticket_id": "82382",
+          "title": "Estimated shipping costs not transferring correctly",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "The AI concluded the charged rate was the correct FedEx rate and the discrepancy was estimate-vs-adjustment, not a bug.",
+          "actual_outcome": "The dev confirmed the core conclusion: the cart shows a Ground estimate while checkout charges Home Delivery (residential), and the charged rate is accurate as it comes from FedEx.",
+          "notes": "Nailed the core conclusion (charged rate correct; residential vs non-residential rate difference)."
+        },
+        {
+          "seq": 65,
+          "ticket_id": "82362",
+          "title": "Kohler Configurator spout issue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "The AI identified the exact SKUs (72791-AF/BL/TT) with the wrong ConfiguratorftID (TUB vs BATH slot) and framed it as a data fix.",
+          "actual_outcome": "The dev/config team confirmed the spec-group isolation and the fix was pending deployment \u2014 matching the AI's root cause.",
+          "notes": "Precise root cause and affected SKUs."
+        },
+        {
+          "seq": 66,
+          "ticket_id": "82410",
+          "title": "Order stuck in backordered queue",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 90,
+          "conclusion": "The AI found the shipment's shipped_on was NULL while items were shipped=true, and recommended stamping shipped_on to clear the queue.",
+          "actual_outcome": "The order fell off the queue shortly after; the analysis was sound and specific.",
+          "notes": "Specific, well-evidenced diagnosis; symptom resolved."
+        },
+        {
+          "seq": 67,
+          "ticket_id": "82456",
+          "title": "M Health Fairview - unable to generate a charge",
+          "accuracy_label": "Accurate",
+          "accuracy_pct": 85,
+          "conclusion": "The AI concluded this wasn't an outage: a missing billing address on a digital-only order caused the tax calc to fail (\"generate a charge\" error), and the \"bill to\" checkbox was a red herring.",
+          "actual_outcome": "The dev confirmed exactly this \u2014 OneSourceTaxMapper requires a billing address for non-shippable items, the checkbox never existed, and the fix was to populate the billing address.",
+          "notes": "Core diagnosis matched, including the \"checkbox never existed\" clarification."
+        }
+      ]
     }
   ],
   "summary": {
-    "total_documents": 2,
-    "total_tickets": 143,
-    "rated_tickets": 140,
-    "average_accuracy": 74.3,
+    "total_documents": 3,
+    "total_tickets": 210,
+    "rated_tickets": 207,
+    "average_accuracy": 73.3,
     "buckets": {
-      "accurate": 83,
-      "partial": 42,
-      "inaccurate": 15
+      "accurate": 114,
+      "partial": 68,
+      "inaccurate": 25
     }
   }
 }
