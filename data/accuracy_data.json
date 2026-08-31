@@ -1,6 +1,13 @@
 {
   "documents": [
     {
+      "file": "investigator_accuracy_audit_august2026.md",
+      "doc_title": "TE Investigator Accuracy Audit \u2014 August 2026",
+      "period": null,
+      "ticket_count": 0,
+      "tickets": []
+    },
+    {
       "file": "investigator_accuracy_audit_july1st2026_July_31_2026.md",
       "doc_title": "TE Investigator Accuracy Audit \u2014 July 2026",
       "period": "July 1\u201331, 2026",
@@ -670,7 +677,7 @@
     }
   ],
   "summary": {
-    "total_documents": 1,
+    "total_documents": 2,
     "total_tickets": 66,
     "rated_tickets": 65,
     "average_accuracy": 82.0,
