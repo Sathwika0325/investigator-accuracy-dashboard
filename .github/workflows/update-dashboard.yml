@@ -6,6 +6,7 @@ on:
     paths:
       - "audits/**.md"
       - "scripts/parse_audits.py"
+      - "index.html"
   workflow_dispatch: {}   # lets you trigger it manually from the Actions tab
 
 permissions:
