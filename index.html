@@ -65,11 +65,20 @@
   .chip[data-bucket="accurate"].active{background:var(--accurate);}
   .chip[data-bucket="partial"].active{background:var(--partial);}
   .chip[data-bucket="inaccurate"].active{background:var(--inaccurate);}
-  .chip[data-bucket="all"].active,.chip[data-period="all"].active{background:var(--accent);}
-  /* period chips get a distinct teal-outline when active */
-  .chip[data-period].active{background:var(--accent);}
+  .chip[data-bucket="all"].active{background:var(--accent);}
   .divider{width:1px;height:22px;background:var(--line);flex-shrink:0;}
   .controls-label{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;white-space:nowrap;}
+  /* Period dropdown */
+  .period-select{
+    background:var(--panel-2);border:1px solid var(--line);color:var(--text);
+    padding:7px 32px 7px 12px;border-radius:7px;font-family:var(--mono);font-size:12px;
+    outline:none;cursor:pointer;appearance:none;-webkit-appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238b96a3' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 10px center;
+    transition:border-color .15s;min-width:170px;
+  }
+  .period-select:focus,.period-select:hover{border-color:var(--accent);}
+  .period-select option{background:var(--panel-2);color:var(--text);}
 
   /* ── Table ── */
   .table-wrap{max-height:540px;overflow:auto;border:1px solid var(--line);border-radius:8px;}
@@ -303,8 +312,10 @@ async function init() {
       <h2>Ticket log</h2>
       <div class="controls">
         <span class="controls-label">Period:</span>
-        <span class="chip active" data-period="all">All periods</span>
-        ${periods.map(p => `<span class="chip" data-period="${p}">${p}</span>`).join('')}
+        <select id="periodSelect" class="period-select">
+          <option value="all">All periods</option>
+          ${periods.map(p => `<option value="${p}">${p}</option>`).join('')}
+        </select>
         <div class="divider"></div>
         <span class="controls-label">Rating:</span>
         <span class="chip active" data-bucket="all">All</span>
@@ -398,15 +409,11 @@ async function init() {
     drawBar(visibleDocs);
   }
 
-  // Period chip clicks
-  document.querySelectorAll('.chip[data-period]').forEach(chip => {
-    chip.addEventListener('click', () => {
-      document.querySelectorAll('.chip[data-period]').forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      activePeriod = chip.dataset.period;
-      renderTable();
-      updateSummaryCards();
-    });
+  // Period dropdown
+  document.getElementById('periodSelect').addEventListener('change', e => {
+    activePeriod = e.target.value;
+    renderTable();
+    updateSummaryCards();
   });
 
   // Bucket chip clicks
