@@ -247,16 +247,44 @@ async function init() {
     return;
   }
 
-  const docs = data.documents || [];
+  // Chronological sort helper (by "Month ... Year" found in the period string)
+  const MONTH_INDEX = {
+    january:0, february:1, march:2, april:3, may:4, june:5,
+    july:6, august:7, september:8, october:9, november:10, december:11
+  };
+  function periodSortKey(p) {
+    // Parse a leading "Month ... Year" out of the period string, e.g. "April 1–30, 2026"
+    const s = String(p);
+    const monthMatch = s.match(/(january|february|march|april|may|june|july|august|september|october|november|december)/i);
+    const yearMatch = s.match(/(\d{4})/);
+    const month = monthMatch ? MONTH_INDEX[monthMatch[1].toLowerCase()] : 99;
+    const year = yearMatch ? parseInt(yearMatch[1], 10) : 9999;
+    return year * 100 + month;
+  }
+
+  const docs = (data.documents || [])
+    .slice()
+    .sort((a, b) => periodSortKey(a.period || a.file) - periodSortKey(b.period || b.file));
   const allTickets = docs.flatMap(d => d.tickets.map(t => ({...t, source: d.file, period: d.period || d.file})));
   const rated = allTickets.filter(t => t.accuracy_pct !== null);
 
-  // Period list for filter chips (unique, sorted)
+  // Period list for filter chips (unique, chronological)
   const periods = [...new Set(docs.map(d => d.period || d.file))];
+
+  // Compact month range label, e.g. "April–August" (periods are chronological)
+  function monthNameOf(p) {
+    const m = String(p).match(/(january|february|march|april|may|june|july|august|september|october|november|december)/i);
+    return m ? m[1][0].toUpperCase() + m[1].slice(1).toLowerCase() : String(p);
+  }
+  const rangeLabel = periods.length
+    ? (periods.length === 1
+        ? monthNameOf(periods[0])
+        : `${monthNameOf(periods[0])}–${monthNameOf(periods[periods.length - 1])}`)
+    : '';
 
   document.getElementById('docMeta').innerHTML =
     `${docs.length} audit doc${docs.length > 1 ? 's' : ''}<br>` +
-    periods.map(p => `<span style="color:var(--text)">${p}</span>`).join(' · ');
+    `<span style="color:var(--text)">${rangeLabel}</span>`;
 
   function bucketOf(pct) { return pct >= 85 ? 'accurate' : pct >= 50 ? 'partial' : 'inaccurate'; }
 
