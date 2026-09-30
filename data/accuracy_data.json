@@ -2313,6 +2313,13 @@
       ]
     },
     {
+      "file": "investigator_accuracy_audit_aug31_september2026.md",
+      "doc_title": "TE Investigator Accuracy Audit \u2014 August 31 (carry-over) + September 2026",
+      "period": null,
+      "ticket_count": 0,
+      "tickets": []
+    },
+    {
       "file": "investigator_accuracy_audit_august2026.md",
       "doc_title": "TE Investigator Accuracy Audit \u2014 August 2026",
       "period": "August 1\u201331, 2026",
@@ -3092,7 +3099,7 @@
     }
   ],
   "summary": {
-    "total_documents": 5,
+    "total_documents": 6,
     "total_tickets": 305,
     "rated_tickets": 302,
     "average_accuracy": 74.9,
