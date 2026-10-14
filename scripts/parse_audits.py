@@ -46,6 +46,7 @@ MONTHS = {
     "july": 7, "august": 8, "september": 9, "october": 10, "november": 11,
     "december": 12,
 }
+MONTH_NAME_RE = re.compile(r"\b(" + "|".join(MONTHS) + r")\b")
 
 
 def period_sort_key(doc: dict):
@@ -54,9 +55,12 @@ def period_sort_key(doc: dict):
     Falls back to a large sentinel so unparseable docs sort last but stay stable.
     """
     text = f"{doc.get('period') or ''} {doc.get('doc_title') or ''}".lower()
-    month = next((num for name, num in MONTHS.items() if name in text), None)
-    year_match = re.search(r"(19|20)\d{2}", text)
-    year = int(year_match.group(0)) if year_match else None
+    # Use the LAST month/year named, so a carry-over period such as
+    # "August 31 (carry-over) + September 1-30, 2026" sorts as September.
+    months_found = MONTH_NAME_RE.findall(text)
+    month = MONTHS[months_found[-1]] if months_found else None
+    years_found = re.findall(r"(?:19|20)\d{2}", text)
+    year = int(years_found[-1]) if years_found else None
     if month is None or year is None:
         return (9999, 99, doc.get("file", ""))
     return (year, month, doc.get("file", ""))
