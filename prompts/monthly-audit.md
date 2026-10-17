@@ -1,10 +1,11 @@
 # Monthly audit prompt for Kiro
 
-Paste the block below into Kiro on the 1st of each month. It needs no editing: Kiro works out
+Paste the block below into Kiro on the last day of each month (or any day after it). It needs no editing: Kiro works out
 which month to audit, writes the file in the format the parser expects and puts it in `audits/`.
 Pushing to `main` is the only step left, and it is yours.
 
-To audit a specific month instead of the previous one, add this line at the very top:
+On the last day of a month it audits that month; on any other day it audits the previous month.
+To audit a specific month instead, add this line at the very top:
 `Audit month: 2026-08`
 
 ---

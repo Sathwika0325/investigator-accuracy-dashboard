@@ -67,7 +67,7 @@ python3 -m http.server 8000       # serve the folder
 ## Monthly audit prompt
 
 `prompts/monthly-audit.md` is a paste-ready Kiro prompt. It needs no editing: it runs
-`node scripts/month_window.js` to find the previous month and its Slack timestamps, writes the audit
+`node scripts/month_window.js` to find the month to audit (the current month on its last day, otherwise the previous one) and its Slack timestamps, writes the audit
 into `audits/` in the format the parser expects, and checks its own counts. Then `git add`,
 commit and push as above.
 

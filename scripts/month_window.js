@@ -2,7 +2,8 @@
 /*
  * Prints the Slack window and output filename for a monthly accuracy audit.
  *
- *   node scripts/month_window.js            -> the previous calendar month (UTC)
+ *   node scripts/month_window.js            -> the current month if today is its last day,
+ *                                              otherwise the previous month
  *   node scripts/month_window.js 2026-08    -> a specific month
  *
  * `oldest` is the first second of the month and `latest` is the first second
@@ -17,8 +18,12 @@ if (arg) {
   if (!hit || +hit[2] < 1 || +hit[2] > 12) { console.error('Usage: month_window.js [YYYY-MM]'); process.exit(1); }
   y = +hit[1]; m = +hit[2] - 1;
 } else {
-  m -= 1;
-  if (m < 0) { m = 11; y -= 1; }
+  // On the last day of a month (local date) audit that month; on any other day, the previous one.
+  const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+  if (tomorrow.getDate() !== 1) {
+    m -= 1;
+    if (m < 0) { m = 11; y -= 1; }
+  }
 }
 const NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const start = Date.UTC(y, m, 1) / 1000;
