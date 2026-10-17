@@ -63,3 +63,19 @@ python3 -m http.server 8000       # serve the folder
 # open http://localhost:8000
 ```
 (A local `file://` open won't work — `fetch()` needs an HTTP server.)
+
+## Monthly audit prompt
+
+`prompts/monthly-audit.md` is a paste-ready Kiro prompt. It needs no editing: it runs
+`node scripts/month_window.js` to find the previous month and its Slack timestamps, writes the audit
+into `audits/` in the format the parser expects, and checks its own counts. Then `git add`,
+commit and push as above.
+
+## Dashboard extras
+
+- Cards show the change versus the previous month and a 75% target (`TARGET` at the top of the script in `index.html`).
+- Click a bar to filter to that month; the rating-mix chart and "Needs attention" list follow the filter.
+- "Count each ticket once" removes repeat audits of the same ticket.
+- The data-quality panel flags repeats, unrated tickets, placeholder titles and generic titles.
+- Click a ticket title to read the conclusion, outcome and notes. Sort by any column. Export the current view as CSV.
+- The URL hash keeps the current filters, so a view can be shared as a link.

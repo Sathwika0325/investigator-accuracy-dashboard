@@ -17,6 +17,8 @@
   body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.5;}
   .scanline{position:fixed;inset:0;pointer-events:none;z-index:50;
     background:repeating-linear-gradient(to bottom,rgba(255,255,255,.012) 0px,rgba(255,255,255,.012) 1px,transparent 1px,transparent 3px);}
+  button{font:inherit;color:inherit;}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
 
   /* ── Header ── */
   header{padding:28px 40px 20px;border-bottom:1px solid var(--line);
@@ -27,6 +29,11 @@
 
   /* ── Layout ── */
   main{max-width:1200px;margin:0 auto;padding:28px 40px 80px;}
+  @media(max-width:640px){header{padding:20px 16px 14px;}main{padding:18px 16px 60px;}h1{font-size:21px;}.doc-meta{text-align:left;}}
+
+  /* ── Scope bar ── */
+  .scope{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px;}
+  .scope-note{font-family:var(--mono);font-size:11px;color:var(--muted);}
 
   /* ── Summary cards ── */
   .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:13px;margin-bottom:24px;}
@@ -36,20 +43,38 @@
   .card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--card-accent,var(--accent));}
   .card .label{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);}
   .card .value{font-family:var(--mono);font-size:30px;font-weight:700;margin-top:5px;line-height:1;}
-  .card .sub{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:4px;}
+  .card .sub{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:6px;min-height:15px;}
   .card.accurate{--card-accent:var(--accurate);}
   .card.partial{--card-accent:var(--partial);}
   .card.inaccurate{--card-accent:var(--inaccurate);}
   .card.accent{--card-accent:var(--accent);}
+  .delta{font-weight:700;}
+  .delta.up{color:var(--accurate);} .delta.down{color:var(--inaccurate);} .delta.flat{color:var(--muted);}
+  @media(prefers-reduced-motion:reduce){.card{transition:none;}.card:hover{transform:none;}}
 
-  /* ── Charts row ── */
-  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px;}
+  /* ── Panels ── */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;}
   @media(max-width:860px){.grid-2{grid-template-columns:1fr;}}
   .panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px 22px;}
   .panel h2{margin:0 0 14px;font-size:11px;font-family:var(--mono);text-transform:uppercase;
-    letter-spacing:.08em;color:var(--muted);font-weight:600;}
-  .chart-host{position:relative;height:220px;width:100%;}
-  .chart-host canvas{max-height:220px;}
+    letter-spacing:.08em;color:var(--muted);font-weight:600;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;}
+  .panel h2 .hint{text-transform:none;letter-spacing:0;font-weight:400;}
+  .chart-host{position:relative;width:100%;}
+  .chart-host svg{width:100%;height:auto;display:block;}
+  .bar-hit{cursor:pointer;}
+  .bar-hit:hover rect.bar{opacity:1;}
+
+  /* ── Lists (needs attention / data quality) ── */
+  .list{list-style:none;margin:0;padding:0;}
+  .list li{display:flex;gap:10px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;}
+  .list li:last-child{border-bottom:none;}
+  .list .pct{margin-left:auto;}
+  .list button.link{background:none;border:none;padding:0;cursor:pointer;text-align:left;color:var(--text);}
+  .list button.link:hover{color:var(--accent);}
+  .q-count{font-family:var(--mono);font-weight:700;min-width:34px;}
+  .q-count.warn{color:var(--partial);} .q-count.ok{color:var(--accurate);}
+  .q-desc{color:var(--muted);font-size:12px;}
+  .empty{font-family:var(--mono);font-size:12px;color:var(--muted);padding:14px 0;}
 
   /* ── Controls ── */
   .controls{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center;}
@@ -61,14 +86,13 @@
     border:1px solid var(--line);background:var(--panel-2);color:var(--muted);user-select:none;
     transition:all .15s;white-space:nowrap;}
   .chip:hover{border-color:var(--accent);color:var(--text);}
-  .chip.active{color:var(--bg);font-weight:700;border-color:transparent;}
+  .chip.active{color:var(--bg);font-weight:700;border-color:transparent;background:var(--accent);}
   .chip[data-bucket="accurate"].active{background:var(--accurate);}
   .chip[data-bucket="partial"].active{background:var(--partial);}
   .chip[data-bucket="inaccurate"].active{background:var(--inaccurate);}
-  .chip[data-bucket="all"].active{background:var(--accent);}
+  .chip[data-bucket="none"].active{background:var(--muted);}
   .divider{width:1px;height:22px;background:var(--line);flex-shrink:0;}
   .controls-label{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;white-space:nowrap;}
-  /* Period dropdown */
   .period-select{
     background:var(--panel-2);border:1px solid var(--line);color:var(--text);
     padding:7px 32px 7px 12px;border-radius:7px;font-family:var(--mono);font-size:12px;
@@ -79,27 +103,44 @@
   }
   .period-select:focus,.period-select:hover{border-color:var(--accent);}
   .period-select option{background:var(--panel-2);color:var(--text);}
+  .toggle{display:inline-flex;gap:7px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--muted);cursor:pointer;user-select:none;}
+  .toggle input{accent-color:var(--accent);}
+  .btn{font-family:var(--mono);font-size:11px;padding:6px 12px;border-radius:7px;cursor:pointer;
+    border:1px solid var(--line);background:var(--panel-2);color:var(--text);}
+  .btn:hover{border-color:var(--accent);}
 
   /* ── Table ── */
-  .table-wrap{max-height:540px;overflow:auto;border:1px solid var(--line);border-radius:8px;}
+  .table-wrap{max-height:620px;overflow:auto;border:1px solid var(--line);border-radius:8px;}
   table{width:100%;border-collapse:collapse;font-size:13px;}
   thead th{text-align:left;font-family:var(--mono);font-size:10px;text-transform:uppercase;
-    letter-spacing:.06em;color:var(--muted);padding:8px 10px;border-bottom:1px solid var(--line);
+    letter-spacing:.06em;color:var(--muted);padding:0;border-bottom:1px solid var(--line);
     position:sticky;top:0;background:var(--panel);z-index:2;}
+  thead th button{width:100%;background:none;border:none;cursor:pointer;text-align:inherit;
+    font:inherit;text-transform:inherit;letter-spacing:inherit;color:inherit;padding:8px 10px;}
+  thead th button:hover{color:var(--text);}
+  thead th[aria-sort="ascending"] button::after{content:' ▲';}
+  thead th[aria-sort="descending"] button::after{content:' ▼';}
   tbody td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
-  tbody tr:last-child td{border-bottom:none;}
-  tbody tr:hover{background:var(--panel-2);}
+  tbody tr.row:hover{background:var(--panel-2);}
   .ticket-id{font-family:var(--mono);color:var(--accent);white-space:nowrap;}
+  .rowbtn{background:none;border:none;padding:0;cursor:pointer;text-align:left;color:inherit;}
+  .rowbtn::before{content:'▸';display:inline-block;width:14px;color:var(--muted);}
+  .rowbtn[aria-expanded="true"]::before{content:'▾';}
   .period-badge{display:inline-block;font-family:var(--mono);font-size:10px;padding:2px 7px;
     border-radius:4px;background:var(--panel-2);border:1px solid var(--line);color:var(--muted);white-space:nowrap;}
+  .flag{display:inline-block;font-family:var(--mono);font-size:9.5px;padding:1px 6px;margin-left:6px;
+    border-radius:4px;border:1px solid var(--partial);color:var(--partial);white-space:nowrap;}
   .bucket-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;flex-shrink:0;}
   .bucket-dot.accurate{background:var(--accurate);}
   .bucket-dot.partial{background:var(--partial);}
   .bucket-dot.inaccurate{background:var(--inaccurate);}
   .pct{font-family:var(--mono);font-weight:700;}
-  .pct.accurate{color:var(--accurate);}
-  .pct.partial{color:var(--partial);}
-  .pct.inaccurate{color:var(--inaccurate);}
+  .pct.accurate{color:var(--accurate);} .pct.partial{color:var(--partial);} .pct.inaccurate{color:var(--inaccurate);}
+  .detail td{background:var(--panel-2);padding:14px 18px 16px 28px;}
+  .detail dl{margin:0;display:grid;grid-template-columns:150px 1fr;gap:8px 16px;}
+  .detail dt{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-top:2px;}
+  .detail dd{margin:0;font-size:13px;}
+  @media(max-width:640px){.detail dl{grid-template-columns:1fr;} .col-period{display:none;}}
   .row-count{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:8px;text-align:right;}
 
   footer{text-align:center;padding:22px;font-family:var(--mono);font-size:11px;
@@ -123,18 +164,24 @@
 
 <footer>Rebuilt automatically from /audits on every push · no manual edits needed</footer>
 
-<!-- ── Inline Chart.js (tiny UMD bundle to avoid CDN blocks) ── -->
-<!-- We fetch Chart.js from two CDNs; if both fail we draw our own SVG charts -->
 <script>
 /* ─────────────────────────────────────────────────────────────────
-   CHART HELPERS — drawn with inline SVG so they always work even
-   when Chart.js CDN is blocked on the corporate network.
-   We still TRY to load Chart.js for nicer interactive charts.
+   SETTINGS
 ───────────────────────────────────────────────────────────────── */
+const TARGET = 75;            // target average accuracy (%) drawn on the trend chart
+const ACCURATE_MIN = 85;      // >= this is "accurate"
+const PARTIAL_MIN = 50;       // >= this is "partial", below is "inaccurate"
+const COLORS = {accurate:'#3ecf8e', partial:'#e8b339', inaccurate:'#e8593f', accent:'#5bc0be', muted:'#8b96a3', line:'#262e37'};
+
+/* ─────────────────────────────────────────────────────────────────
+   HELPERS
+───────────────────────────────────────────────────────────────── */
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
 
 /* Last month name found in a period string, e.g.
-   "August 31 (carry-over) + September 1–30, 2026" -> "September".
-   Returns null when no month is present. */
+   "August 31 (carry-over) + September 1–30, 2026" -> "September". */
 function lastMonthName(p) {
   const all = String(p).match(/\b(january|february|march|april|may|june|july|august|september|october|november|december)\b/gi);
   if (!all) return null;
@@ -142,105 +189,130 @@ function lastMonthName(p) {
   return m[0].toUpperCase() + m.slice(1).toLowerCase();
 }
 
-function svgDonut(slices, total, cx, cy, r, gap) {
-  /* slices = [{value, color, label}] */
-  if (!total) return '<text x="' + cx + '" y="' + (cy+5) + '" text-anchor="middle" fill="#8b96a3" font-size="13" font-family="JetBrains Mono">No data</text>';
-  let angle = -90;
-  let paths = '';
-  const ri = r * 0.55;
-  slices.forEach(s => {
-    if (!s.value) return;
-    const sweep = (s.value / total) * 360;
-    const a1 = angle * Math.PI / 180;
-    const a2 = (angle + sweep - (gap || 2)) * Math.PI / 180;
-    const x1 = cx + r * Math.cos(a1), y1 = cy + r * Math.sin(a1);
-    const x2 = cx + r * Math.cos(a2), y2 = cy + r * Math.sin(a2);
-    const xi1 = cx + ri * Math.cos(a1), yi1 = cy + ri * Math.sin(a1);
-    const xi2 = cx + ri * Math.cos(a2), yi2 = cy + ri * Math.sin(a2);
-    const large = sweep > 180 ? 1 : 0;
-    paths += `<path d="M${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} L${xi2},${yi2} A${ri},${ri} 0 ${large},0 ${xi1},${yi1} Z" fill="${s.color}" opacity="0.9"/>`;
-    angle += sweep;
-  });
-  return paths;
+const MONTH_INDEX = {january:0,february:1,march:2,april:3,may:4,june:5,july:6,august:7,september:8,october:9,november:10,december:11};
+function periodSortKey(p) {
+  const s = String(p);
+  const name = lastMonthName(s);
+  const years = s.match(/\d{4}/g);
+  const month = name ? MONTH_INDEX[name.toLowerCase()] : 99;
+  const year = years ? parseInt(years[years.length - 1], 10) : 9999;
+  return year * 100 + month;
 }
 
-function drawDonutChart(canvasOrDiv, counts) {
-  const el = typeof canvasOrDiv === 'string' ? document.getElementById(canvasOrDiv) : canvasOrDiv;
-  if (!el) return;
+function bucketOf(pct) { return pct >= ACCURATE_MIN ? 'accurate' : pct >= PARTIAL_MIN ? 'partial' : 'inaccurate'; }
+function bucketName(t) { return t.accuracy_pct === null ? 'none' : bucketOf(t.accuracy_pct); }
+
+function stats(tickets) {
+  const rated = tickets.filter(t => t.accuracy_pct !== null);
+  const c = {accurate:0, partial:0, inaccurate:0};
+  rated.forEach(t => c[bucketOf(t.accuracy_pct)]++);
+  return {
+    total: tickets.length, rated: rated.length, unrated: tickets.length - rated.length,
+    counts: c,
+    avg: rated.length ? rated.reduce((s, t) => s + t.accuracy_pct, 0) / rated.length : null
+  };
+}
+
+const PLACEHOLDER_RE = /^\s*\[(failed to fetch|inaccessible|no subject)[^\]]*\]\s*$/i;
+const GENERIC_RE = /^\s*collaterate issue\s*$/i;
+
+/* ─────────────────────────────────────────────────────────────────
+   CHARTS (inline SVG — no CDN needed)
+───────────────────────────────────────────────────────────────── */
+function donutSvg(counts) {
   const total = counts.accurate + counts.partial + counts.inaccurate;
+  const cx = 105, cy = 105, r = 85, ri = r * 0.55;
   const slices = [
-    {value: counts.accurate,   color: '#3ecf8e', label: 'Accurate'},
-    {value: counts.partial,    color: '#e8b339', label: 'Partial'},
-    {value: counts.inaccurate, color: '#e8593f', label: 'Inaccurate'},
+    {v: counts.accurate, color: COLORS.accurate, label: 'Accurate'},
+    {v: counts.partial, color: COLORS.partial, label: 'Partial'},
+    {v: counts.inaccurate, color: COLORS.inaccurate, label: 'Inaccurate'}
   ];
-  const W = 280, H = 220, cx = 105, cy = 105, r = 85;
-  let legend = '';
-  slices.forEach(s => {
-    const pct = total ? ((s.value / total) * 100).toFixed(0) : 0;
-    legend += `<g>
-      <rect x="200" y="${legend.length === 0 ? 60 : legend.length === 1 ? 95 : 130}" width="10" height="10" rx="2" fill="${s.color}"/>
-      <text x="216" y="${legend.length === 0 ? 70 : legend.length === 1 ? 105 : 140}" fill="#e7e9ea" font-size="12" font-family="Space Grotesk">${s.label}</text>
-      <text x="216" y="${legend.length === 0 ? 84 : legend.length === 1 ? 119 : 154}" fill="#8b96a3" font-size="11" font-family="JetBrains Mono">${s.value} (${pct}%)</text>
-    </g>`;
-    legend = legend; // trick to track index — rebuild properly below
-  });
-  // rebuild legend properly
-  legend = '';
-  const ys = [60, 100, 140];
-  slices.forEach((s, i) => {
-    const pct = total ? ((s.value / total) * 100).toFixed(0) : 0;
-    legend += `<rect x="200" y="${ys[i]}" width="10" height="10" rx="2" fill="${s.color}"/>
-      <text x="216" y="${ys[i]+10}" fill="#e7e9ea" font-size="12" font-family="Space Grotesk">${s.label}</text>
-      <text x="216" y="${ys[i]+24}" fill="#8b96a3" font-size="11" font-family="JetBrains Mono">${s.value} (${pct}%)</text>`;
-  });
-  const html = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-height:220px">
-    ${svgDonut(slices, total, cx, cy, r, 3)}
-    <text x="${cx}" y="${cy-8}" text-anchor="middle" fill="#e7e9ea" font-size="22" font-weight="700" font-family="JetBrains Mono">${total}</text>
-    <text x="${cx}" y="${cy+12}" text-anchor="middle" fill="#8b96a3" font-size="11" font-family="JetBrains Mono">tickets</text>
-    ${legend}
-  </svg>`;
-  el.outerHTML = html;
+  let paths = '', angle = -90;
+  if (!total) {
+    paths = `<text x="${cx}" y="${cy + 5}" text-anchor="middle" fill="${COLORS.muted}" font-size="13" font-family="JetBrains Mono">No data</text>`;
+  } else {
+    slices.forEach(s => {
+      if (!s.v) return;
+      const full = s.v === total;
+      const sweep = (s.v / total) * 360 - (full ? 0.01 : 2);
+      const a1 = angle * Math.PI / 180, a2 = (angle + sweep) * Math.PI / 180;
+      const p = (rad, a) => (cx + rad * Math.cos(a)).toFixed(2) + ',' + (cy + rad * Math.sin(a)).toFixed(2);
+      const large = sweep > 180 ? 1 : 0;
+      paths += `<path d="M${p(r,a1)} A${r},${r} 0 ${large},1 ${p(r,a2)} L${p(ri,a2)} A${ri},${ri} 0 ${large},0 ${p(ri,a1)} Z" fill="${s.color}" opacity="0.9"><title>${s.label}: ${s.v}</title></path>`;
+      angle += (s.v / total) * 360;
+    });
+  }
+  const legend = slices.map((s, i) => {
+    const y = 60 + i * 40, pct = total ? Math.round(s.v / total * 100) : 0;
+    return `<rect x="200" y="${y}" width="10" height="10" rx="2" fill="${s.color}"/>
+      <text x="216" y="${y + 10}" fill="#e7e9ea" font-size="12" font-family="Space Grotesk">${s.label}</text>
+      <text x="216" y="${y + 24}" fill="${COLORS.muted}" font-size="11" font-family="JetBrains Mono">${s.v} (${pct}%)</text>`;
+  }).join('');
+  return `<svg viewBox="0 0 300 210" role="img" aria-label="Accuracy distribution donut: ${counts.accurate} accurate, ${counts.partial} partial, ${counts.inaccurate} inaccurate">
+    ${paths}
+    <text x="${cx}" y="${cy - 8}" text-anchor="middle" fill="#e7e9ea" font-size="22" font-weight="700" font-family="JetBrains Mono">${total}</text>
+    <text x="${cx}" y="${cy + 12}" text-anchor="middle" fill="${COLORS.muted}" font-size="11" font-family="JetBrains Mono">rated</text>
+    ${legend}</svg>`;
 }
 
-function drawBarChart(containerId, docs) {
-  const el = document.getElementById(containerId);
-  if (!el) return;
-  if (!docs.length) { el.innerHTML = '<p style="color:var(--muted);font-family:var(--mono);font-size:12px;padding:20px">No data</p>'; return; }
-  const W = 400, H = 200, padL = 40, padB = 50, padT = 20, padR = 20;
-  const chartW = W - padL - padR;
-  const chartH = H - padB - padT;
-  const barW = Math.min(60, (chartW / docs.length) - 16);
-
-  const avgs = docs.map(d => {
-    const r = d.tickets.filter(t => t.accuracy_pct !== null);
-    return r.length ? +(r.reduce((s,t) => s + t.accuracy_pct, 0) / r.length).toFixed(1) : 0;
-  });
-  const maxVal = 100;
-
-  let bars = '', labels = '', values = '', gridLines = '';
+/* Bar chart: one bar per period, target line, click a bar to select that period. */
+function trendSvg(periodStats, selectedIdx) {
+  const W = 460, H = 230, padL = 36, padB = 34, padT = 22, padR = 14;
+  const cw = W - padL - padR, ch = H - padT - padB;
+  const n = periodStats.length;
+  const slot = cw / Math.max(n, 1);
+  const barW = Math.min(52, slot - 14);
+  const yOf = v => padT + ch - (v / 100) * ch;
+  let g = '';
   [0, 25, 50, 75, 100].forEach(v => {
-    const y = padT + chartH - (v / maxVal) * chartH;
-    gridLines += `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="#262e37" stroke-width="1"/>
-      <text x="${padL - 6}" y="${y + 4}" text-anchor="end" fill="#8b96a3" font-size="10" font-family="JetBrains Mono">${v}</text>`;
+    g += `<line x1="${padL}" y1="${yOf(v)}" x2="${W - padR}" y2="${yOf(v)}" stroke="${COLORS.line}"/>
+      <text x="${padL - 6}" y="${yOf(v) + 4}" text-anchor="end" fill="${COLORS.muted}" font-size="10" font-family="JetBrains Mono">${v}</text>`;
   });
-
-  docs.forEach((d, i) => {
-    const avg = avgs[i];
-    const bh = (avg / maxVal) * chartH;
-    const x = padL + (i + 0.5) * (chartW / docs.length) - barW / 2;
-    const y = padT + chartH - bh;
-    const color = avg >= 85 ? '#3ecf8e' : avg >= 50 ? '#e8b339' : '#e8593f';
-    // short label — take first word of period or month name
-    const lbl = lastMonthName(d.period || d.file) ||
-      (d.period || d.file).replace(/\d{4}/g, '').replace('1–31,', '').replace('1-31,', '').trim().split(' ')[0];
-    bars += `<rect x="${x}" y="${y}" width="${barW}" height="${bh}" rx="4" fill="${color}" opacity="0.85"/>`;
-    values += `<text x="${x + barW/2}" y="${y - 5}" text-anchor="middle" fill="${color}" font-size="11" font-weight="700" font-family="JetBrains Mono">${avg}%</text>`;
-    labels += `<text x="${x + barW/2}" y="${H - 8}" text-anchor="middle" fill="#8b96a3" font-size="10" font-family="JetBrains Mono">${lbl}</text>`;
+  let bars = '';
+  periodStats.forEach((p, i) => {
+    const avg = p.s.avg === null ? 0 : p.s.avg;
+    const x = padL + (i + 0.5) * slot - barW / 2;
+    const color = avg >= ACCURATE_MIN ? COLORS.accurate : avg >= PARTIAL_MIN ? COLORS.partial : COLORS.inaccurate;
+    const dim = selectedIdx !== null && selectedIdx !== i ? 0.35 : 0.9;
+    const label = (lastMonthName(p.doc.period || p.doc.file) || '').slice(0, 3) || '?';
+    const h = (avg / 100) * ch;
+    bars += `<g class="bar-hit" data-idx="${i}" tabindex="0" role="button" aria-label="${esc(label)} average ${avg.toFixed(1)} percent, ${p.s.rated} rated tickets. Click to filter.">
+      <rect x="${x - 4}" y="${padT}" width="${barW + 8}" height="${ch + padB - 6}" fill="transparent"/>
+      <rect class="bar" x="${x}" y="${yOf(avg)}" width="${barW}" height="${h}" rx="4" fill="${color}" opacity="${dim}"/>
+      <text x="${x + barW / 2}" y="${yOf(avg) - 5}" text-anchor="middle" fill="${color}" font-size="11" font-weight="700" font-family="JetBrains Mono">${p.s.avg === null ? '—' : avg.toFixed(0) + '%'}</text>
+      <text x="${x + barW / 2}" y="${H - 18}" text-anchor="middle" fill="${COLORS.muted}" font-size="10" font-family="JetBrains Mono">${esc(label)}</text>
+      <text x="${x + barW / 2}" y="${H - 6}" text-anchor="middle" fill="${COLORS.muted}" font-size="9" font-family="JetBrains Mono">n=${p.s.rated}</text></g>`;
   });
+  const ty = yOf(TARGET);
+  const target = `<line x1="${padL}" y1="${ty}" x2="${W - padR}" y2="${ty}" stroke="${COLORS.accent}" stroke-dasharray="5 4" stroke-width="1.5"/>
+    <text x="${W - padR}" y="${ty - 4}" text-anchor="end" fill="${COLORS.accent}" font-size="10" font-family="JetBrains Mono">target ${TARGET}%</text>`;
+  // trend line through bar tops
+  const pts = periodStats.map((p, i) => p.s.avg === null ? null : `${(padL + (i + 0.5) * slot).toFixed(1)},${yOf(p.s.avg).toFixed(1)}`).filter(Boolean);
+  const line = pts.length > 1 ? `<polyline points="${pts.join(' ')}" fill="none" stroke="#e7e9ea" stroke-opacity=".55" stroke-width="1.5" stroke-linejoin="round"/>` : '';
+  return `<svg viewBox="0 0 ${W} ${H}" role="group" aria-label="Average accuracy by period">${g}${bars}${line}${target}</svg>`;
+}
 
-  el.outerHTML = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-height:220px">
-    ${gridLines}${bars}${values}${labels}
-  </svg>`;
+/* 100% stacked bar per period: accurate / partial / inaccurate mix. */
+function mixSvg(periodStats) {
+  const W = 460, rowH = 26, padL = 44, padR = 40;
+  const H = periodStats.length * rowH + 8;
+  const cw = W - padL - padR;
+  let out = '';
+  periodStats.forEach((p, i) => {
+    const y = 4 + i * rowH, tot = p.s.rated;
+    const label = (lastMonthName(p.doc.period || p.doc.file) || '?').slice(0, 3);
+    out += `<text x="${padL - 8}" y="${y + 14}" text-anchor="end" fill="${COLORS.muted}" font-size="10" font-family="JetBrains Mono">${esc(label)}</text>`;
+    let x = padL;
+    ['accurate', 'partial', 'inaccurate'].forEach(k => {
+      const v = p.s.counts[k];
+      if (!tot || !v) return;
+      const w = v / tot * cw;
+      out += `<rect x="${x.toFixed(1)}" y="${y}" width="${Math.max(w - 1, 0).toFixed(1)}" height="18" fill="${COLORS[k]}" opacity=".88"><title>${esc(label)} ${k}: ${v} of ${tot}</title></rect>`;
+      if (w > 24) out += `<text x="${(x + w / 2).toFixed(1)}" y="${y + 13}" text-anchor="middle" fill="#0d1013" font-size="10" font-weight="700" font-family="JetBrains Mono">${Math.round(v / tot * 100)}%</text>`;
+      x += w;
+    });
+  });
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Accuracy mix per period">${out}</svg>`;
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -253,225 +325,316 @@ async function init() {
     const res = await fetch('data/accuracy_data.json', {cache: 'no-store'});
     if (!res.ok) throw new Error('HTTP ' + res.status);
     data = await res.json();
-  } catch(e) {
-    contentEl.innerHTML = `<div class="error">Could not load data/accuracy_data.json<br><span style="font-size:11px">${e.message}</span></div>`;
+  } catch (e) {
+    contentEl.innerHTML = `<div class="error">Could not load data/accuracy_data.json<br><span style="font-size:11px">${esc(e.message)}</span></div>`;
     return;
   }
 
-  // Chronological sort helper (by "Month ... Year" found in the period string)
-  const MONTH_INDEX = {
-    january:0, february:1, march:2, april:3, may:4, june:5,
-    july:6, august:7, september:8, october:9, november:10, december:11
-  };
-  function periodSortKey(p) {
-    // Parse a leading "Month ... Year" out of the period string, e.g. "April 1–30, 2026"
-    const s = String(p);
-    const monthName = lastMonthName(s);
-    const yearAll = s.match(/\d{4}/g);
-    const month = monthName ? MONTH_INDEX[monthName.toLowerCase()] : 99;
-    const year = yearAll ? parseInt(yearAll[yearAll.length - 1], 10) : 9999;
-    return year * 100 + month;
-  }
-
-  const docs = (data.documents || [])
-    .slice()
+  const docs = (data.documents || []).slice()
     .sort((a, b) => periodSortKey(a.period || a.file) - periodSortKey(b.period || b.file));
-  const allTickets = docs.flatMap(d => d.tickets.map(t => ({...t, source: d.file, period: d.period || d.file})));
-  const rated = allTickets.filter(t => t.accuracy_pct !== null);
+  const periodLabel = d => d.period || d.file;
 
-  // Period list for filter chips (unique, chronological)
-  const periods = [...new Set(docs.map(d => d.period || d.file))];
+  // Flatten, keeping document (chronological) order, and tag each ticket.
+  const lastSeen = {};
+  const seenCount = {};
+  const allTickets = [];
+  docs.forEach((d, di) => d.tickets.forEach(t => {
+    const row = Object.assign({}, t, {docIdx: di, period: periodLabel(d), uid: allTickets.length});
+    allTickets.push(row);
+    lastSeen[t.ticket_id] = row.uid;
+    seenCount[t.ticket_id] = (seenCount[t.ticket_id] || 0) + 1;
+  }));
+  allTickets.forEach(t => {
+    t.flags = [];
+    if (seenCount[t.ticket_id] > 1) t.flags.push('duplicate');
+    if (t.accuracy_pct === null) t.flags.push('unrated');
+    if (PLACEHOLDER_RE.test(t.title)) t.flags.push('placeholder');
+    else if (GENERIC_RE.test(t.title)) t.flags.push('generic title');
+    t.isLatest = lastSeen[t.ticket_id] === t.uid;
+  });
 
-  // Compact month range label, e.g. "April–August" (periods are chronological)
-  function monthNameOf(p) {
-    return lastMonthName(p) || String(p);
+  if (!docs.length) {
+    contentEl.innerHTML = '<div class="error">No audits found in /audits yet.</div>';
+    return;
   }
-  const rangeLabel = periods.length
-    ? (periods.length === 1
-        ? monthNameOf(periods[0])
-        : `${monthNameOf(periods[0])}–${monthNameOf(periods[periods.length - 1])}`)
-    : '';
 
+  const periods = docs.map(periodLabel);
+  const first = lastMonthName(periods[0]) || periods[0];
+  const lastM = lastMonthName(periods[periods.length - 1]) || periods[periods.length - 1];
   document.getElementById('docMeta').innerHTML =
-    `${docs.length} audit doc${docs.length > 1 ? 's' : ''}<br>` +
-    `<span style="color:var(--text)">${rangeLabel}</span>`;
+    `${docs.length} audit doc${docs.length > 1 ? 's' : ''}<br><span style="color:var(--text)">${esc(docs.length === 1 ? first : first + '–' + lastM)}</span>`;
 
-  function bucketOf(pct) { return pct >= 85 ? 'accurate' : pct >= 50 ? 'partial' : 'inaccurate'; }
-
-  // Compute global counts (all periods)
-  function computeCounts(tickets) {
-    const c = {accurate:0, partial:0, inaccurate:0};
-    tickets.filter(t => t.accuracy_pct !== null).forEach(t => c[bucketOf(t.accuracy_pct)]++);
-    return c;
+  /* ── State (mirrored to the URL hash so a view can be shared) ── */
+  const state = {period: 'all', bucket: 'all', q: '', unique: false, sort: null, dir: 1, open: new Set()};
+  (function readHash() {
+    const h = new URLSearchParams(location.hash.slice(1));
+    const p = h.get('p');
+    if (p !== null && (p === 'all' || (+p >= 0 && +p < docs.length))) state.period = p;
+    if (['all', 'accurate', 'partial', 'inaccurate', 'none'].includes(h.get('r'))) state.bucket = h.get('r');
+    if (h.get('q')) state.q = h.get('q').toLowerCase();
+    state.unique = h.get('u') === '1';
+  })();
+  function writeHash() {
+    const h = new URLSearchParams();
+    if (state.period !== 'all') h.set('p', state.period);
+    if (state.bucket !== 'all') h.set('r', state.bucket);
+    if (state.q) h.set('q', state.q);
+    if (state.unique) h.set('u', '1');
+    const s = h.toString();
+    history.replaceState(null, '', s ? '#' + s : location.pathname + location.search);
   }
-  const globalCounts = computeCounts(rated);
-  const avg = rated.length ? (rated.reduce((s,t) => s + t.accuracy_pct, 0) / rated.length) : 0;
+
+  const inUnique = t => !state.unique || t.isLatest;
+  const scopeTickets = () => allTickets.filter(t => inUnique(t) && (state.period === 'all' || String(t.docIdx) === state.period));
+  const periodStats = () => docs.map((d, i) => ({doc: d, s: stats(allTickets.filter(t => t.docIdx === i && inUnique(t)))}));
 
   contentEl.innerHTML = `
-    <!-- Summary cards -->
-    <div class="cards" id="summaryCards">
-      <div class="card accent">
-        <div class="label">Tickets audited</div>
-        <div class="value" id="cTotal">${allTickets.length}</div>
-        <div class="sub" id="cPeriodSub">across ${docs.length} periods</div>
-      </div>
-      <div class="card accent">
-        <div class="label">Average accuracy</div>
-        <div class="value" id="cAvg">${avg.toFixed(1)}%</div>
-      </div>
-      <div class="card accurate">
-        <div class="label">Accurate (85%+)</div>
-        <div class="value" id="cAccurate">${globalCounts.accurate}</div>
-      </div>
-      <div class="card partial">
-        <div class="label">Partially accurate</div>
-        <div class="value" id="cPartial">${globalCounts.partial}</div>
-      </div>
-      <div class="card inaccurate">
-        <div class="label">Inaccurate (&lt;50%)</div>
-        <div class="value" id="cInaccurate">${globalCounts.inaccurate}</div>
-      </div>
+    <div class="scope">
+      <span class="controls-label">Period</span>
+      <select id="periodSelect" class="period-select" aria-label="Period">
+        <option value="all">All periods</option>
+        ${periods.map((p, i) => `<option value="${i}">${esc(p)}</option>`).join('')}
+      </select>
+      <label class="toggle" title="A ticket that was audited in more than one period is counted once, in its latest period.">
+        <input type="checkbox" id="uniqueToggle"> Count each ticket once
+      </label>
+      <span class="scope-note" id="scopeNote"></span>
     </div>
 
-    <!-- Charts -->
+    <div class="cards" id="summaryCards"></div>
+
     <div class="grid-2">
-      <div class="panel">
-        <h2>Accuracy distribution</h2>
-        <div class="chart-host" id="distChartHost"><div id="distChart"></div></div>
-      </div>
-      <div class="panel">
-        <h2>Avg accuracy by period</h2>
-        <div class="chart-host" id="trendChartHost"><div id="trendChart"></div></div>
-      </div>
+      <div class="panel"><h2>Accuracy distribution</h2><div class="chart-host" id="distChart"></div></div>
+      <div class="panel"><h2>Average accuracy by period <span class="hint">click a bar to filter</span></h2><div class="chart-host" id="trendChart"></div></div>
     </div>
 
-    <!-- Ticket log -->
+    <div class="grid-2">
+      <div class="panel"><h2>Rating mix by period</h2><div class="chart-host" id="mixChart"></div></div>
+      <div class="panel"><h2>Needs attention <span class="hint">lowest scores in view</span></h2><ul class="list" id="worstList"></ul></div>
+    </div>
+
+    <div class="panel" style="margin-bottom:18px">
+      <h2>Data quality <span class="hint">click to filter the log</span></h2>
+      <ul class="list" id="qualityList"></ul>
+    </div>
+
     <div class="panel">
       <h2>Ticket log</h2>
       <div class="controls">
-        <span class="controls-label">Period:</span>
-        <select id="periodSelect" class="period-select">
-          <option value="all">All periods</option>
-          ${periods.map(p => `<option value="${p}">${p}</option>`).join('')}
-        </select>
+        <span class="controls-label">Rating</span>
+        <button type="button" class="chip" data-bucket="all">All</button>
+        <button type="button" class="chip" data-bucket="accurate">Accurate</button>
+        <button type="button" class="chip" data-bucket="partial">Partial</button>
+        <button type="button" class="chip" data-bucket="inaccurate">Inaccurate</button>
+        <button type="button" class="chip" data-bucket="none">Unrated</button>
         <div class="divider"></div>
-        <span class="controls-label">Rating:</span>
-        <span class="chip active" data-bucket="all">All</span>
-        <span class="chip" data-bucket="accurate">Accurate</span>
-        <span class="chip" data-bucket="partial">Partial</span>
-        <span class="chip" data-bucket="inaccurate">Inaccurate</span>
-        <div class="divider"></div>
-        <input type="search" id="search" placeholder="Search ticket # or title…">
+        <input type="search" id="search" placeholder="Search ticket #, title, conclusion, notes…" aria-label="Search tickets">
+        <button type="button" class="btn" id="csvBtn">Export CSV</button>
       </div>
       <div class="table-wrap">
         <table>
-          <thead>
-            <tr>
-              <th>Ticket</th>
-              <th>Title</th>
-              <th>Period</th>
-              <th>Rating</th>
-              <th style="text-align:right">Accuracy</th>
-            </tr>
-          </thead>
+          <thead><tr>
+            <th scope="col" data-sort="ticket_id"><button type="button">Ticket</button></th>
+            <th scope="col" data-sort="title"><button type="button">Title</button></th>
+            <th scope="col" class="col-period" data-sort="docIdx"><button type="button">Period</button></th>
+            <th scope="col" data-sort="accuracy_pct"><button type="button">Rating</button></th>
+            <th scope="col" data-sort="accuracy_pct" style="text-align:right"><button type="button" style="text-align:right">Accuracy</button></th>
+          </tr></thead>
           <tbody id="ticketBody"></tbody>
         </table>
       </div>
       <div class="row-count" id="rowCount"></div>
-    </div>
-  `;
+    </div>`;
 
-  // ── Draw inline SVG charts ──
-  drawDonut(globalCounts);
-  drawBar(docs);
+  const $ = id => document.getElementById(id);
+  $('periodSelect').value = state.period;
+  $('uniqueToggle').checked = state.unique;
+  $('search').value = state.q;
 
-  function drawDonut(counts) {
-    drawDonutChart('distChart', counts);
+  /* ── Cards ── */
+  function renderCards() {
+    const sc = scopeTickets(), s = stats(sc), all = periodStats();
+    // Compare the selected period (or the latest one) with the one before it.
+    const idx = state.period === 'all' ? docs.length - 1 : +state.period;
+    const cur = all[idx], prev = idx > 0 ? all[idx - 1] : null;
+    let deltaHtml = '';
+    if (cur && prev && cur.s.avg !== null && prev.s.avg !== null) {
+      const d = cur.s.avg - prev.s.avg;
+      const cls = Math.abs(d) < 0.05 ? 'flat' : d > 0 ? 'up' : 'down';
+      const arrow = cls === 'flat' ? '■' : d > 0 ? '▲' : '▼';
+      const nm = (lastMonthName(periodLabel(cur.doc)) || '').slice(0, 3);
+      const pn = (lastMonthName(periodLabel(prev.doc)) || '').slice(0, 3);
+      deltaHtml = `<span class="delta ${cls}">${arrow} ${d > 0 ? '+' : ''}${d.toFixed(1)} pts</span> ${esc(nm)} vs ${esc(pn)} · `;
+    }
+    const avgTxt = s.avg === null ? '—' : s.avg.toFixed(1) + '%';
+    const gap = s.avg === null ? '' : (s.avg >= TARGET ? 'at or above' : 'below') + ` ${TARGET}% target`;
+    const share = n => s.rated ? Math.round(n / s.rated * 100) + '% of rated' : '';
+    $('summaryCards').innerHTML = `
+      <div class="card accent"><div class="label">Tickets audited</div><div class="value">${s.total}</div>
+        <div class="sub">${s.rated} rated · ${s.unrated} unrated</div></div>
+      <div class="card accent"><div class="label">Average accuracy</div><div class="value">${avgTxt}</div>
+        <div class="sub">${deltaHtml}${gap}</div></div>
+      <div class="card accurate"><div class="label">Accurate (${ACCURATE_MIN}%+)</div><div class="value">${s.counts.accurate}</div><div class="sub">${share(s.counts.accurate)}</div></div>
+      <div class="card partial"><div class="label">Partially accurate</div><div class="value">${s.counts.partial}</div><div class="sub">${share(s.counts.partial)}</div></div>
+      <div class="card inaccurate"><div class="label">Inaccurate (&lt;${PARTIAL_MIN}%)</div><div class="value">${s.counts.inaccurate}</div><div class="sub">${share(s.counts.inaccurate)}</div></div>`;
+    $('distChart').innerHTML = donutSvg(s.counts);
+    const dupes = allTickets.filter(t => t.flags.includes('duplicate') && !t.isLatest).length;
+    $('scopeNote').textContent = state.unique && dupes ? `${dupes} repeat audit${dupes !== 1 ? 's' : ''} hidden` : '';
   }
-  function drawBar(docsToShow) {
-    drawBarChart('trendChart', docsToShow);
+
+  /* ── Charts that show every period ── */
+  function renderCharts() {
+    const ps = periodStats();
+    $('trendChart').innerHTML = trendSvg(ps, state.period === 'all' ? null : +state.period);
+    $('mixChart').innerHTML = mixSvg(ps);
+    document.querySelectorAll('#trendChart .bar-hit').forEach(g => {
+      const pick = () => { setPeriod(String(g.dataset.idx) === state.period ? 'all' : g.dataset.idx); };
+      g.addEventListener('click', pick);
+      g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+    });
   }
 
-  // ── Table filtering ──
-  let activePeriod = 'all';
-  let activeBucket = 'all';
-  let query = '';
+  /* ── Lists ── */
+  function renderWorst() {
+    const worst = scopeTickets().filter(t => t.accuracy_pct !== null && t.accuracy_pct < PARTIAL_MIN)
+      .sort((a, b) => a.accuracy_pct - b.accuracy_pct || a.uid - b.uid).slice(0, 6);
+    $('worstList').innerHTML = worst.map(t => `<li>
+        <span class="ticket-id">#${esc(t.ticket_id)}</span>
+        <button type="button" class="link" data-focus="${esc(t.uid)}">${esc(t.title)}</button>
+        <span class="pct inaccurate">${t.accuracy_pct}%</span></li>`).join('')
+      || '<li class="empty">No inaccurate tickets in this view.</li>';
+    document.querySelectorAll('#worstList [data-focus]').forEach(b => b.addEventListener('click', () => {
+      state.q = ''; $('search').value = ''; state.bucket = 'all';
+      state.open.add(+b.dataset.focus); renderAll();
+      const row = document.querySelector(`tr[data-uid="${b.dataset.focus}"]`);
+      if (row) row.scrollIntoView({block: 'center'});
+    }));
+  }
 
-  function filteredTickets() {
-    return allTickets.filter(t => {
-      if (activePeriod !== 'all' && t.period !== activePeriod) return false;
-      if (activeBucket !== 'all') {
-        const b = t.accuracy_pct !== null ? bucketOf(t.accuracy_pct) : 'none';
-        if (b !== activeBucket) return false;
-      }
-      if (query) {
-        const q = query.toLowerCase();
-        if (!t.ticket_id.toLowerCase().includes(q) && !t.title.toLowerCase().includes(q)) return false;
+  const QUALITY = [
+    {key: 'duplicate', desc: 'audited in more than one period (counted once when "Count each ticket once" is on)'},
+    {key: 'unrated', desc: 'no [AI Comment] or no accuracy score — excluded from averages'},
+    {key: 'placeholder', desc: 'title could not be fetched (e.g. [FAILED TO FETCH])'},
+    {key: 'generic title', desc: 'generic "Collaterate issue" title, harder to search'}
+  ];
+  function renderQuality() {
+    const sc = allTickets.filter(t => state.period === 'all' || String(t.docIdx) === state.period);
+    $('qualityList').innerHTML = QUALITY.map(q => {
+      const n = sc.filter(t => t.flags.includes(q.key)).length;
+      return `<li><span class="q-count ${n ? 'warn' : 'ok'}">${n}</span>
+        ${n ? `<button type="button" class="link" data-flag="${q.key}">${q.key}</button>` : `<span>${q.key}</span>`}
+        <span class="q-desc">${esc(q.desc)}</span></li>`;
+    }).join('');
+    document.querySelectorAll('#qualityList [data-flag]').forEach(b => b.addEventListener('click', () => {
+      state.q = ''; state.bucket = 'all'; $('search').value = ''; state.flag = b.dataset.flag; renderAll();
+      $('ticketBody').scrollIntoView({block: 'center'});
+    }));
+  }
+
+  /* ── Table ── */
+  function visibleRows() {
+    let rows = allTickets.filter(t => {
+      if (state.period !== 'all' && String(t.docIdx) !== state.period) return false;
+      if (!inUnique(t)) return false;
+      if (state.bucket !== 'all' && bucketName(t) !== state.bucket) return false;
+      if (state.flag && !t.flags.includes(state.flag)) return false;
+      if (state.q) {
+        const hay = [t.ticket_id, t.title, t.conclusion, t.actual_outcome, t.notes].join(' ').toLowerCase();
+        if (!hay.includes(state.q)) return false;
       }
       return true;
     });
+    if (state.sort) {
+      const k = state.sort;
+      rows = rows.slice().sort((a, b) => {
+        let x = a[k], y = b[k];
+        if (k === 'accuracy_pct') { x = x === null ? -1 : x; y = y === null ? -1 : y; }
+        if (k === 'ticket_id') { x = +x || 0; y = +y || 0; }
+        if (typeof x === 'string') return state.dir * x.localeCompare(y);
+        return state.dir * (x - y) || a.uid - b.uid;
+      });
+    }
+    return rows;
   }
 
   function renderTable() {
-    const rows = filteredTickets();
-    const tbody = document.getElementById('ticketBody');
-    tbody.innerHTML = rows.map(t => {
+    const rows = visibleRows();
+    $('ticketBody').innerHTML = rows.map(t => {
       const b = t.accuracy_pct !== null ? bucketOf(t.accuracy_pct) : null;
-      return `<tr>
-        <td class="ticket-id">#${t.ticket_id}</td>
-        <td>${t.title}</td>
-        <td><span class="period-badge">${t.period || '—'}</span></td>
-        <td>${b ? `<span class="bucket-dot ${b}"></span>${t.accuracy_label}` : (t.accuracy_label || '—')}</td>
-        <td style="text-align:right" class="pct ${b||''}">${t.accuracy_pct !== null ? t.accuracy_pct + '%' : '—'}</td>
-      </tr>`;
+      const open = state.open.has(t.uid);
+      const flags = t.flags.map(f => `<span class="flag">${esc(f)}</span>`).join('');
+      let html = `<tr class="row" data-uid="${t.uid}">
+        <td class="ticket-id">#${esc(t.ticket_id)}</td>
+        <td><button type="button" class="rowbtn" data-toggle="${t.uid}" aria-expanded="${open}">${esc(t.title)}</button>${flags}</td>
+        <td class="col-period"><span class="period-badge">${esc(t.period || '—')}</span></td>
+        <td>${b ? `<span class="bucket-dot ${b}"></span>${esc(t.accuracy_label)}` : esc(t.accuracy_label || '—')}</td>
+        <td style="text-align:right" class="pct ${b || ''}">${t.accuracy_pct !== null ? t.accuracy_pct + '%' : '—'}</td></tr>`;
+      if (open) {
+        html += `<tr class="detail"><td colspan="5"><dl>
+          <dt>Investigator said</dt><dd>${esc(t.conclusion || '—')}</dd>
+          <dt>What happened</dt><dd>${esc(t.actual_outcome || '—')}</dd>
+          <dt>Notes</dt><dd>${esc(t.notes || '—')}</dd></dl></td></tr>`;
+      }
+      return html;
     }).join('') || '<tr><td colspan="5" style="color:var(--muted);text-align:center;padding:28px;font-family:var(--mono);font-size:12px">No matching tickets</td></tr>';
-    document.getElementById('rowCount').textContent = `${rows.length} ticket${rows.length !== 1 ? 's' : ''} shown`;
-  }
-
-  function updateSummaryCards() {
-    const visible = filteredTickets();
-    const visRated = visible.filter(t => t.accuracy_pct !== null);
-    const c = computeCounts(visRated);
-    const a = visRated.length ? (visRated.reduce((s,t) => s + t.accuracy_pct, 0) / visRated.length) : 0;
-    document.getElementById('cTotal').textContent = visible.length;
-    document.getElementById('cAvg').textContent = visRated.length ? a.toFixed(1) + '%' : '—';
-    document.getElementById('cAccurate').textContent = c.accurate;
-    document.getElementById('cPartial').textContent = c.partial;
-    document.getElementById('cInaccurate').textContent = c.inaccurate;
-
-    // Update donut for current filter
-    drawDonut(c);
-
-    // Update bar chart — show filtered docs or all
-    const visibleDocs = activePeriod === 'all' ? docs : docs.filter(d => (d.period || d.file) === activePeriod);
-    drawBar(visibleDocs);
-  }
-
-  // Period dropdown
-  document.getElementById('periodSelect').addEventListener('change', e => {
-    activePeriod = e.target.value;
-    renderTable();
-    updateSummaryCards();
-  });
-
-  // Bucket chip clicks
-  document.querySelectorAll('.chip[data-bucket]').forEach(chip => {
-    chip.addEventListener('click', () => {
-      document.querySelectorAll('.chip[data-bucket]').forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      activeBucket = chip.dataset.bucket;
-      renderTable();
+    const extra = state.flag ? ` · flag: ${state.flag} <button type="button" class="btn" id="clearFlag" style="padding:1px 8px">clear</button>` : '';
+    $('rowCount').innerHTML = `${rows.length} ticket${rows.length !== 1 ? 's' : ''} shown${extra}`;
+    const cf = $('clearFlag');
+    if (cf) cf.addEventListener('click', () => { state.flag = null; renderAll(); });
+    document.querySelectorAll('thead th[data-sort]').forEach(th => {
+      th.setAttribute('aria-sort', state.sort === th.dataset.sort ? (state.dir > 0 ? 'ascending' : 'descending') : 'none');
     });
-  });
+    document.querySelectorAll('.chip[data-bucket]').forEach(c => {
+      const on = c.dataset.bucket === state.bucket;
+      c.classList.toggle('active', on); c.setAttribute('aria-pressed', on);
+    });
+  }
 
-  // Search
-  document.getElementById('search').addEventListener('input', e => {
-    query = e.target.value.trim().toLowerCase();
+  function renderAll() { writeHash(); renderCards(); renderCharts(); renderWorst(); renderQuality(); renderTable(); }
+  function setPeriod(v) { state.period = v; $('periodSelect').value = v; renderAll(); }
+
+  /* ── Events ── */
+  $('periodSelect').addEventListener('change', e => setPeriod(e.target.value));
+  $('uniqueToggle').addEventListener('change', e => { state.unique = e.target.checked; renderAll(); });
+  document.querySelectorAll('.chip[data-bucket]').forEach(c => c.addEventListener('click', () => {
+    state.bucket = c.dataset.bucket; renderAll();
+  }));
+  let timer;
+  $('search').addEventListener('input', e => {
+    clearTimeout(timer);
+    timer = setTimeout(() => { state.q = e.target.value.trim().toLowerCase(); writeHash(); renderTable(); }, 120);
+  });
+  $('ticketBody').addEventListener('click', e => {
+    const b = e.target.closest('[data-toggle]');
+    if (!b) return;
+    const id = +b.dataset.toggle;
+    state.open.has(id) ? state.open.delete(id) : state.open.add(id);
     renderTable();
+    const again = document.querySelector(`[data-toggle="${id}"]`);
+    if (again) again.focus();
+  });
+  document.querySelectorAll('thead th[data-sort]').forEach(th => th.querySelector('button').addEventListener('click', () => {
+    const k = th.dataset.sort;
+    if (state.sort === k) state.dir = -state.dir; else { state.sort = k; state.dir = 1; }
+    renderTable();
+  }));
+  $('csvBtn').addEventListener('click', () => {
+    const cell = v => {
+      let s = v === null || v === undefined ? '' : String(v);
+      if (/^[=+\-@]/.test(s)) s = "'" + s;       // stop spreadsheet formula injection
+      return '"' + s.replace(/"/g, '""') + '"';
+    };
+    const head = ['ticket_id', 'title', 'period', 'rating', 'accuracy_pct', 'flags', 'conclusion', 'actual_outcome', 'notes'];
+    const lines = [head.join(',')].concat(visibleRows().map(t => [
+      t.ticket_id, t.title, t.period, t.accuracy_label, t.accuracy_pct, t.flags.join('; '),
+      t.conclusion, t.actual_outcome, t.notes].map(cell).join(',')));
+    const url = URL.createObjectURL(new Blob(['﻿' + lines.join('\r\n')], {type: 'text/csv;charset=utf-8'}));
+    const a = document.createElement('a');
+    a.href = url; a.download = 'investigator-accuracy-view.csv'; a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
   });
 
-  renderTable();
-  document.getElementById('rowCount').textContent = `${allTickets.length} tickets shown`;
+  renderAll();
 }
 init();
 </script>
